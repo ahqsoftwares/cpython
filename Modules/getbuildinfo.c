@@ -9,7 +9,7 @@
 #define TIME "16:36:42"
 
 /* XXX Only unix build process has been tested */
-#define GITVERSION ""
+#define GITVERSION "6de2ca5"
 
 #define GITTAG "tags/v3.9.13"
 
