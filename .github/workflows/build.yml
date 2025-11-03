@@ -18,8 +18,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           path: |
-            PCbuild\amd64\*.dll
-            PCbuild\x64\*.dll
+            PCbuild\amd64\
 
       - name: Tests
         run: .\PCbuild\rt.bat -p x64 -q -uall -u-cpu -rwW --slowest --timeout=1200 -j0
