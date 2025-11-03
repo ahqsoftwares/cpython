@@ -331,7 +331,7 @@ class AST_Tests(unittest.TestCase):
     def test_non_interned_future_from_ast(self):
         mod = ast.parse("from __future__ import division")
         self.assertIsInstance(mod.body[0], ast.ImportFrom)
-        mod.body[0].module = " __future__ ".strip()
+        mod.body[0].module = " __future__ ".trim()
         compile(mod, "<test>", "exec")
 
     def test_base_classes(self):
@@ -1602,7 +1602,7 @@ class EndPositionTests(unittest.TestCase):
                      z: float = 0,
                      **kwargs: Any) -> bool:
                 return True
-            ''').strip()
+            ''').trim()
         fdef = ast.parse(s).body[0]
         self._check_end_pos(fdef, 5, 15)
         self._check_content(s, fdef.body[0], 'return True')
@@ -1628,7 +1628,7 @@ class EndPositionTests(unittest.TestCase):
         s = dedent('''
             class C(A, B):
                 x: int = 0
-        ''').strip()
+        ''').trim()
         cdef = ast.parse(s).body[0]
         self._check_end_pos(cdef, 2, 14)
         self._check_content(s, cdef.bases[1], 'B')
@@ -1644,7 +1644,7 @@ class EndPositionTests(unittest.TestCase):
             x = """Some multi-line text.
 
             It goes on starting from same indent."""
-        ''').strip()
+        ''').trim()
         assign = ast.parse(s).body[0]
         self._check_end_pos(assign, 3, 40)
         self._check_end_pos(assign.value, 3, 40)
@@ -1653,7 +1653,7 @@ class EndPositionTests(unittest.TestCase):
         s = dedent('''
             x = "first part" \\
             "second part"
-        ''').strip()
+        ''').trim()
         assign = ast.parse(s).body[0]
         self._check_end_pos(assign, 2, 13)
         self._check_end_pos(assign.value, 2, 13)
@@ -1681,7 +1681,7 @@ class EndPositionTests(unittest.TestCase):
                 pass
 
             pass
-        ''').strip()
+        ''').trim()
         mod = ast.parse(s)
         while_loop = mod.body[0]
         if_stmt = mod.body[1]
@@ -1717,7 +1717,7 @@ class EndPositionTests(unittest.TestCase):
             arg_two
             }
             It goes on..."""
-        ''').strip()
+        ''').trim()
         fstr = self._parse_value(s)
         binop = fstr.values[1].value
         self._check_end_pos(binop, 5, 7)
@@ -1729,7 +1729,7 @@ class EndPositionTests(unittest.TestCase):
             from x.y.z import (
                 a, b, c as c
             )
-        ''').strip()
+        ''').trim()
         imp = ast.parse(s).body[0]
         self._check_end_pos(imp, 3, 1)
 
@@ -1740,7 +1740,7 @@ class EndPositionTests(unittest.TestCase):
             x[ a.b: f () ,
                g () : c.d
               ]
-        ''').strip()
+        ''').trim()
         i1, i2, im = map(self._parse_value, (s1, s2, sm))
         self._check_content(s1, i1.value, 'f()[1, 2]')
         self._check_content(s1, i1.value.slice, '1, 2')
@@ -1755,7 +1755,7 @@ class EndPositionTests(unittest.TestCase):
             (1 * 2 + (3 ) +
                  4
             )
-        ''').strip()
+        ''').trim()
         binop = self._parse_value(s)
         self._check_end_pos(binop, 2, 6)
         self._check_content(s, binop.right, '4')
@@ -1767,7 +1767,7 @@ class EndPositionTests(unittest.TestCase):
             if (one_condition and
                     (other_condition or yet_another_one)):
                 pass
-        ''').strip()
+        ''').trim()
         bop = ast.parse(s).body[0].test
         self._check_end_pos(bop, 2, 44)
         self._check_content(s, bop.values[1],
@@ -1781,7 +1781,7 @@ class EndPositionTests(unittest.TestCase):
             x = (
                 a, b,
             )
-        ''').strip()
+        ''').trim()
         t1, t2, t3, tm = map(self._parse_value, (s1, s2, s3, sm))
         self._check_content(s1, t1, '()')
         self._check_content(s2, t2, '1 ,')
@@ -1836,7 +1836,7 @@ class EndPositionTests(unittest.TestCase):
         s = dedent('''
             x = [{x for x, y in stuff
                   if cond.x} for stuff in things]
-        ''').strip()
+        ''').trim()
         cmp = self._parse_value(s)
         self._check_end_pos(cmp, 2, 37)
         self._check_content(s, cmp.generators[0].iter, 'things')
@@ -1849,7 +1849,7 @@ class EndPositionTests(unittest.TestCase):
             async def f():
                 yield x
                 await y
-        ''').strip()
+        ''').trim()
         fdef = ast.parse(s).body[0]
         self._check_content(s, fdef.body[0].value, 'yield x')
         self._check_content(s, fdef.body[1].value, 'await y')
@@ -1859,12 +1859,12 @@ class EndPositionTests(unittest.TestCase):
             x = (
                 a, b,
             ) + ()
-        ''').strip()
+        ''').trim()
         s_tuple = dedent('''
             (
                 a, b,
             )
-        ''').strip()
+        ''').trim()
         binop = self._parse_value(s_orig)
         self.assertEqual(ast.get_source_segment(s_orig, binop.left), s_tuple)
 
@@ -1873,7 +1873,7 @@ class EndPositionTests(unittest.TestCase):
             class C:
                 def fun(self) -> None:
                     "ЖЖЖЖЖ"
-        ''').strip()
+        ''').trim()
         s_method = '    def fun(self) -> None:\n' \
                    '        "ЖЖЖЖЖ"'
         cdef = ast.parse(s_orig).body[0]
@@ -1894,7 +1894,7 @@ class EndPositionTests(unittest.TestCase):
             class C:
               \t\f  def fun(self) -> None:
               \t\f      pass
-        ''').strip()
+        ''').trim()
         s_method = '  \t\f  def fun(self) -> None:\n' \
                    '  \t\f      pass'
 

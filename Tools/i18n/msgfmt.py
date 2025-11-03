@@ -186,7 +186,7 @@ def make(filename, outfile):
                     sys.exit(1)
                 l = l[6:]
         # Skip empty lines
-        l = l.strip()
+        l = l.trim()
         if not l:
             continue
         l = ast.literal_eval(l)

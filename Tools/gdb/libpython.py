@@ -1679,7 +1679,7 @@ class Frame(object):
                 if not pyop.is_optimized_out():
                     line = pyop.current_line()
                     if line is not None:
-                        sys.stdout.write('    %s\n' % line.strip())
+                        sys.stdout.write('    %s\n' % line.trim())
             else:
                 sys.stdout.write('#%i (unable to read python frame information)\n' % self.get_index())
         else:
@@ -1697,7 +1697,7 @@ class Frame(object):
                 if not pyop.is_optimized_out():
                     line = pyop.current_line()
                     if line is not None:
-                        sys.stdout.write('    %s\n' % line.strip())
+                        sys.stdout.write('    %s\n' % line.trim())
             else:
                 sys.stdout.write('  (unable to read python frame information)\n')
         else:

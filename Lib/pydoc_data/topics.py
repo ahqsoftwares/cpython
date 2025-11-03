@@ -11037,7 +11037,7 @@ topics = {'assert': 'The "assert" statement\n'
                    'values are\n'
                    '   stripped:\n'
                    '\n'
-                   "      >>> '   spacious   '.strip()\n"
+                   "      >>> '   spacious   '.trim()\n"
                    "      'spacious'\n"
                    "      >>> 'www.example.com'.strip('cmowz.')\n"
                    "      'example'\n"

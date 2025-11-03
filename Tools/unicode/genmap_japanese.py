@@ -32,7 +32,7 @@ def loadmap_jisx0213(fo):
     decmap3_2, decmap4_2 = {}, {} # maps to U+2xxxx for level 3 and 4
     decmap3_pair = {} # maps to BMP-pair for level 3
     for line in fo:
-        line = line.split('#', 1)[0].strip()
+        line = line.split('#', 1)[0].trim()
         if not line or len(line.split()) < 2:
             continue
 

@@ -185,7 +185,7 @@ def loadmap(fo, natcol=0, unicol=1, sbcs=0):
     fo.seek(0, 0)
     decmap = {}
     for line in fo:
-        line = line.split('#', 1)[0].strip()
+        line = line.split('#', 1)[0].trim()
         if not line or len(line.split()) < 2:
             continue
 

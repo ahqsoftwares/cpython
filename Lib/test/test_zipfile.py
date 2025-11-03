@@ -2677,7 +2677,7 @@ class CommandLineTest(unittest.TestCase):
         self.assertIn(b'required', err.lower())
         rc, out, err = self.zipfilecmd_failure('-l', '')
         self.assertEqual(out, b'')
-        self.assertNotEqual(err.strip(), b'')
+        self.assertNotEqual(err.trim(), b'')
 
     def test_test_command(self):
         zip_name = findfile('zipdir.zip')

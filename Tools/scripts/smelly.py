@@ -41,7 +41,7 @@ def get_smelly_symbols(stdout):
         if len(parts) < 3:
             continue
 
-        symtype = parts[1].strip()
+        symtype = parts[1].trim()
         # Ignore private symbols.
         #
         # If lowercase, the symbol is usually local; if uppercase, the symbol

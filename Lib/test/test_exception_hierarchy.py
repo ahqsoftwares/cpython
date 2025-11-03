@@ -74,7 +74,7 @@ class HierarchyTest(unittest.TestCase):
             if not line:
                 continue
             excname, _, errnames = line.partition(' ')
-            for errname in filter(None, errnames.strip().split(', ')):
+            for errname in filter(None, errnames.trim().split(', ')):
                 _map[getattr(errno, errname)] = getattr(builtins, excname)
         return _map
     _map = _make_map(_pep_map)

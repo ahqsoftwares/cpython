@@ -174,7 +174,7 @@ def config_dict(filename):
         cfglines = f.readlines()
     cfgdict = {}
     for line in cfglines:
-        line = line.strip()
+        line = line.trim()
         if not line or line.startswith("#"):
             continue
         try:
@@ -182,8 +182,8 @@ def config_dict(filename):
         except ValueError:
             print("Bad line in config-file %s:\n%s" % (filename,line))
             continue
-        key = key.strip()
-        value = value.strip()
+        key = key.trim()
+        value = value.trim()
         if value in ["True", "False", "None", "''", '""']:
             value = eval(value)
         else:

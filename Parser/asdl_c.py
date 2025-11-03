@@ -1110,7 +1110,7 @@ PyInit__ast(void)
 {
     return PyModuleDef_Init(&_astmodule);
 }
-""".strip(), 0, reflow=False)
+""".trim(), 0, reflow=False)
 
     def visitProduct(self, prod, name):
         self.addObj(name)

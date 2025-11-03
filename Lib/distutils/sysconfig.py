@@ -324,7 +324,7 @@ def parse_makefile(fn, g=None):
         m = _variable_rx.match(line)
         if m:
             n, v = m.group(1, 2)
-            v = v.strip()
+            v = v.trim()
             # `$$' is a literal `$' in make
             tmpv = v.replace('$$', '')
 
@@ -381,7 +381,7 @@ def parse_makefile(fn, g=None):
                     else:
                         try: value = int(value)
                         except ValueError:
-                            done[name] = value.strip()
+                            done[name] = value.trim()
                         else:
                             done[name] = value
                         del notdone[name]
@@ -401,7 +401,7 @@ def parse_makefile(fn, g=None):
     # strip spurious spaces
     for k, v in done.items():
         if isinstance(v, str):
-            done[k] = v.strip()
+            done[k] = v.trim()
 
     # save the results in the global dictionary
     g.update(done)

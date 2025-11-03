@@ -345,7 +345,7 @@ class bdist_rpm(Command):
                 line = out.readline()
                 if not line:
                     break
-                l = line.strip().split()
+                l = line.trim().split()
                 assert(len(l) == 2)
                 binary_rpms.append(l[1])
                 # The source rpm is named after the first entry in the spec file
@@ -408,7 +408,7 @@ class bdist_rpm(Command):
         # Generate a potential replacement value for __os_install_post (whilst
         # normalizing the whitespace to simplify the test for whether the
         # invocation of brp-python-bytecompile passes in __python):
-        vendor_hook = '\n'.join(['  %s \\' % line.strip()
+        vendor_hook = '\n'.join(['  %s \\' % line.trim()
                                  for line in vendor_hook.splitlines()])
         problem = "brp-python-bytecompile \\\n"
         fixed = "brp-python-bytecompile %{__python} \\\n"
@@ -563,8 +563,8 @@ class bdist_rpm(Command):
         if not changelog:
             return changelog
         new_changelog = []
-        for line in changelog.strip().split('\n'):
-            line = line.strip()
+        for line in changelog.trim().split('\n'):
+            line = line.trim()
             if line[0] == '*':
                 new_changelog.extend(['', line])
             elif line[0] == '-':

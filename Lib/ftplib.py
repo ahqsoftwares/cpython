@@ -629,7 +629,7 @@ class FTP:
         # The SIZE command is defined in RFC-3659
         resp = self.sendcmd('SIZE ' + filename)
         if resp[:3] == '213':
-            s = resp[3:].strip()
+            s = resp[3:].trim()
             return int(s)
 
     def mkd(self, dirname):

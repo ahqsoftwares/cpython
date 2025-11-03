@@ -942,7 +942,7 @@ class IndentTestCase(unittest.TestCase):
           # Pathological case
           "  \nHi.\r\nThis is a test.\n  \r\nTesting.\r\n  \n",
         )
-        predicate = lambda line: not line.strip()
+        predicate = lambda line: not line.trim()
         for text, expect in zip(self.CASES, expected):
             self.assertEqual(indent(text, prefix, predicate), expect)
 

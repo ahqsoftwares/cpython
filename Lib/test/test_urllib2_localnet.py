@@ -113,11 +113,11 @@ class DigestAuthHandler:
         auth_dict = {}
         for part in parts:
             name, value = part.split("=")
-            name = name.strip()
+            name = name.trim()
             if value[0] == '"' and value[-1] == '"':
                 value = value[1:-1]
             else:
-                value = value.strip()
+                value = value.trim()
             auth_dict[name] = value
         return auth_dict
 

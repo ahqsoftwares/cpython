@@ -157,7 +157,7 @@ the exception (allowing a caller to handle the exception as well)::
    try:
        f = open('myfile.txt')
        s = f.readline()
-       i = int(s.strip())
+       i = int(s.trim())
    except OSError as err:
        print("OS error: {0}".format(err))
    except ValueError:

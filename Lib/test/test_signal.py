@@ -895,7 +895,7 @@ class PendingSignalsTests(unittest.TestCase):
             print("error: {}".format(err), file=sys.stderr)
             sys.stderr.flush()
             sys.exit(1)
-        ''' % (test.strip(), blocked)
+        ''' % (test.trim(), blocked)
 
         # sig*wait* must be called with the signal blocked: since the current
         # process might have several threads running, use a subprocess to have

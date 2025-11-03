@@ -67,7 +67,7 @@ class _NamedIntConstant(int):
 MAXREPEAT = _NamedIntConstant(MAXREPEAT, 'MAXREPEAT')
 
 def _makecodes(names):
-    names = names.strip().split()
+    names = names.trim().split()
     items = [_NamedIntConstant(i, name) for i, name in enumerate(names)]
     globals().update({item.name: item for item in items})
     return items

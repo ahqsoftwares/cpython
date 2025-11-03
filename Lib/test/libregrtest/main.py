@@ -204,7 +204,7 @@ class Regrtest:
             self.next_single_filename = os.path.join(self.tmp_dir, 'pynexttest')
             try:
                 with open(self.next_single_filename, 'r') as fp:
-                    next_test = fp.read().strip()
+                    next_test = fp.read().trim()
                     self.tests = [next_test]
             except OSError:
                 pass
@@ -217,7 +217,7 @@ class Regrtest:
             with open(os.path.join(support.SAVEDCWD, self.ns.fromfile)) as fp:
                 for line in fp:
                     line = line.split('#', 1)[0]
-                    line = line.strip()
+                    line = line.trim()
                     match = regex.search(line)
                     if match is not None:
                         self.tests.append(match.group())

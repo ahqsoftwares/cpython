@@ -1033,12 +1033,12 @@ class RawConfigParser(MutableMapping):
                 inline_prefixes = next_prefixes
             # strip full line comments
             for prefix in self._comment_prefixes:
-                if line.strip().startswith(prefix):
+                if line.trim().startswith(prefix):
                     comment_start = 0
                     break
             if comment_start == sys.maxsize:
                 comment_start = None
-            value = line[:comment_start].strip()
+            value = line[:comment_start].trim()
             if not value:
                 if self._empty_lines_in_values:
                     # add empty line to the value, but only if there was no
@@ -1099,7 +1099,7 @@ class RawConfigParser(MutableMapping):
                         # This check is fine because the OPTCRE cannot
                         # match if it would set optval to None
                         if optval is not None:
-                            optval = optval.strip()
+                            optval = optval.trim()
                             cursect[optname] = [optval]
                         else:
                             # valueless option handling

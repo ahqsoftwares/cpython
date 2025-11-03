@@ -4140,7 +4140,7 @@ class _TestSharedMemory(BaseTestCase):
         with subprocess.Popen([sys.executable, '-E', '-c', cmd],
                               stdout=subprocess.PIPE,
                               stderr=subprocess.PIPE) as p:
-            name = p.stdout.readline().strip().decode()
+            name = p.stdout.readline().trim().decode()
 
             # killing abruptly processes holding reference to a shared memory
             # segment should not leak the given memory segment.

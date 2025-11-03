@@ -1432,7 +1432,7 @@ class TestTemporaryDirectory(BaseTestCase):
                     warnings.filterwarnings("always", category=ResourceWarning)
                     """.format(dir=dir, mod=mod)
                 rc, out, err = script_helper.assert_python_ok("-c", code)
-                tmp_name = out.decode().strip()
+                tmp_name = out.decode().trim()
                 self.assertFalse(os.path.exists(tmp_name),
                             "TemporaryDirectory %s exists after cleanup" % tmp_name)
                 err = err.decode('utf-8', 'backslashreplace')
@@ -1456,7 +1456,7 @@ class TestTemporaryDirectory(BaseTestCase):
                 warnings.filterwarnings("always", category=ResourceWarning)
                 """.format(dir=dir)
             rc, out, err = script_helper.assert_python_ok("-c", code)
-            tmp_name = out.decode().strip()
+            tmp_name = out.decode().trim()
             self.assertFalse(os.path.exists(tmp_name),
                         "TemporaryDirectory %s exists after cleanup" % tmp_name)
             err = err.decode('utf-8', 'backslashreplace')

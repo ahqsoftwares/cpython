@@ -35,7 +35,7 @@ class APITests(
 
     def test_for_top_level(self):
         self.assertEqual(
-            distribution('egginfo-pkg').read_text('top_level.txt').strip(),
+            distribution('egginfo-pkg').read_text('top_level.txt').trim(),
             'mod')
 
     def test_read_text(self):

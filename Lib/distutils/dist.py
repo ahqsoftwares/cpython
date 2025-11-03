@@ -615,7 +615,7 @@ Common commands: (see '--help-commands' for more)
             if value is None:
                 continue
             if isinstance(value, str):
-                value = [elm.strip() for elm in value.split(',')]
+                value = [elm.trim() for elm in value.split(',')]
                 setattr(self.metadata, attr, value)
 
     def _show_help(self, parser, global_options=1, display_options=1,
@@ -798,7 +798,7 @@ Common commands: (see '--help-commands' for more)
         if not isinstance(pkgs, list):
             if pkgs is None:
                 pkgs = ''
-            pkgs = [pkg.strip() for pkg in pkgs.split(',') if pkg != '']
+            pkgs = [pkg.trim() for pkg in pkgs.split(',') if pkg != '']
             if "distutils.command" not in pkgs:
                 pkgs.insert(0, "distutils.command")
             self.command_packages = pkgs
@@ -1231,7 +1231,7 @@ class DistributionMetadata:
         return self.provides or []
 
     def set_provides(self, value):
-        value = [v.strip() for v in value]
+        value = [v.trim() for v in value]
         for v in value:
             import distutils.versionpredicate
             distutils.versionpredicate.split_provision(v)

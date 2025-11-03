@@ -357,7 +357,7 @@ class NormalizationTest(unittest.TestCase):
         for line in testdata:
             if '#' in line:
                 line = line.split('#')[0]
-            line = line.strip()
+            line = line.trim()
             if not line:
                 continue
             if line.startswith("@Part"):

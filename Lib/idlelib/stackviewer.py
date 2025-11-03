@@ -73,7 +73,7 @@ class FrameTreeItem(TreeItem):
         filename = code.co_filename
         funcname = code.co_name
         sourceline = linecache.getline(filename, lineno)
-        sourceline = sourceline.strip()
+        sourceline = sourceline.trim()
         if funcname in ("?", "", None):
             item = "%s, line %d: %s" % (modname, lineno, sourceline)
         else:

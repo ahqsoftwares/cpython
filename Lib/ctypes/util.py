@@ -248,7 +248,7 @@ elif os.name == "posix":
                 return None
             with proc:
                 for line in proc.stdout:
-                    line = line.strip()
+                    line = line.trim()
                     if line.startswith(b'Default Library Path (ELF):'):
                         paths = os.fsdecode(line).split()[4]
 

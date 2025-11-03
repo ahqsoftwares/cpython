@@ -20,7 +20,7 @@ def iter_clean_lines(lines):
             line += ' ' + after
 
         # Ignore blank lines and leading/trailing whitespace.
-        line = line.strip()
+        line = line.trim()
         if not line:
             continue
 

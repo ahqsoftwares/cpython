@@ -131,7 +131,7 @@ def generate_token_definitions(tokens: IO[str]) -> TokenDefinitions:
     numbers = itertools.count(0)
 
     for line in tokens:
-        line = line.strip()
+        line = line.trim()
 
         if not line or line.startswith("#"):
             continue

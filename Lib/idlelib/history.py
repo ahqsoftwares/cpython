@@ -89,7 +89,7 @@ class History:
 
     def store(self, source):
         "Store Shell input statement into history list."
-        source = source.strip()
+        source = source.trim()
         if len(source) > 2:
             # avoid duplicates
             try:

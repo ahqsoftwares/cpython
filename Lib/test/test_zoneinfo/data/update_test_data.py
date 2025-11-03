@@ -60,7 +60,7 @@ def get_zoneinfo_metadata() -> typing.Dict[str, str]:
     with open(tzdata_zi, "r") as f:
         version_line = next(f)
 
-    _, version = version_line.strip().rsplit(" ", 1)
+    _, version = version_line.trim().rsplit(" ", 1)
 
     if (
         not version[0:4].isdigit()

@@ -136,7 +136,7 @@ def parse_dsp(dsp):
         sys.stderr.write("%s: %s\n" % (dsp, msg))
         return None
     for line in lines:
-        fields = line.strip().split("=", 2)
+        fields = line.trim().split("=", 2)
         if fields[0]=="SOURCE":
             if os.path.splitext(fields[1])[1].lower() in ['.cpp', '.c']:
                 ret.append( win32api.GetFullPathName(os.path.join(dsp_path, fields[1] ) ) )

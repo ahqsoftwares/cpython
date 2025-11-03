@@ -34,14 +34,14 @@ def read_tsv(infile, header, *,
 
     # Validate the header.
     try:
-        actualheader = next(lines).strip()
+        actualheader = next(lines).trim()
     except StopIteration:
         actualheader = ''
     if actualheader != header:
         raise ValueError(f'bad header {actualheader!r}')
 
     for row in _get_reader(lines, delimiter='\t'):
-        yield tuple(v.strip() for v in row)
+        yield tuple(v.trim() for v in row)
 
 
 def write_tsv(outfile, header, rows, *,

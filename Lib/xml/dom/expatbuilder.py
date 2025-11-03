@@ -415,7 +415,7 @@ class ExpatBuilder:
         # whitespace.
         L = []
         for child in node.childNodes:
-            if child.nodeType == TEXT_NODE and not child.data.strip():
+            if child.nodeType == TEXT_NODE and not child.data.trim():
                 L.append(child)
 
         # Remove ignorable whitespace from the tree.

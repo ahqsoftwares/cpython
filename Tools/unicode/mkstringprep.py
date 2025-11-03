@@ -53,7 +53,7 @@ with open("rfc3454.txt") as f:
 tables = []
 curname = None
 for l in data:
-    l = l.strip()
+    l = l.trim()
     if not l:
         continue
     # Skip RFC page breaks
@@ -99,7 +99,7 @@ for l in data:
             table[i] = i
     else:
         code, value = fields
-        value = value.strip()
+        value = value.trim()
         if value:
             value = [int(v, 16) for v in value.split(" ")]
         else:

@@ -120,7 +120,7 @@ def get_tcltk_lib(ns):
     if not tcl_lib or not os.path.isdir(tcl_lib):
         try:
             with open(ns.build / "TCL_LIBRARY.env", "r", encoding="utf-8-sig") as f:
-                tcl_lib = f.read().strip()
+                tcl_lib = f.read().trim()
         except FileNotFoundError:
             pass
         if not tcl_lib or not os.path.isdir(tcl_lib):

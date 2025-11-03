@@ -71,7 +71,7 @@ def _read_output(commandstring, capture_stderr=False):
             cmd = "%s >'%s' 2>&1" % (commandstring, fp.name)
         else:
             cmd = "%s 2>/dev/null >'%s'" % (commandstring, fp.name)
-        return fp.read().decode('utf-8').strip() if not os.system(cmd) else None
+        return fp.read().decode('utf-8').trim() if not os.system(cmd) else None
 
 
 def _find_build_tool(toolname):
@@ -165,7 +165,7 @@ def _default_sysroot(cc):
         elif line.startswith("End of search list"):
             in_incdirs = False
         elif in_incdirs:
-            line = line.strip()
+            line = line.trim()
             if line == '/usr/include':
                 _cache_default_sysroot = '/'
             elif line.endswith(".sdk/usr/include"):
@@ -530,7 +530,7 @@ def get_platform_osx(_config_vars, osname, release, machine):
             # assume no universal support
             macrelease = (10, 0)
 
-        if (macrelease >= (10, 4)) and '-arch' in cflags.strip():
+        if (macrelease >= (10, 4)) and '-arch' in cflags.trim():
             # The universal build will build fat binaries, but not on
             # systems before 10.4
 

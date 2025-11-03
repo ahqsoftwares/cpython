@@ -64,10 +64,10 @@ class IgnoredFromFileTests(unittest.TestCase):
             file1.c     -       var2    variable        ???
             file1.c     func2   local2  variable           |
             file2.c     -       var1    variable        reasons
-            ''').strip().splitlines()
+            ''').trim().splitlines()
         lines = [re.sub(r'\s{1,8}', '\t', line, 4).replace('|', '')
                  for line in lines]
-        self._return_read_tsv = [tuple(v.strip() for v in line.split('\t'))
+        self._return_read_tsv = [tuple(v.trim() for v in line.split('\t'))
                                  for line in lines[1:]]
 
         ignored = ignored_from_file('spam.c', _read_tsv=self._read_tsv)

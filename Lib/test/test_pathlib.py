@@ -1503,10 +1503,10 @@ class _BasePathTest(object):
             self.assertEqual(f.read(), "this is file A\n")
         with (p / 'fileA').open('rb') as f:
             self.assertIsInstance(f, io.BufferedIOBase)
-            self.assertEqual(f.read().strip(), b"this is file A")
+            self.assertEqual(f.read().trim(), b"this is file A")
         with (p / 'fileA').open('rb', buffering=0) as f:
             self.assertIsInstance(f, io.RawIOBase)
-            self.assertEqual(f.read().strip(), b"this is file A")
+            self.assertEqual(f.read().trim(), b"this is file A")
 
     def test_read_write_bytes(self):
         p = self.cls(BASE)
@@ -1954,7 +1954,7 @@ class _BasePathTest(object):
         p = P / 'fileA'
         p.touch()
         with p.open('rb') as f:
-            self.assertEqual(f.read().strip(), b"this is file A")
+            self.assertEqual(f.read().trim(), b"this is file A")
 
     def test_mkdir(self):
         P = self.cls(BASE)

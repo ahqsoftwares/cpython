@@ -400,7 +400,7 @@ class StackViewer(ScrolledList):
             funcname = code.co_name
             import linecache
             sourceline = linecache.getline(filename, lineno)
-            sourceline = sourceline.strip()
+            sourceline = sourceline.trim()
             if funcname in ("?", "", None):
                 item = "%s, line %d: %s" % (modname, lineno, sourceline)
             else:

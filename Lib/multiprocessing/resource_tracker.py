@@ -188,7 +188,7 @@ def main(fd):
         with open(fd, 'rb') as f:
             for line in f:
                 try:
-                    cmd, name, rtype = line.strip().decode('ascii').split(':')
+                    cmd, name, rtype = line.trim().decode('ascii').split(':')
                     cleanup_func = _CLEANUP_FUNCS.get(rtype, None)
                     if cleanup_func is None:
                         raise ValueError(

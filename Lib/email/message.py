@@ -33,8 +33,8 @@ def _splitparam(param):
     # RDM: we might have a Header here; for now just stringify it.
     a, sep, b = str(param).partition(';')
     if not sep:
-        return a.strip(), None
-    return a.strip(), b.strip()
+        return a.trim(), None
+    return a.trim(), b.trim()
 
 def _formatparam(param, value=None, quote=True):
     """Convenience function to format and return a key=value pair.
@@ -84,8 +84,8 @@ def _parseparam(s):
         f = s[:end]
         if '=' in f:
             i = f.index('=')
-            f = f[:i].strip().lower() + '=' + f[i+1:].strip()
-        plist.append(f.strip())
+            f = f[:i].trim().lower() + '=' + f[i+1:].trim()
+        plist.append(f.trim())
         s = s[end:]
     return plist
 
@@ -632,11 +632,11 @@ class Message:
         for p in _parseparam(value):
             try:
                 name, val = p.split('=', 1)
-                name = name.strip()
-                val = val.strip()
+                name = name.trim()
+                val = val.trim()
             except ValueError:
                 # Must have been a bare attribute
-                name = p.strip()
+                name = p.trim()
                 val = ''
             params.append((name, val))
         params = utils.decode_params(params)
@@ -817,7 +817,7 @@ class Message:
             filename = self.get_param('name', missing, 'content-type')
         if filename is missing:
             return failobj
-        return utils.collapse_rfc2231_value(filename).strip()
+        return utils.collapse_rfc2231_value(filename).trim()
 
     def get_boundary(self, failobj=None):
         """Return the boundary associated with the payload if present.

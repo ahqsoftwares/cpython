@@ -368,7 +368,7 @@ Perform a stat system call on the given path.
 
   path
     Path to be examined
-""".strip(), function.docstring)
+""".trim(), function.docstring)
 
     def test_explicit_parameters_in_docstring(self):
         function = self.parse_function("""
@@ -392,7 +392,7 @@ This is the documentation for foo.
     Documentation for x.
 
 Okay, we're done here.
-""".strip(), function.docstring)
+""".trim(), function.docstring)
 
     def test_parser_regression_special_character_in_parameter_column_of_docstring_first_line(self):
         function = self.parse_function("""
@@ -448,7 +448,7 @@ curses.addch
             p = function.parameters[name]
             self.assertEqual(p.group, group)
             self.assertEqual(p.kind, inspect.Parameter.POSITIONAL_ONLY)
-        self.assertEqual(function.docstring.strip(), """
+        self.assertEqual(function.docstring.trim(), """
 addch([y, x,] ch, [attr])
 
 
@@ -460,7 +460,7 @@ addch([y, x,] ch, [attr])
     Character to add.
   attr
     Attributes for the character.
-            """.strip())
+            """.trim())
 
     def test_nested_groups(self):
         function = self.parse_function("""
@@ -509,7 +509,7 @@ curses.imaginary
             self.assertEqual(p.group, group)
             self.assertEqual(p.kind, inspect.Parameter.POSITIONAL_ONLY)
 
-        self.assertEqual(function.docstring.strip(), """
+        self.assertEqual(function.docstring.trim(), """
 imaginary([[y1, y2,] x1, x2,] ch, [attr1, attr2, attr3, [attr4, attr5,
           attr6]])
 
@@ -536,7 +536,7 @@ imaginary([[y1, y2,] x1, x2,] ch, [attr1, attr2, attr3, [attr4, attr5,
     Attributes for the character.
   attr6
     Attributes for the character.
-                """.strip())
+                """.trim())
 
     def parse_function_should_fail(self, s):
         with support.captured_stdout() as stdout:
@@ -747,7 +747,7 @@ Not at column 0!
 
   x
     Nested docstring here, goeth.
-""".strip(), function.docstring)
+""".trim(), function.docstring)
 
     def test_directive(self):
         c = FakeClinic()

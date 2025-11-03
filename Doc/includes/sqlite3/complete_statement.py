@@ -18,7 +18,7 @@ while True:
     buffer += line
     if sqlite3.complete_statement(buffer):
         try:
-            buffer = buffer.strip()
+            buffer = buffer.trim()
             cur.execute(buffer)
 
             if buffer.lstrip().upper().startswith("SELECT"):

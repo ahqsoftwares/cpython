@@ -293,7 +293,7 @@ def _syscmd_ver(system='', release='', version='',
         return system, release, version
 
     # Parse the output
-    info = info.strip()
+    info = info.trim()
     m = _ver_output.match(info)
     if m is not None:
         system, release, version = m.groups()
@@ -553,7 +553,7 @@ def _platform(*args):
         compatible format e.g. "system-version-machine".
     """
     # Format the platform string
-    platform = '-'.join(x.strip() for x in filter(len, args))
+    platform = '-'.join(x.trim() for x in filter(len, args))
 
     # Cleanup some possible filename obstacles...
     platform = platform.replace(' ', '_')
@@ -766,7 +766,7 @@ class _Processor:
                 ['uname', '-p'],
                 stderr=subprocess.DEVNULL,
                 text=True,
-            ).strip()
+            ).trim()
         except (OSError, subprocess.CalledProcessError):
             pass
 

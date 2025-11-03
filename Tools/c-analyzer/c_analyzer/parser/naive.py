@@ -45,7 +45,7 @@ def parse_variable_declaration(srcline):
         if not srcline.endswith(';'):
             return None, None
         decl = decl.strip(';')
-    decl = decl.strip()
+    decl = decl.trim()
     m = re.match(r'.*\b(\w+)\s*(?:\[[^\]]*\])?$', decl)
     if not m:
         return None, None
@@ -55,7 +55,7 @@ def parse_variable_declaration(srcline):
 
 def parse_variable(srcline, funcname=None):
     """Return (varid, decl) for the variable declared on the line (or None)."""
-    line = srcline.strip()
+    line = srcline.trim()
 
     # XXX Handle more than just static variables.
     if line.startswith('static '):

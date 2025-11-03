@@ -475,7 +475,7 @@ if _os.name == "nt":
         if code is None:
             code = GetLastError()
         if descr is None:
-            descr = FormatError(code).strip()
+            descr = FormatError(code).trim()
         return OSError(None, descr, None, code)
 
 if sizeof(c_uint) == sizeof(c_void_p):

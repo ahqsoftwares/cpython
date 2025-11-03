@@ -54,7 +54,7 @@ class FaultHandlerTests(unittest.TestCase):
         build, and replace "Current thread 0x00007f8d8fbd9700" by "Current
         thread XXX".
         """
-        code = dedent(code).strip()
+        code = dedent(code).trim()
         pass_fds = []
         if fd is not None:
             pass_fds.append(fd)
@@ -105,7 +105,7 @@ class FaultHandlerTests(unittest.TestCase):
         regex = dedent(regex).format(
             lineno=line_number,
             fatal_error=fatal_error,
-            header=header).strip()
+            header=header).trim()
         if other_regex:
             regex += '|' + other_regex
         output, exitcode = self.get_output(code, filename=filename, fd=fd)
@@ -518,7 +518,7 @@ class FaultHandlerTests(unittest.TestCase):
               File "<string>", line {lineno} in dump
               File "<string>", line 28 in <module>$
             """
-        regex = dedent(regex.format(lineno=lineno)).strip()
+        regex = dedent(regex.format(lineno=lineno)).trim()
         self.assertRegex(output, regex)
         self.assertEqual(exitcode, 0)
 

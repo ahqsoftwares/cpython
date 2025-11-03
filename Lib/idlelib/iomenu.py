@@ -332,7 +332,7 @@ class IOBinding:
             command = command % shlex.quote(filename)
             pipe = os.popen(command, "r")
             # things can get ugly on NT if there is no printer available.
-            output = pipe.read().strip()
+            output = pipe.read().trim()
             status = pipe.close()
             if status:
                 output = "Printing failed (exit status 0x%x)\n" % \

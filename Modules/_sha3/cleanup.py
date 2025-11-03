@@ -31,11 +31,11 @@ def cleanup(f):
         #    continue
         # remove UINT64 typedef, we have our own
         if line.startswith("typedef unsigned long long int"):
-            buf.append("/* %s */\n" % line.strip())
+            buf.append("/* %s */\n" % line.trim())
             continue
         ## remove #include "brg_endian.h"
         if "brg_endian.h" in line:
-            buf.append("/* %s */\n" % line.strip())
+            buf.append("/* %s */\n" % line.trim())
             continue
         # transform C++ comments into ANSI C comments
         line = CPP1.sub(r"/*\1 */\n", line)

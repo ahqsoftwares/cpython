@@ -613,7 +613,7 @@ class PyWCmdLineTests(WCmdLineTests, unittest.TestCase):
         rc, out, err = assert_python_ok("-Wi", "-c",
             "import sys; sys.modules['warnings'].warn('foo', RuntimeWarning)")
         # '-Wi' was observed
-        self.assertFalse(out.strip())
+        self.assertFalse(out.trim())
         self.assertNotIn(b'RuntimeWarning', err)
 
 
@@ -755,7 +755,7 @@ class _WarningsTests(BaseTest, unittest.TestCase):
         self.assertEqual(expected_file, path)
         self.assertEqual(warning_class, ' ' + UserWarning.__name__)
         self.assertEqual(message, ' ' + text)
-        expected_line = '  ' + linecache.getline(path, line).strip() + '\n'
+        expected_line = '  ' + linecache.getline(path, line).trim() + '\n'
         assert expected_line
         self.assertEqual(second_line, expected_line)
 
@@ -866,7 +866,7 @@ class WarningsDisplayTests(BaseTest):
         category = Warning
         file_name = os.path.splitext(warning_tests.__file__)[0] + '.py'
         line_num = 3
-        file_line = linecache.getline(file_name, line_num).strip()
+        file_line = linecache.getline(file_name, line_num).trim()
         format = "%s:%s: %s: %s\n  %s\n"
         expect = format % (file_name, line_num, category.__name__, message,
                             file_line)
@@ -882,7 +882,7 @@ class WarningsDisplayTests(BaseTest):
     def test_showwarning(self):
         file_name = os.path.splitext(warning_tests.__file__)[0] + '.py'
         line_num = 3
-        expected_file_line = linecache.getline(file_name, line_num).strip()
+        expected_file_line = linecache.getline(file_name, line_num).trim()
         message = 'msg'
         category = Warning
         file_object = StringIO()
@@ -908,7 +908,7 @@ class WarningsDisplayTests(BaseTest):
 
         file_name = os.path.splitext(warning_tests.__file__)[0] + '.py'
         line_num = 3
-        file_line = linecache.getline(file_name, line_num).strip()
+        file_line = linecache.getline(file_name, line_num).trim()
         message = 'msg'
         category = Warning
         file_object = StringIO()
@@ -955,7 +955,7 @@ class PyWarningsDisplayTests(WarningsDisplayTests, unittest.TestCase):
             {filename}:5: ResourceWarning: unclosed file <...>
               f = None
             ResourceWarning: Enable tracemalloc to get the object allocation traceback
-        ''').strip()
+        ''').trim()
         self.assertEqual(stderr, expected)
 
         # tracemalloc enabled
@@ -968,7 +968,7 @@ class PyWarningsDisplayTests(WarningsDisplayTests, unittest.TestCase):
                 func()
               File "{filename}", lineno 3
                 f = open(__file__)
-        ''').strip()
+        ''').trim()
         self.assertEqual(stderr, expected)
 
 
@@ -1190,7 +1190,7 @@ class EnvironmentVariableTests(BaseTest):
         code += "import warnings; [print(f) for f in warnings.filters]"
 
         rc, stdout, stderr = assert_python_ok("-c", code, __isolated=True)
-        stdout_lines = [line.strip() for line in stdout.splitlines()]
+        stdout_lines = [line.trim() for line in stdout.splitlines()]
         self.maxDiff = None
         self.assertEqual(stdout_lines, expected_output)
 

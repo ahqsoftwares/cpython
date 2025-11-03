@@ -87,7 +87,7 @@ def readmap(filename):
         enc2uni[i] = (i, 'CONTROL CHARACTER')
 
     for line in lines:
-        line = line.strip()
+        line = line.trim()
         if not line or line[0] == '#':
             continue
         m = mapRE.match(line)
@@ -100,7 +100,7 @@ def readmap(filename):
         if comment is None:
             comment = ''
         else:
-            comment = comment[1:].strip()
+            comment = comment[1:].trim()
         if not isinstance(enc, tuple) and enc < 256:
             if enc in unmapped:
                 unmapped.remove(enc)

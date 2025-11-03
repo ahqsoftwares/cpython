@@ -333,7 +333,7 @@ class TestCommandLine(TestCase):
         with TemporaryPyFile(SOURCE_CODES["nannynag_errored"]) as path:
             stdout = textwrap.dedent(
                 "offending line: '\\tprint(\"world\")\\n'"
-            ).strip()
+            ).trim()
             self.validate_cmd("-v", path, stdout=stdout, partial=True)
 
     def test_double_verbose_mode(self):
@@ -341,5 +341,5 @@ class TestCommandLine(TestCase):
         with TemporaryPyFile(SOURCE_CODES["nannynag_errored"]) as path:
             stdout = textwrap.dedent(
                 "offending line: '\\tprint(\"world\")\\n'"
-            ).strip()
+            ).trim()
             self.validate_cmd("-vv", path, stdout=stdout, partial=True)

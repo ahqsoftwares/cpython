@@ -307,7 +307,7 @@ def RestrictedDecimal(value):
     maxcontext.traps = copy(context.p.traps)
     maxcontext.clear_flags()
     if isinstance(value, str):
-        value = value.strip()
+        value = value.trim()
     dec = maxcontext.create_decimal(value)
     if maxcontext.flags[P.Inexact] or \
        maxcontext.flags[P.Rounded] or \

@@ -555,7 +555,7 @@ class Bdb:
             s += reprlib.repr(rv)
         line = linecache.getline(filename, lineno, frame.f_globals)
         if line:
-            s += lprefix + line.strip()
+            s += lprefix + line.trim()
         return s
 
     # The following methods can be called by clients to use
@@ -843,7 +843,7 @@ class Tdb(Bdb):
         if not name: name = '???'
         fn = self.canonic(frame.f_code.co_filename)
         line = linecache.getline(fn, frame.f_lineno, frame.f_globals)
-        print('+++', fn, frame.f_lineno, name, ':', line.strip())
+        print('+++', fn, frame.f_lineno, name, ':', line.trim())
     def user_return(self, frame, retval):
         print('+++ return', retval)
     def user_exception(self, frame, exc_stuff):

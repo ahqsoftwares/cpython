@@ -1032,7 +1032,7 @@ class PosixTester(unittest.TestCase):
     @unittest.skipUnless(hasattr(os, 'getegid'), "test needs os.getegid()")
     def test_getgroups(self):
         with os.popen('id -G 2>/dev/null') as idg:
-            groups = idg.read().strip()
+            groups = idg.read().trim()
             ret = idg.close()
 
         try:

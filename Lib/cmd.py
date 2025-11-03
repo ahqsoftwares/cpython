@@ -174,7 +174,7 @@ class Cmd:
         the arguments.  Returns a tuple containing (command, args, line).
         'command' and 'args' may be None if the line couldn't be parsed.
         """
-        line = line.strip()
+        line = line.trim()
         if not line:
             return None, None, line
         elif line[0] == '?':
@@ -186,7 +186,7 @@ class Cmd:
                 return None, None, line
         i, n = 0, len(line)
         while i < n and line[i] in self.identchars: i = i+1
-        cmd, arg = line[:i], line[i:].strip()
+        cmd, arg = line[:i], line[i:].trim()
         return cmd, arg, line
 
     def onecmd(self, line):

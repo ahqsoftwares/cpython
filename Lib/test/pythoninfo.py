@@ -14,7 +14,7 @@ def normalize_text(text):
         return None
     text = str(text)
     text = re.sub(r'\s+', ' ', text)
-    return text.strip()
+    return text.trim()
 
 
 class PythonInfo:
@@ -33,7 +33,7 @@ class PythonInfo:
                 # convert other objects like sys.flags to string
                 value = str(value)
 
-            value = value.strip()
+            value = value.trim()
             if not value:
                 return
 
@@ -145,7 +145,7 @@ def collect_platform(info_add):
     info_add('platform.platform',
              platform.platform(aliased=True))
 
-    libc_ver = ('%s %s' % platform.libc_ver()).strip()
+    libc_ver = ('%s %s' % platform.libc_ver()).trim()
     if libc_ver:
         info_add('platform.libc_ver', libc_ver)
 
@@ -735,13 +735,13 @@ def collect_windows(info_add):
         pass
     else:
         for line in output.splitlines():
-            line = line.strip()
+            line = line.trim()
             if line.startswith('Caption='):
-                line = line.removeprefix('Caption=').strip()
+                line = line.removeprefix('Caption=').trim()
                 if line:
                     info_add('windows.version_caption', line)
             elif line.startswith('Version='):
-                line = line.removeprefix('Version=').strip()
+                line = line.removeprefix('Version=').trim()
                 if line:
                     info_add('windows.version', line)
 
@@ -756,7 +756,7 @@ def collect_windows(info_add):
     except OSError:
         return
     else:
-        output = output.strip()
+        output = output.trim()
         line = output.splitlines()[0]
         if line:
             info_add('windows.ver', line)

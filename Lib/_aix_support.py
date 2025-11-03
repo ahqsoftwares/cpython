@@ -38,7 +38,7 @@ def _aix_bos_rte():
     # All AIX systems to have lslpp installed in this location
     out = subprocess.check_output(["/usr/bin/lslpp", "-Lqc", "bos.rte"])
     out = out.decode("utf-8")
-    out = out.strip().split(":")  # type: ignore
+    out = out.trim().split(":")  # type: ignore
     _bd = int(out[-1]) if out[-1] != '' else 9988
     return (str(out[2]), _bd)
 

@@ -54,7 +54,7 @@ def idle_formatwarning(message, category, filename, lineno, line=None):
     s += '  File \"%s\", line %s\n' % (filename, lineno)
     if line is None:
         line = linecache.getline(filename, lineno)
-    line = line.strip()
+    line = line.trim()
     if line:
         s += "    %s\n" % line
     s += "%s: %s\n" % (category.__name__, message)

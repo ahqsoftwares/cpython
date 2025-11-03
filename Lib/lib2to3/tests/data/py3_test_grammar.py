@@ -793,7 +793,7 @@ class GrammarTests(unittest.TestCase):
         strs = ["Apple", "Banana", "Coconut"]
         spcs = ["  Apple", " Banana ", "Coco  nut  "]
 
-        self.assertEqual([s.strip() for s in spcs], ['Apple', 'Banana', 'Coco  nut'])
+        self.assertEqual([s.trim() for s in spcs], ['Apple', 'Banana', 'Coco  nut'])
         self.assertEqual([3 * x for x in nums], [3, 6, 9, 12, 15])
         self.assertEqual([x for x in nums if x > 2], [3, 4, 5])
         self.assertEqual([(i, s) for i in nums for s in strs],

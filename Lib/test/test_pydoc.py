@@ -135,7 +135,7 @@ CREDITS
 
 FILE
     %s
-""".strip()
+""".trim()
 
 expected_text_data_docstrings = tuple('\n     |      ' + s if s else ''
                                       for s in expected_data_docstrings)
@@ -278,7 +278,7 @@ war</tt></dd></dl>
 \x20\x20\x20\x20
 <tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%%">Nobody</td></tr></table>
-""".strip() # ' <- emacs turd
+""".trim() # ' <- emacs turd
 
 expected_html_data_docstrings = tuple(s.replace(' ', '&nbsp;')
                                       for s in expected_data_docstrings)
@@ -308,7 +308,7 @@ class DA(builtins.object)
  |  Data and other attributes inherited from Meta:
  |\x20\x20
  |  ham = 'spam'
-""".strip()
+""".trim()
 
 expected_virtualattribute_pattern1 = """
 Help on class Class in module %s:
@@ -317,7 +317,7 @@ class Class(builtins.object)
  |  Data and other attributes inherited from Meta:
  |\x20\x20
  |  LIFE = 42
-""".strip()
+""".trim()
 
 expected_virtualattribute_pattern2 = """
 Help on class Class1 in module %s:
@@ -326,7 +326,7 @@ class Class1(builtins.object)
  |  Data and other attributes inherited from Meta1:
  |\x20\x20
  |  one = 1
-""".strip()
+""".trim()
 
 expected_virtualattribute_pattern3 = """
 Help on class Class2 in module %s:
@@ -350,7 +350,7 @@ class Class2(Class1)
  |  Data and other attributes inherited from Meta2:
  |\x20\x20
  |  two = 2
-""".strip()
+""".trim()
 
 expected_missingattribute_pattern = """
 Help on class C in module %s:
@@ -359,7 +359,7 @@ class C(builtins.object)
  |  Data and other attributes defined here:
  |\x20\x20
  |  here = 'present!'
-""".strip()
+""".trim()
 
 def run_pydoc(module_name, *args, **env):
     """
@@ -369,7 +369,7 @@ def run_pydoc(module_name, *args, **env):
     args = args + (module_name,)
     # do not write bytecode files to avoid caching errors
     rc, out, err = assert_python_ok('-B', pydoc.__file__, *args, **env)
-    return out.strip()
+    return out.trim()
 
 def get_pydoc_html(module):
     "Returns pydoc generated output as html"
@@ -378,7 +378,7 @@ def get_pydoc_html(module):
     loc = doc.getdocloc(pydoc_mod) or ""
     if loc:
         loc = "<br><a href=\"" + loc + "\">Module Docs</a>"
-    return output.strip(), loc
+    return output.trim(), loc
 
 def get_pydoc_link(module):
     "Returns a documentation web link of a module"
@@ -401,7 +401,7 @@ def get_pydoc_text(module):
     # clean up the extra text formatting that pydoc performs
     patt = re.compile('\b.')
     output = patt.sub('', output)
-    return output.strip(), loc
+    return output.trim(), loc
 
 def get_html_title(text):
     # Bit of hack, but good enough for test purposes
@@ -528,7 +528,7 @@ class PydocDocTest(unittest.TestCase):
     def test_input_strip(self):
         missing_module = " test.i_am_not_here "
         result = str(run_pydoc(missing_module), 'ascii')
-        expected = missing_pattern % missing_module.strip()
+        expected = missing_pattern % missing_module.trim()
         self.assertEqual(expected, result)
 
     def test_stripid(self):
@@ -702,7 +702,7 @@ class PydocDocTest(unittest.TestCase):
             with captured_output('stdout') as output, \
                  captured_output('stderr') as err:
                 helper.help(module)
-                result = buf.getvalue().strip()
+                result = buf.getvalue().trim()
                 expected_text = expected_help_pattern % (
                                 (doc_loc,) +
                                 expected_text_data_docstrings +
@@ -950,7 +950,7 @@ class PydocImportTest(PydocBaseTest):
             with captured_stdout() as out:
                 with captured_stderr() as err:
                     pydoc.apropos('syntaxerr')
-            self.assertEqual(out.getvalue().strip(), 'syntaxerr')
+            self.assertEqual(out.getvalue().trim(), 'syntaxerr')
             self.assertEqual(err.getvalue(), '')
 
     def test_apropos_with_unreadable_dir(self):
@@ -1018,7 +1018,7 @@ class PydocImportTest(PydocBaseTest):
         output = StringIO()
         helper = pydoc.Helper(output=output)
         helper('modules')
-        result = output.getvalue().strip()
+        result = output.getvalue().trim()
         num_lines = len(result.splitlines())
 
         self.assertGreaterEqual(num_lines, expected)
@@ -1079,13 +1079,13 @@ class TestDescriptions(unittest.TestCase):
         doc = pydoc.render_doc(typing.List[int], renderer=pydoc.plaintext)
         self.assertIn('_GenericAlias in module typing', doc)
         self.assertIn('\nclass list(object)', doc)
-        self.assertIn(list.__doc__.strip().splitlines()[0], doc)
+        self.assertIn(list.__doc__.trim().splitlines()[0], doc)
 
         self.assertEqual(pydoc.describe(list[int]), 'GenericAlias')
         doc = pydoc.render_doc(list[int], renderer=pydoc.plaintext)
         self.assertIn('GenericAlias in module builtins', doc)
         self.assertIn('\nclass list(object)', doc)
-        self.assertIn(list.__doc__.strip().splitlines()[0], doc)
+        self.assertIn(list.__doc__.trim().splitlines()[0], doc)
 
     def test_union_type(self):
         self.assertEqual(pydoc.describe(typing.Union[int, str]), '_UnionGenericAlias')
@@ -1093,7 +1093,7 @@ class TestDescriptions(unittest.TestCase):
         self.assertIn('_UnionGenericAlias in module typing', doc)
         self.assertIn('\ntyping.Union', doc)
         if typing.Union.__doc__:
-            self.assertIn(typing.Union.__doc__.strip().splitlines()[0], doc)
+            self.assertIn(typing.Union.__doc__.trim().splitlines()[0], doc)
 
     def test_special_form(self):
         self.assertEqual(pydoc.describe(typing.Any), '_SpecialForm')
@@ -1101,7 +1101,7 @@ class TestDescriptions(unittest.TestCase):
         self.assertIn('_SpecialForm in module typing', doc)
         if typing.Any.__doc__:
             self.assertIn('\ntyping.Any', doc)
-            self.assertIn(typing.Any.__doc__.strip().splitlines()[0], doc)
+            self.assertIn(typing.Any.__doc__.trim().splitlines()[0], doc)
         else:
             self.assertIn('\nclass _SpecialForm(_Final)', doc)
 
@@ -1465,7 +1465,7 @@ class PydocWithMetaClasses(unittest.TestCase):
         helper(DA)
         expected_text = expected_dynamicattribute_pattern % (
                 (__name__,) + expected_text_data_docstrings[:2])
-        result = output.getvalue().strip()
+        result = output.getvalue().trim()
         self.assertEqual(expected_text, result)
 
     @unittest.skipIf(sys.flags.optimize >= 2,
@@ -1486,7 +1486,7 @@ class PydocWithMetaClasses(unittest.TestCase):
         helper = pydoc.Helper(output=output)
         helper(Class)
         expected_text = expected_virtualattribute_pattern1 % __name__
-        result = output.getvalue().strip()
+        result = output.getvalue().trim()
         self.assertEqual(expected_text, result)
 
     @unittest.skipIf(sys.flags.optimize >= 2,
@@ -1526,13 +1526,13 @@ class PydocWithMetaClasses(unittest.TestCase):
         helper = pydoc.Helper(output=output)
         helper(Class1)
         expected_text1 = expected_virtualattribute_pattern2 % __name__
-        result1 = output.getvalue().strip()
+        result1 = output.getvalue().trim()
         self.assertEqual(expected_text1, result1)
         output = StringIO()
         helper = pydoc.Helper(output=output)
         helper(Class2)
         expected_text2 = expected_virtualattribute_pattern3 % __name__
-        result2 = output.getvalue().strip()
+        result2 = output.getvalue().trim()
         self.assertEqual(expected_text2, result2)
 
     @unittest.skipIf(sys.flags.optimize >= 2,
@@ -1549,7 +1549,7 @@ class PydocWithMetaClasses(unittest.TestCase):
         helper = pydoc.Helper(output=output)
         helper(C)
         expected_text = expected_missingattribute_pattern % __name__
-        result = output.getvalue().strip()
+        result = output.getvalue().trim()
         self.assertEqual(expected_text, result)
 
     def test_resolve_false(self):

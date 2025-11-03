@@ -184,7 +184,7 @@ class UnicodeNamesTest(unittest.TestCase):
             self.skipTest("Could not retrieve " + url)
         self.addCleanup(testdata.close)
         for line in testdata:
-            line = line.strip()
+            line = line.trim()
             if not line or line.startswith('#'):
                 continue
             seqname, codepoints = line.split(';')

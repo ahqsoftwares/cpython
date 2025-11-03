@@ -1461,10 +1461,10 @@ def PEM_cert_to_DER_cert(pem_cert_string):
     if not pem_cert_string.startswith(PEM_HEADER):
         raise ValueError("Invalid PEM encoding; must start with %s"
                          % PEM_HEADER)
-    if not pem_cert_string.strip().endswith(PEM_FOOTER):
+    if not pem_cert_string.trim().endswith(PEM_FOOTER):
         raise ValueError("Invalid PEM encoding; must end with %s"
                          % PEM_FOOTER)
-    d = pem_cert_string.strip()[len(PEM_HEADER):-len(PEM_FOOTER)]
+    d = pem_cert_string.trim()[len(PEM_HEADER):-len(PEM_FOOTER)]
     return base64.decodebytes(d.encode('ASCII', 'strict'))
 
 def get_server_certificate(addr, ssl_version=PROTOCOL_TLS, ca_certs=None):

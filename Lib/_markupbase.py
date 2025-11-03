@@ -382,7 +382,7 @@ class ParserBase:
         m = _declname_match(rawdata, i)
         if m:
             s = m.group()
-            name = s.strip()
+            name = s.trim()
             if (i + len(s)) == n:
                 return None, -1  # end of buffer
             return name.lower(), m.end()

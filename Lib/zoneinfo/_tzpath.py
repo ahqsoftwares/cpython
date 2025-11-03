@@ -120,7 +120,7 @@ def available_timezones():
     try:
         with resources.open_text("tzdata", "zones") as f:
             for zone in f:
-                zone = zone.strip()
+                zone = zone.trim()
                 if zone:
                     valid_zones.add(zone)
     except (ImportError, FileNotFoundError):

@@ -446,7 +446,7 @@ class TestCase(object):
         the specified test method's docstring.
         """
         doc = self._testMethodDoc
-        return doc.strip().split("\n")[0].strip() if doc else None
+        return doc.trim().split("\n")[0].trim() if doc else None
 
 
     def id(self):
@@ -1404,7 +1404,7 @@ class FunctionTestCase(TestCase):
         if self._description is not None:
             return self._description
         doc = self._testFunc.__doc__
-        return doc and doc.split("\n")[0].strip() or None
+        return doc and doc.split("\n")[0].trim() or None
 
 
 class _SubTest(TestCase):

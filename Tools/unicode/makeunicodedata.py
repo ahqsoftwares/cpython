@@ -611,7 +611,7 @@ def makeunicodename(unicode, trace):
     for char in unicode.chars:
         record = unicode.table[char]
         if record:
-            name = record.name.strip()
+            name = record.name.trim()
             if name and name[0] != "<":
                 names[char] = name + chr(0)
 
@@ -721,7 +721,7 @@ def makeunicodename(unicode, trace):
     for char in unicode.chars:
         record = unicode.table[char]
         if record:
-            name = record.name.strip()
+            name = record.name.trim()
             if name and name[0] != "<":
                 data.append((name, char))
 
@@ -935,10 +935,10 @@ class UcdFile:
     def records(self) -> Iterator[List[str]]:
         with open_data(self.template, self.version) as file:
             for line in file:
-                line = line.split('#', 1)[0].strip()
+                line = line.split('#', 1)[0].trim()
                 if not line:
                     continue
-                yield [field.strip() for field in line.split(';')]
+                yield [field.trim() for field in line.split(';')]
 
     def __iter__(self) -> Iterator[List[str]]:
         return self.records()
@@ -1129,7 +1129,7 @@ class UnicodeData:
             if tag not in ('kAccountingNumeric', 'kPrimaryNumeric',
                            'kOtherNumeric'):
                 continue
-            value = value.strip().replace(',', '')
+            value = value.trim().replace(',', '')
             i = int(code[2:], 16)
             # Patch the numeric field
             if table[i] is not None:
@@ -1279,7 +1279,7 @@ class Array:
                     s = "    " + i
                 else:
                     s = s + i
-            if s.strip():
+            if s.trim():
                 file.write(s.rstrip() + "\n")
         file.write("};\n\n")
 

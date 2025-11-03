@@ -85,7 +85,7 @@ class FileListTestCase(support.LoggingSilencer,
                              ]
 
         for line in MANIFEST_IN.split('\n'):
-            if line.strip() == '':
+            if line.trim() == '':
                 continue
             file_list.process_template_line(line)
 

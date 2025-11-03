@@ -1301,7 +1301,7 @@ class HandlerTests(unittest.TestCase):
         hrh = urllib.request.HTTPRedirectHandler()
         o = build_test_opener(hh, hdeh, hrh)
         fp = o.open('http://www.example.com')
-        self.assertEqual(fp.geturl(), redirected_url.strip())
+        self.assertEqual(fp.geturl(), redirected_url.trim())
 
     def test_redirect_no_path(self):
         # Issue 14132: Relative redirect strips original path
@@ -1645,7 +1645,7 @@ class HandlerTests(unittest.TestCase):
         self.assertFalse(http_handler.requests[0].has_header(auth_header))
         userpass = bytes('%s:%s' % (user, password), "ascii")
         auth_hdr_value = ('Basic ' +
-            base64.encodebytes(userpass).strip().decode())
+            base64.encodebytes(userpass).trim().decode())
         self.assertEqual(http_handler.requests[1].get_header(auth_header),
                          auth_hdr_value)
         self.assertEqual(http_handler.requests[1].unredirected_hdrs[auth_header],

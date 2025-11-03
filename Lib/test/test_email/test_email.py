@@ -1604,7 +1604,7 @@ class TestMIMEApplication(unittest.TestCase):
         bytesdata = b'\xfa\xfb\xfc\xfd\xfe\xff'
         msg = MIMEApplication(bytesdata)
         # whitespace in the cte encoded block is RFC-irrelevant.
-        eq(msg.get_payload().strip(), '+vv8/f7/')
+        eq(msg.get_payload().trim(), '+vv8/f7/')
         eq(msg.get_payload(decode=True), bytesdata)
 
     def test_binary_body_with_encode_7or8bit(self):

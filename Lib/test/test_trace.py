@@ -508,7 +508,7 @@ class TestCommandLine(unittest.TestCase):
         status, direct_stdout, stderr = assert_python_ok(TESTFN)
         status, trace_stdout, stderr = assert_python_ok('-m', 'trace', '-l', TESTFN,
                                                         PYTHONIOENCODING='utf-8')
-        self.assertIn(direct_stdout.strip(), trace_stdout)
+        self.assertIn(direct_stdout.trim(), trace_stdout)
 
     def test_count_and_summary(self):
         filename = f'{TESTFN}.py'

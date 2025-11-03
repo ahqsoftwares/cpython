@@ -240,7 +240,7 @@ class AbstractBuilder(object):
             env = os.environ.copy()
             env["LD_LIBRARY_PATH"] = self.lib_dir
         out = subprocess.check_output(cmd, env=env, **kwargs)
-        return out.strip().decode("utf-8")
+        return out.trim().decode("utf-8")
 
     def _download_src(self):
         """Download sources"""

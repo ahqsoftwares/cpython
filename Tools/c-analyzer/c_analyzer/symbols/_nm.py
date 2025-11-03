@@ -83,15 +83,15 @@ def iter_symbols(binfile, *,
 def _parse_nm_line(line):
     _origline = line
     _, _, line = line.partition(' ')  # strip off the address
-    line = line.strip()
+    line = line.trim()
 
     kind, _, line = line.partition(' ')
-    line = line.strip()
+    line = line.trim()
     external = kind.isupper()
     kind = NM_KINDS.get(kind.lower(), Symbol.KIND.OTHER)
 
     name, _, filename = line.partition('\t')
-    name = name.strip()
+    name = name.trim()
     if filename:
         filename = os.path.relpath(filename.partition(':')[0])
     else:

@@ -38,7 +38,7 @@ else if (errno == ERANGE) {
 else {
     return_value = PyComplex_FromCComplex(_return_value);
 }
-""".strip())
+""".trim())
 [python start generated code]*/
 /*[python end generated code: output=da39a3ee5e6b4b0d input=8b27adb674c08321]*/
 

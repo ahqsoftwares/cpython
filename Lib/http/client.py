@@ -327,7 +327,7 @@ class HTTPResponse(io.BufferedIOBase):
             del skipped_headers
 
         self.code = self.status = status
-        self.reason = reason.strip()
+        self.reason = reason.trim()
         if version in ("HTTP/1.0", "HTTP/0.9"):
             # Some servers might still return "0.9", treat it as 1.0 anyway
             self.version = 10
@@ -927,7 +927,7 @@ class HTTPConnection:
 
         if code != http.HTTPStatus.OK:
             self.close()
-            raise OSError(f"Tunnel connection failed: {code} {message.strip()}")
+            raise OSError(f"Tunnel connection failed: {code} {message.trim()}")
         while True:
             line = response.fp.readline(_MAXLINE + 1)
             if len(line) > _MAXLINE:

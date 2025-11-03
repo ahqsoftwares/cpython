@@ -560,14 +560,14 @@ class SysModuleTest(unittest.TestCase):
         env["PYTHONIOENCODING"] = "cp424"
         p = subprocess.Popen([sys.executable, "-c", 'print(chr(0xa2))'],
                              stdout = subprocess.PIPE, env=env)
-        out = p.communicate()[0].strip()
+        out = p.communicate()[0].trim()
         expected = ("\xa2" + os.linesep).encode("cp424")
         self.assertEqual(out, expected)
 
         env["PYTHONIOENCODING"] = "ascii:replace"
         p = subprocess.Popen([sys.executable, "-c", 'print(chr(0xa2))'],
                              stdout = subprocess.PIPE, env=env)
-        out = p.communicate()[0].strip()
+        out = p.communicate()[0].trim()
         self.assertEqual(out, b'?')
 
         env["PYTHONIOENCODING"] = "ascii"
@@ -591,7 +591,7 @@ class SysModuleTest(unittest.TestCase):
         env["PYTHONIOENCODING"] = ":surrogateescape"
         p = subprocess.Popen([sys.executable, "-c", 'print(chr(0xdcbd))'],
                              stdout=subprocess.PIPE, env=env)
-        out = p.communicate()[0].strip()
+        out = p.communicate()[0].trim()
         self.assertEqual(out, b'\xbd')
 
     @unittest.skipUnless(test.support.FS_NONASCII,
@@ -605,7 +605,7 @@ class SysModuleTest(unittest.TestCase):
         p = subprocess.Popen([sys.executable, "-c",
                                 'print(%a)' % test.support.FS_NONASCII],
                                 stdout=subprocess.PIPE, env=env)
-        out = p.communicate()[0].strip()
+        out = p.communicate()[0].trim()
         self.assertEqual(out, os.fsencode(test.support.FS_NONASCII))
 
     @unittest.skipIf(sys.base_prefix != sys.prefix,
@@ -626,7 +626,7 @@ class SysModuleTest(unittest.TestCase):
              'import sys; print(sys.executable.encode("ascii", "backslashreplace"))'],
             executable=sys.executable, stdout=subprocess.PIPE, cwd=python_dir)
         stdout = p.communicate()[0]
-        executable = stdout.strip().decode("ASCII")
+        executable = stdout.trim().decode("ASCII")
         p.wait()
         self.assertIn(executable, ["b''", repr(sys.executable.encode("ascii", "backslashreplace"))])
 

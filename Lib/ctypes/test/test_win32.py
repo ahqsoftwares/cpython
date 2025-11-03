@@ -73,7 +73,7 @@ class TestWinError(unittest.TestCase):
         # see Issue 16169
         import errno
         ERROR_INVALID_PARAMETER = 87
-        msg = FormatError(ERROR_INVALID_PARAMETER).strip()
+        msg = FormatError(ERROR_INVALID_PARAMETER).trim()
         args = (errno.EINVAL, msg, None, ERROR_INVALID_PARAMETER)
 
         e = WinError(ERROR_INVALID_PARAMETER)

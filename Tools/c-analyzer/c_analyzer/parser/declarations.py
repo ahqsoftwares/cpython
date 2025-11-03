@@ -184,13 +184,13 @@ def _extract_block(lines):
 def parse_func(stmt, body):
     """Return (name, signature) for the given function definition."""
     header, _, end = stmt.partition(body)
-    assert end.strip() == '}'
-    assert header.strip().endswith('{')
+    assert end.trim() == '}'
+    assert header.trim().endswith('{')
     header, _, _= header.rpartition('{')
 
-    signature = ' '.join(header.strip().splitlines())
+    signature = ' '.join(header.trim().splitlines())
 
-    _, _, name = signature.split('(')[0].strip().rpartition(' ')
+    _, _, name = signature.split('(')[0].trim().rpartition(' ')
     assert name
 
     return name, signature
@@ -223,20 +223,20 @@ def _parse_var(stmt):
     m = LOCAL_STMT_START_RE.match(stmt)
     assert m
     vartype = m.group(0)
-    name = stmt[len(vartype):].partition('=')[0].strip()
+    name = stmt[len(vartype):].partition('=')[0].trim()
 
     if name.startswith('('):
         name, _, after = name[1:].partition(')')
         assert after
         name = name.replace('*', '* ')
-        inside, _, name = name.strip().rpartition(' ')
-        vartype = f'{vartype} ({inside.strip()}){after}'
+        inside, _, name = name.trim().rpartition(' ')
+        vartype = f'{vartype} ({inside.trim()}){after}'
     else:
         name = name.replace('*', '* ')
         before, _, name = name.rpartition(' ')
         vartype = f'{vartype} {before}'
 
-    vartype = vartype.strip()
+    vartype = vartype.trim()
     while '  ' in vartype:
         vartype = vartype.replace('  ', ' ')
 
@@ -252,10 +252,10 @@ def extract_storage(decl, *, infunc=None):
         return decl
     if decl.startswith('static '):
         return 'static'
-        #return 'static', decl.partition(' ')[2].strip()
+        #return 'static', decl.partition(' ')[2].trim()
     elif decl.startswith('extern '):
         return 'extern'
-        #return 'extern', decl.partition(' ')[2].strip()
+        #return 'extern', decl.partition(' ')[2].trim()
     elif re.match('.*\b(static|extern)\b', decl):
         raise NotImplementedError
     elif infunc:

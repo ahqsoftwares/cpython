@@ -1029,7 +1029,7 @@ class AbstractBasicAuthHandler:
             credentials = '{0}:{1}'.format(user, passwd).encode()
             auth_str = base64.standard_b64encode(credentials).decode()
             req.add_unredirected_header('Authorization',
-                                        'Basic {}'.format(auth_str.strip()))
+                                        'Basic {}'.format(auth_str.trim()))
         return req
 
     def http_response(self, req, response):
@@ -1467,7 +1467,7 @@ def parse_http_list(s):
     if part:
         res.append(part)
 
-    return [part.strip() for part in res]
+    return [part.trim() for part in res]
 
 class FileHandler(BaseHandler):
     # Use local file or FTP depending on form of URL
@@ -2536,7 +2536,7 @@ def proxy_bypass_environment(host, proxies=None):
     hostonly, port = _splitport(host)
     # check if the host ends with any of the DNS suffixes
     for name in no_proxy.split(','):
-        name = name.strip()
+        name = name.trim()
         if name:
             name = name.lstrip('.')  # ignore leading dots
             name = name.lower()

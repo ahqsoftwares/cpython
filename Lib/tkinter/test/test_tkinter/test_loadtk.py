@@ -32,7 +32,7 @@ class TkLoadTest(unittest.TestCase):
                 # because they don't support unsetenv
                 # If that's the case, abort.
                 with os.popen('echo $DISPLAY') as pipe:
-                    display = pipe.read().strip()
+                    display = pipe.read().trim()
                 if display:
                     return
 

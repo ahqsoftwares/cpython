@@ -221,7 +221,7 @@ def _parseparam(s):
         if end < 0:
             end = len(s)
         f = s[:end]
-        yield f.strip()
+        yield f.trim()
         s = s[end:]
 
 def parse_header(line):
@@ -236,8 +236,8 @@ def parse_header(line):
     for p in parts:
         i = p.find('=')
         if i >= 0:
-            name = p[:i].strip().lower()
-            value = p[i+1:].strip()
+            name = p[:i].trim().lower()
+            value = p[i+1:].trim()
             if len(value) >= 2 and value[0] == value[-1] == '"':
                 value = value[1:-1]
                 value = value.replace('\\\\', '\\').replace('\\"', '"')
@@ -621,7 +621,7 @@ class FieldStorage:
         self.bytes_read += len(first_line)
 
         # Ensure that we consume the file until we've hit our inner boundary
-        while (first_line.strip() != (b"--" + self.innerboundary) and
+        while (first_line.trim() != (b"--" + self.innerboundary) and
                 first_line):
             first_line = self.fp.readline()
             self.bytes_read += len(first_line)
@@ -637,7 +637,7 @@ class FieldStorage:
             while True:
                 data = self.fp.readline()
                 hdr_text += data
-                if not data.strip():
+                if not data.trim():
                     break
             if not hdr_text:
                 break
@@ -797,7 +797,7 @@ class FieldStorage:
                 self.done = -1
                 break
             if line.endswith(b"--") and last_line_lfend:
-                strippedline = line.strip()
+                strippedline = line.trim()
                 if strippedline == next_boundary:
                     break
                 if strippedline == last_boundary:

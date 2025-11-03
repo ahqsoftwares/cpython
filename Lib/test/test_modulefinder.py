@@ -307,13 +307,13 @@ def create_package(source):
             if type(line) != bytes:
                 line = line.encode('utf-8')
             if line.startswith(b' ') or line.startswith(b'\t'):
-                ofi.write(line.strip() + b'\n')
+                ofi.write(line.trim() + b'\n')
             else:
                 if ofi:
                     ofi.close()
                 if type(line) == bytes:
                     line = line.decode('utf-8')
-                ofi = open_file(os.path.join(TEST_DIR, line.strip()))
+                ofi = open_file(os.path.join(TEST_DIR, line.trim()))
     finally:
         if ofi:
             ofi.close()

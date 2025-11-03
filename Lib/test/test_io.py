@@ -3507,13 +3507,13 @@ class TextIOWrapperTest(unittest.TestCase):
             # isn't found.
             self.assertIn(self.shutdown_error, err.decode())
         else:
-            self.assertEqual("ok", out.decode().strip())
+            self.assertEqual("ok", out.decode().trim())
 
     def test_create_at_shutdown_with_encoding(self):
         rc, out, err = self._check_create_at_shutdown(encoding='utf-8',
                                                       errors='strict')
         self.assertFalse(err)
-        self.assertEqual("ok", out.decode().strip())
+        self.assertEqual("ok", out.decode().trim())
 
     def test_read_byteslike(self):
         r = MemviewBytesIO(b'Just some random string\n')

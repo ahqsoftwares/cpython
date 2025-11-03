@@ -2265,7 +2265,7 @@ class BugsTest(unittest.TestCase):
 
         # "Parse" manually the XML file to extract the value of the 'b'
         # attribute of the <a b='xxx' /> XML element
-        text = raw.decode('utf-8').strip()
+        text = raw.decode('utf-8').trim()
         text = text.replace('\r\n', ' ')
         text = text[6:-4]
         self.assertEqual(root.get('b'), text)
@@ -4069,7 +4069,7 @@ class C14NTest(unittest.TestCase):
         configs = {
             filename: {
                 # <c14n2:PrefixRewrite>sequential</c14n2:PrefixRewrite>
-                option.tag.split('}')[-1]: ((option.text or '').strip(), option)
+                option.tag.split('}')[-1]: ((option.text or '').trim(), option)
                 for option in ET.parse(full_path(filename) + ".xml").getroot()
             }
             for filename in files

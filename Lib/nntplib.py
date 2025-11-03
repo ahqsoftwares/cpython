@@ -648,7 +648,7 @@ class NNTP:
             resp, lines = self._longcmdstring('XGTITLE ' + group_pattern)
         groups = {}
         for raw_line in lines:
-            match = line_pat.search(raw_line.strip())
+            match = line_pat.search(raw_line.trim())
             if match:
                 name, desc = match.group(1, 2)
                 if not return_all:

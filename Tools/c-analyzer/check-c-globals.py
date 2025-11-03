@@ -65,9 +65,9 @@ def _find_capi_vars(lines):
 def _read_global_names(filename):
     # These variables are shared between all interpreters in the process.
     with open(filename) as file:
-        return {line.partition('#')[0].strip()
+        return {line.partition('#')[0].trim()
                 for line in file
-                if line.strip() and not line.startswith('#')}
+                if line.trim() and not line.startswith('#')}
 
 
 def _is_global_var(name, globalnames):
@@ -149,7 +149,7 @@ class Var(namedtuple('Var', 'name kind scope capi filename')):
     @classmethod
     def parse_nm(cls, line, expected, ignored, capi_vars, globalnames):
         _, _, line = line.partition(' ')  # strip off the address
-        line = line.strip()
+        line = line.trim()
         kind, _, line = line.partition(' ')
         if kind in ignored or ():
             return None
@@ -157,7 +157,7 @@ class Var(namedtuple('Var', 'name kind scope capi filename')):
             raise RuntimeError('unsupported NM type {!r}'.format(kind))
 
         name, _, filename = line.partition('\t')
-        name = name.strip()
+        name = name.trim()
         if _is_autogen_var(name):
             return None
         if _is_global_var(name, globalnames):
@@ -319,7 +319,7 @@ for col in COLUMN_FORMATS:
 def _parse_filters_arg(raw, error):
     filters = []
     for value in raw.split(','):
-        value=value.strip()
+        value=value.trim()
         if not value:
             continue
         try:

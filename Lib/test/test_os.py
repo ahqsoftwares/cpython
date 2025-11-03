@@ -856,7 +856,7 @@ class EnvironTests(mapping_tests.BasicTestMappingProtocol):
         os.environ.clear()
         os.environ.update(HELLO="World")
         with os.popen("%s -c 'echo $HELLO'" % unix_shell) as popen:
-            value = popen.read().strip()
+            value = popen.read().trim()
             self.assertEqual(value, "World")
 
     @unittest.skipUnless(unix_shell and os.path.exists(unix_shell),
@@ -1031,7 +1031,7 @@ class EnvironTests(mapping_tests.BasicTestMappingProtocol):
             return
 
         with os.popen(f"{unix_shell} -c 'echo ${var}'") as popen:
-            value = popen.read().strip()
+            value = popen.read().trim()
 
         self.assertEqual(expected, value)
 

@@ -709,8 +709,8 @@ class IdleConf:
                 helpPath = '' #so value won't be added to list
             else: #config entry contains ';' as expected
                 value=value.split(';')
-                menuItem=value[0].strip()
-                helpPath=value[1].strip()
+                menuItem=value[0].trim()
+                helpPath=value[1].trim()
             if menuItem and helpPath: #neither are empty strings
                 helpSources.append( (menuItem,helpPath,option) )
         helpSources.sort(key=lambda x: x[2])

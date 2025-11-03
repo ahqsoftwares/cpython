@@ -189,7 +189,7 @@ def get_argspec(ob):
     doc = inspect.getdoc(ob)
     if doc:
         for line in doc.split('\n', _MAX_LINES)[:_MAX_LINES]:
-            line = line.strip()
+            line = line.trim()
             if not line:
                 break
             if len(line) > _MAX_COLS:

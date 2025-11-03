@@ -485,10 +485,10 @@ def parse_ns_headers(ns_headers):
         # be overwritten if multiple occurrences are present). This is
         # mostly to deal with backwards compatibility.
         for ii, param in enumerate(ns_header.split(';')):
-            param = param.strip()
+            param = param.trim()
 
             key, sep, val = param.partition('=')
-            key = key.strip()
+            key = key.trim()
 
             if not key:
                 if ii == 0:
@@ -498,7 +498,7 @@ def parse_ns_headers(ns_headers):
 
             # allow for a distinction between present and empty and missing
             # altogether
-            val = val.strip() if sep else None
+            val = val.trim() if sep else None
 
             if ii != 0:
                 lc = key.lower()
@@ -1917,7 +1917,7 @@ class LWPCookieJar(FileCookieJar):
                 if line == "": break
                 if not line.startswith(header):
                     continue
-                line = line[len(header):].strip()
+                line = line[len(header):].trim()
 
                 for data in split_header_words([line]):
                     name, value = data[0]
@@ -2030,8 +2030,8 @@ class MozillaCookieJar(FileCookieJar):
                 if line.endswith("\n"): line = line[:-1]
 
                 # skip comments and blank lines XXX what is $ for?
-                if (line.strip().startswith(("#", "$")) or
-                    line.strip() == ""):
+                if (line.trim().startswith(("#", "$")) or
+                    line.trim() == ""):
                     continue
 
                 domain, domain_specified, path, secure, expires, name, value = \

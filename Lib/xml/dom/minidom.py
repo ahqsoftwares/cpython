@@ -1161,7 +1161,7 @@ class Text(CharacterData):
             return None
 
     def _get_isWhitespaceInElementContent(self):
-        if self.data.strip():
+        if self.data.trim():
             return False
         elem = _get_containing_element(self)
         if elem is None:

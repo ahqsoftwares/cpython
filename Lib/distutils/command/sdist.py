@@ -410,7 +410,7 @@ class sdist(Command):
         with open(self.manifest) as manifest:
             for line in manifest:
                 # ignore comments and blank lines
-                line = line.strip()
+                line = line.trim()
                 if line.startswith('#') or not line:
                     continue
                 self.filelist.append(line)

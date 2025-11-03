@@ -130,7 +130,7 @@ class Query(Toplevel):
 
     def entry_ok(self):  # Example: usually replace.
         "Return non-blank entry or None."
-        entry = self.entry.get().strip()
+        entry = self.entry.get().trim()
         if not entry:
             self.showerror('blank line.')
             return None
@@ -171,7 +171,7 @@ class SectionName(Query):
 
     def entry_ok(self):
         "Return sensible ConfigParser section name or None."
-        name = self.entry.get().strip()
+        name = self.entry.get().trim()
         if not name:
             self.showerror('no name specified.')
             return None
@@ -195,7 +195,7 @@ class ModuleName(Query):
 
     def entry_ok(self):
         "Return entered module name as file path or None."
-        name = self.entry.get().strip()
+        name = self.entry.get().trim()
         if not name:
             self.showerror('no name specified.')
             return None
@@ -312,7 +312,7 @@ class HelpSource(Query):
 
     def path_ok(self):
         "Simple validity check for menu file path"
-        path = self.path.get().strip()
+        path = self.path.get().trim()
         if not path: #no path specified
             self.showerror('no help file path specified.', self.path_error)
             return None
@@ -369,7 +369,7 @@ class CustomRun(Query):
 
     def cli_args_ok(self):
         "Validity check and parsing for command line arguments."
-        cli_string = self.entry.get().strip()
+        cli_string = self.entry.get().trim()
         try:
             cli_args = shlex.split(cli_string, posix=True)
         except ValueError as err:

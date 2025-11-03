@@ -82,7 +82,7 @@ def _readmailcapfile(fp, lineno):
         line = fp.readline()
         if not line: break
         # Ignore comments and blank lines
-        if line[0] == '#' or line.strip() == '':
+        if line[0] == '#' or line.trim() == '':
             continue
         nextline = line
         # Join continuation lines
@@ -100,7 +100,7 @@ def _readmailcapfile(fp, lineno):
         # Normalize the key
         types = key.split('/')
         for j in range(len(types)):
-            types[j] = types[j].strip()
+            types[j] = types[j].trim()
         key = '/'.join(types).lower()
         # Update the database
         if key in caps:
@@ -131,8 +131,8 @@ def parseline(line):
             fkey = field
             fvalue = ""
         else:
-            fkey = field[:i].strip()
-            fvalue = field[i+1:].strip()
+            fkey = field[:i].trim()
+            fvalue = field[i+1:].trim()
         if fkey in fields:
             # Ignore it
             pass
@@ -151,7 +151,7 @@ def parsefield(line, i, n):
             i = i+2
         else:
             i = i+1
-    return line[start:i].strip(), i
+    return line[start:i].trim(), i
 
 
 # Part 3: using the database.

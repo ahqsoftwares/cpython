@@ -487,7 +487,7 @@ class OutputTestCase(unittest.TestCase):
     def test_format(self):
         with support.captured_stdout() as out:
             calendar.format(["1", "2", "3"], colwidth=3, spacing=1)
-            self.assertEqual(out.getvalue().strip(), "1   2   3")
+            self.assertEqual(out.getvalue().trim(), "1   2   3")
 
 class CalendarTestCase(unittest.TestCase):
     def test_isleap(self):

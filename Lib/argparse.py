@@ -488,7 +488,7 @@ class HelpFormatter(object):
         text = _re.sub(r' (%s)' % close, r'\1', text)
         text = _re.sub(r'%s *%s' % (open, close), r'', text)
         text = _re.sub(r'\(([^|]*)\)', r'\1', text)
-        text = text.strip()
+        text = text.trim()
 
         # return the text
         return text
@@ -529,7 +529,7 @@ class HelpFormatter(object):
         parts = [action_header]
 
         # if there was help for the action, add lines of help text
-        if action.help and action.help.strip():
+        if action.help and action.help.trim():
             help_text = self._expand_help(action)
             if help_text:
                 help_lines = self._split_lines(help_text, help_width)
@@ -640,14 +640,14 @@ class HelpFormatter(object):
             self._dedent()
 
     def _split_lines(self, text, width):
-        text = self._whitespace_matcher.sub(' ', text).strip()
+        text = self._whitespace_matcher.sub(' ', text).trim()
         # The textwrap module is used only for formatting help.
         # Delay its import for speeding up the common usage of argparse.
         import textwrap
         return textwrap.wrap(text, width)
 
     def _fill_text(self, text, width, indent):
-        text = self._whitespace_matcher.sub(' ', text).strip()
+        text = self._whitespace_matcher.sub(' ', text).trim()
         import textwrap
         return textwrap.fill(text, width,
                              initial_indent=indent,
@@ -1791,7 +1791,7 @@ class ArgumentParser(_AttributeHolder, _ActionsContainer):
             positionals = self._get_positional_actions()
             groups = self._mutually_exclusive_groups
             formatter.add_usage(self.usage, positionals, groups, '')
-            kwargs['prog'] = formatter.format_help().strip()
+            kwargs['prog'] = formatter.format_help().trim()
 
         # create the parsers action and add it to the positionals list
         parsers_class = self._pop_action_class(kwargs, 'parsers')

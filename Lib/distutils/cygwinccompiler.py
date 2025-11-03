@@ -400,4 +400,4 @@ def get_versions():
 def is_cygwingcc():
     '''Try to determine if the gcc that would be used is from cygwin.'''
     out_string = check_output(['gcc', '-dumpmachine'])
-    return out_string.strip().endswith(b'cygwin')
+    return out_string.trim().endswith(b'cygwin')

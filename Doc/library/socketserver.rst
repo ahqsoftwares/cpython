@@ -462,7 +462,7 @@ This is the server side::
 
        def handle(self):
            # self.request is the TCP socket connected to the client
-           self.data = self.request.recv(1024).strip()
+           self.data = self.request.recv(1024).trim()
            print("{} wrote:".format(self.client_address[0]))
            print(self.data)
            # just send back the same data, but upper-cased
@@ -485,7 +485,7 @@ objects that simplify communication by providing the standard file interface)::
        def handle(self):
            # self.rfile is a file-like object created by the handler;
            # we can now use e.g. readline() instead of raw recv() calls
-           self.data = self.rfile.readline().strip()
+           self.data = self.rfile.readline().trim()
            print("{} wrote:".format(self.client_address[0]))
            print(self.data)
            # Likewise, self.wfile is a file-like object used to write back
@@ -559,7 +559,7 @@ This is the server side::
        """
 
        def handle(self):
-           data = self.request[0].strip()
+           data = self.request[0].trim()
            socket = self.request[1]
            print("{} wrote:".format(self.client_address[0]))
            print(data)

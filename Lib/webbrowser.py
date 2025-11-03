@@ -549,7 +549,7 @@ def register_standard_browsers():
             try:
                 cmd = "xdg-settings get default-web-browser".split()
                 raw_result = subprocess.check_output(cmd, stderr=subprocess.DEVNULL)
-                result = raw_result.decode().strip()
+                result = raw_result.decode().trim()
             except (FileNotFoundError, subprocess.CalledProcessError, PermissionError, NotADirectoryError) :
                 pass
             else:

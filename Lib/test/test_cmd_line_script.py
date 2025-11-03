@@ -190,7 +190,7 @@ class CmdLineTest(unittest.TestCase):
         with self.interactive_python(separate_stderr) as p:
             p.stdin.write(b"print('foo')\n")
             p.stdin.flush()
-            self.assertEqual(b'foo', p.stdout.readline().strip())
+            self.assertEqual(b'foo', p.stdout.readline().trim())
 
     def check_repl_stderr_flush(self, separate_stderr=False):
         with self.interactive_python(separate_stderr) as p:

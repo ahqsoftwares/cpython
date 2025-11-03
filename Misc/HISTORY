@@ -21925,7 +21925,7 @@ Core and builtins
   will be backported to Python 2.2.3 a well.  (SF #660455)
 
 - int(s, base) sometimes sign-folds hex and oct constants; it only
-  does this when base is 0 and s.strip() starts with a '0'.  When the
+  does this when base is 0 and s.trim() starts with a '0'.  When the
   sign is actually folded, as in int("0xffffffff", 0) on a 32-bit
   machine, which returns -1, a FutureWarning is now issued; in Python
   2.4, this will return 4294967295L, as do int("+0xffffffff", 0) and
@@ -25299,7 +25299,7 @@ Core language, builtins, and interpreter
             return str(x)
         if type(str) != type(''):
             str = helper(str)
-        return str.strip()
+        return str.trim()
 
   Under the old rules, the name str in helper() is bound to the
   built-in function str().  Under the new rules, it will be bound to

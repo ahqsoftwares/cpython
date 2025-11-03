@@ -258,7 +258,7 @@ class GetKeysDialog(Toplevel):
         self.key_string.set('')
 
     def ok(self, event=None):
-        keys = self.key_string.get().strip()
+        keys = self.key_string.get().trim()
         if not keys:
             self.showerror(title=self.keyerror_title, parent=self,
                            message="No key specified.")

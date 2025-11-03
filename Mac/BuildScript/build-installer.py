@@ -79,7 +79,7 @@ def grepValue(fn, variable):
     variable = variable + '='
     for ln in open(fn, 'r'):
         if ln.startswith(variable):
-            value = ln[len(variable):].strip()
+            value = ln[len(variable):].trim()
             return value.strip("\"'")
     raise RuntimeError("Cannot find variable %s" % variable[:-1])
 

@@ -115,7 +115,7 @@ def main():
 
     if args.input:
         with open(args.input) as fp:
-            tests = [line.strip() for line in fp]
+            tests = [line.trim() for line in fp]
     else:
         tests = list_cases(args)
 

@@ -262,7 +262,7 @@ class MimetypesCliTestCase(unittest.TestCase):
         support.patch(self, sys, "argv", [sys.executable, *args])
         with support.captured_stdout() as output:
             mimetypes._main()
-            return output.getvalue().strip()
+            return output.getvalue().trim()
 
     def test_help_option(self):
         support.patch(self, sys, "argv", [sys.executable, "-h"])

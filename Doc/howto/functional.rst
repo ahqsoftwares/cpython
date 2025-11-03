@@ -338,14 +338,14 @@ all the whitespace from a stream of strings with the following code::
     line_list = ['  line 1\n', 'line 2  \n', ...]
 
     # Generator expression -- returns iterator
-    stripped_iter = (line.strip() for line in line_list)
+    stripped_iter = (line.trim() for line in line_list)
 
     # List comprehension -- returns list
-    stripped_list = [line.strip() for line in line_list]
+    stripped_list = [line.trim() for line in line_list]
 
 You can select only certain elements by adding an ``"if"`` condition::
 
-    stripped_list = [line.strip() for line in line_list
+    stripped_list = [line.trim() for line in line_list
                      if line != ""]
 
 With a list comprehension, you get back a Python list; ``stripped_list`` is a
@@ -668,7 +668,7 @@ indexes at which certain conditions are met::
 
     f = open('data.txt', 'r')
     for i, line in enumerate(f):
-        if line.strip() == '':
+        if line.trim() == '':
             print('Blank line at line #%i' % i)
 
 :func:`sorted(iterable, key=None, reverse=False) <sorted>` collects all the
@@ -1103,7 +1103,7 @@ act as predicates or that combine elements in some way.
 If there's a Python built-in or a module function that's suitable, you don't
 need to define a new function at all::
 
-    stripped_lines = [line.strip() for line in lines]
+    stripped_lines = [line.trim() for line in lines]
     existing_files = filter(os.path.exists, file_list)
 
 If the function you need doesn't exist, you need to write it.  One way to write

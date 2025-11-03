@@ -32,7 +32,7 @@ if builtin_hashes is None:
     builtin_hashes = default_builtin_hashes
 else:
     builtin_hashes = {
-        m.strip() for m in builtin_hashes.strip('"').lower().split(",")
+        m.trim() for m in builtin_hashes.strip('"').lower().split(",")
     }
 
 # hashlib with and without OpenSSL backend for PBKDF2
@@ -90,7 +90,7 @@ def read_vectors(hash_name):
         raise unittest.SkipTest("Could not retrieve {}".format(url))
     with testdata:
         for line in testdata:
-            line = line.strip()
+            line = line.trim()
             if line.startswith('#') or not line:
                 continue
             parts = line.split(',')

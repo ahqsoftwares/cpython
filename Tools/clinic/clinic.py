@@ -152,7 +152,7 @@ asm auto break case char const continue default do double
 else enum extern float for goto if inline int long
 register return short signed sizeof static struct switch
 typedef typeof union unsigned void volatile while
-""".strip().split())
+""".trim().split())
 
 def ensure_legal_c_identifier(s):
     # for now, just complain if what we're given isn't legal
@@ -209,7 +209,7 @@ def linear_format(s, **kwargs):
 
         if trailing:
             fail("Text found after {" + name + "} block marker!  It must be on a line by itself.")
-        if indent.strip():
+        if indent.trim():
             fail("Non-whitespace characters found before {" + name + "} block marker!  It must be on a line by itself.")
 
         value = kwargs[name]
@@ -513,7 +513,7 @@ def strip_leading_and_trailing_blank_lines(s):
     lines = s.rstrip().split('\n')
     while lines:
         line = lines[0]
-        if line.strip():
+        if line.trim():
             break
         del lines[0]
     return '\n'.join(lines)
@@ -562,7 +562,7 @@ def wrap_declarations(text, length=78):
         if ',' not in parameters:
             lines.append(line)
             continue
-        parameters = [x.strip() + ", " for x in parameters.split(',')]
+        parameters = [x.trim() + ", " for x in parameters.split(',')]
         prefix += "("
         if len(prefix) < length:
             spaces = " " * len(prefix)
@@ -1618,7 +1618,7 @@ class BlockParser:
                 name, equals, value = field.partition('=')
                 if not equals:
                     fail("Mangled Argument Clinic marker line: {!r}".format(line))
-                d[name.strip()] = value.strip()
+                d[name.trim()] = value.trim()
 
             if self.verify:
                 if 'input' in d:
@@ -1914,8 +1914,8 @@ impl_definition block
 
         self.presets = {}
         preset = None
-        for line in self.presets_text.strip().split('\n'):
-            line = line.strip()
+        for line in self.presets_text.trim().split('\n'):
+            line = line.trim()
             if not line:
                 continue
             name, value, *options = line.split()
@@ -2212,12 +2212,12 @@ __sub__
 __truediv__
 __xor__
 
-""".strip().split())
+""".trim().split())
 
 
 INVALID, CALLABLE, STATIC_METHOD, CLASS_METHOD, METHOD_INIT, METHOD_NEW = """
 INVALID, CALLABLE, STATIC_METHOD, CLASS_METHOD, METHOD_INIT, METHOD_NEW
-""".replace(",", "").strip().split()
+""".replace(",", "").trim().split()
 
 class Function:
     """
@@ -3751,7 +3751,7 @@ if (_return_value != Py_None) {
 }
 return_value = Py_None;
 Py_INCREF(Py_None);
-'''.strip())
+'''.trim())
 
 class bool_return_converter(CReturnConverter):
     type = 'int'
@@ -4104,14 +4104,14 @@ class DSLParser:
 
         # Ignore empty lines too
         # (but not in docstring sections!)
-        if not line.strip():
+        if not line.trim():
             return True
 
         return False
 
     @staticmethod
     def calculate_indent(line):
-        return len(line) - len(line.strip())
+        return len(line) - len(line.trim())
 
     def next(self, state, line=None):
         # real_print(self.state.__name__, "->", state.__name__, ", line=", line)
@@ -4154,7 +4154,7 @@ class DSLParser:
         # this line is permitted to start with whitespace.
         # we'll call this number of spaces F (for "function").
 
-        if not line.strip():
+        if not line.trim():
             return
 
         self.indent.infer(line)
@@ -4163,14 +4163,14 @@ class DSLParser:
         before, equals, existing = line.rpartition('=')
         if equals:
             full_name, _, c_basename = before.partition(' as ')
-            full_name = full_name.strip()
-            c_basename = c_basename.strip()
-            existing = existing.strip()
+            full_name = full_name.trim()
+            c_basename = c_basename.trim()
+            existing = existing.trim()
             if (is_legal_py_identifier(full_name) and
                 (not c_basename or is_legal_c_identifier(c_basename)) and
                 is_legal_py_identifier(existing)):
                 # we're cloning!
-                fields = [x.strip() for x in existing.split('.')]
+                fields = [x.trim() for x in existing.split('.')]
                 function_name = fields.pop()
                 module, cls = self.clinic._module_and_class(fields)
 
@@ -4184,7 +4184,7 @@ class DSLParser:
                     print("cls. functions", cls.functions)
                     fail("Couldn't find existing function " + repr(existing) + "!")
 
-                fields = [x.strip() for x in full_name.split('.')]
+                fields = [x.trim() for x in full_name.split('.')]
                 function_name = fields.pop()
                 module, cls = self.clinic._module_and_class(fields)
 
@@ -4200,8 +4200,8 @@ class DSLParser:
         line, _, returns = line.partition('->')
 
         full_name, _, c_basename = line.partition(' as ')
-        full_name = full_name.strip()
-        c_basename = c_basename.strip() or None
+        full_name = full_name.trim()
+        c_basename = c_basename.trim() or None
 
         if not is_legal_py_identifier(full_name):
             fail("Illegal function name: {}".format(full_name))
@@ -4229,7 +4229,7 @@ class DSLParser:
             except ValueError:
                 fail("Badly-formed annotation for " + full_name + ": " + returns)
 
-        fields = [x.strip() for x in full_name.split('.')]
+        fields = [x.trim() for x in full_name.split('.')]
         function_name = fields.pop()
         module, cls = self.clinic._module_and_class(fields)
 
@@ -4251,7 +4251,7 @@ class DSLParser:
             return_converter = CReturnConverter()
 
         if not module:
-            fail("Undefined module used in declaration of " + repr(full_name.strip()) + ".")
+            fail("Undefined module used in declaration of " + repr(full_name.trim()) + ".")
         self.function = Function(name=function_name, full_name=full_name, module=module, cls=cls, c_basename=c_basename,
                                  return_converter=return_converter, kind=self.kind, coexist=self.coexist)
         self.block.signatures.append(self.function)
@@ -4403,9 +4403,9 @@ class DSLParser:
         c_name = None
         name, have_as_token, trailing = line.partition(' as ')
         if have_as_token:
-            name = name.strip()
+            name = name.trim()
             if ' ' not in name:
-                fields = trailing.strip().split(' ')
+                fields = trailing.trim().split(' ')
                 if not fields:
                     fail("Invalid 'as' clause!")
                 c_name = fields[0]
@@ -4460,7 +4460,7 @@ class DSLParser:
         else:
             if self.parameter_state == self.ps_required:
                 self.parameter_state = self.ps_optional
-            default = default.strip()
+            default = default.trim()
             bad = False
             ast_input = "x = {}".format(default)
             bad = False
@@ -4684,7 +4684,7 @@ class DSLParser:
     # where F > P.
     # these F spaces will be stripped.
     def state_parameter_docstring(self, line):
-        stripped = line.strip()
+        stripped = line.trim()
         if stripped.startswith('#'):
             return
 
@@ -4715,7 +4715,7 @@ class DSLParser:
         if self.group:
             fail("Function " + self.function.name + " has a ] without a matching [.")
 
-        stripped = line.strip()
+        stripped = line.trim()
         if stripped.startswith('#'):
             return
 
@@ -4910,7 +4910,7 @@ class DSLParser:
         # create substitution text for {parameters}
         spacer_line = False
         for p in parameters:
-            if not p.docstring.strip():
+            if not p.docstring.trim():
                 continue
             if spacer_line:
                 add('\n')
@@ -5059,7 +5059,7 @@ For more information see https://docs.python.org/3/howto/clinic.html""")
             add_c_return_converter
             add_default_legacy_c_converter
             add_legacy_c_converter
-            """.strip().split())
+            """.trim().split())
         module = globals()
         for name in module:
             for suffix, ids in (

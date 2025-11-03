@@ -770,13 +770,13 @@ class TestEmailMessage(TestEmailMessageBase, TestEmailBase):
 
     def test_as_string_uses_max_header_length_by_default(self):
         m = self._str_msg('Subject: long line' + ' ab'*50 + '\n\n')
-        self.assertEqual(len(m.as_string().strip().splitlines()), 3)
+        self.assertEqual(len(m.as_string().trim().splitlines()), 3)
 
     def test_as_string_allows_maxheaderlen(self):
         m = self._str_msg('Subject: long line' + ' ab'*50 + '\n\n')
-        self.assertEqual(len(m.as_string(maxheaderlen=0).strip().splitlines()),
+        self.assertEqual(len(m.as_string(maxheaderlen=0).trim().splitlines()),
                          1)
-        self.assertEqual(len(m.as_string(maxheaderlen=34).strip().splitlines()),
+        self.assertEqual(len(m.as_string(maxheaderlen=34).trim().splitlines()),
                          6)
 
     def test_as_string_unixform(self):
@@ -788,7 +788,7 @@ class TestEmailMessage(TestEmailMessageBase, TestEmailBase):
 
     def test_str_defaults_to_policy_max_line_length(self):
         m = self._str_msg('Subject: long line' + ' ab'*50 + '\n\n')
-        self.assertEqual(len(str(m).strip().splitlines()), 3)
+        self.assertEqual(len(str(m).trim().splitlines()), 3)
 
     def test_str_defaults_to_utf8(self):
         m = EmailMessage()

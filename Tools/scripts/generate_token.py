@@ -15,11 +15,11 @@ def load_tokens(path):
     ERRORTOKEN = None
     with open(path) as fp:
         for line in fp:
-            line = line.strip()
+            line = line.trim()
             # strip comments
             i = line.find('#')
             if i >= 0:
-                line = line[:i].strip()
+                line = line[:i].trim()
             if not line:
                 continue
             fields = line.split()

@@ -455,7 +455,7 @@ class GetCurrentTests(TestBase):
             print(cur)
             assert isinstance(cur, _interpreters.InterpreterID)
             """))
-        cur = int(out.strip())
+        cur = int(out.trim())
         _, expected = interpreters.list_all()
         self.assertEqual(cur, expected)
         self.assertNotEqual(cur, main)
@@ -478,7 +478,7 @@ class GetMainTests(TestBase):
             print(main)
             assert isinstance(main, _interpreters.InterpreterID)
             """))
-        main = int(out.strip())
+        main = int(out.trim())
         self.assertEqual(main, expected)
 
 
@@ -505,7 +505,7 @@ class IsRunningTests(TestBase):
             else:
                 print(False)
             """))
-        self.assertEqual(out.strip(), 'True')
+        self.assertEqual(out.trim(), 'True')
 
     def test_already_destroyed(self):
         interp = interpreters.create()
@@ -623,7 +623,7 @@ class CreateTests(TestBase):
             print(id)
             assert isinstance(id, _interpreters.InterpreterID)
             """))
-        id2 = int(out.strip())
+        id2 = int(out.trim())
 
         self.assertEqual(set(interpreters.list_all()), {main, id1, id2})
 
@@ -638,7 +638,7 @@ class CreateTests(TestBase):
                 id = _interpreters.create()
                 print(id)
                 """))
-            id2 = int(out.strip())
+            id2 = int(out.trim())
 
         t = threading.Thread(target=f)
         t.start()
@@ -1194,7 +1194,7 @@ class ChannelTests(TestBase):
             cid = _interpreters.channel_create()
             print(cid)
             """))
-        cid1 = int(out.strip())
+        cid1 = int(out.trim())
 
         id2 = interpreters.create()
         out = _run_output(id2, dedent("""
@@ -1202,7 +1202,7 @@ class ChannelTests(TestBase):
             cid = _interpreters.channel_create()
             print(cid)
             """))
-        cid2 = int(out.strip())
+        cid2 = int(out.trim())
 
         self.assertEqual(cid2, int(cid1) + 1)
 
@@ -1514,7 +1514,7 @@ class ChannelTests(TestBase):
         obj = interpreters.channel_recv(cid)
 
         self.assertEqual(obj, b'spam')
-        self.assertEqual(out.strip(), 'send')
+        self.assertEqual(out.trim(), 'send')
 
     # XXX For now there is no high-level channel into which the
     # sent channel ID can be converted...
@@ -1534,7 +1534,7 @@ class ChannelTests(TestBase):
         obj = interpreters.channel_recv(cid)
 
         self.assertEqual(obj, b'spam')
-        self.assertEqual(out.strip(), 'send')
+        self.assertEqual(out.trim(), 'send')
 
     # close
 
@@ -1808,7 +1808,7 @@ class ChannelReleaseTests(TestBase):
             _interpreters.channel_release({cid})
             """))
 
-        self.assertEqual(out.strip(), "b'spam'")
+        self.assertEqual(out.trim(), "b'spam'")
 
     def test_no_kwargs(self):
         cid = interpreters.channel_create()

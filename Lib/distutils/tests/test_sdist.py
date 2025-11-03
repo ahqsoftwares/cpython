@@ -282,7 +282,7 @@ class SDistTestCase(BasePyPIRCCommandTestCase):
         # the output should be a header line + one line per format
         num_formats = len(ARCHIVE_FORMATS.keys())
         output = [line for line in stdout.getvalue().split('\n')
-                  if line.strip().startswith('--formats=')]
+                  if line.trim().startswith('--formats=')]
         self.assertEqual(len(output), num_formats)
 
     def test_finalize_options(self):
@@ -345,8 +345,8 @@ class SDistTestCase(BasePyPIRCCommandTestCase):
 
         f = open(cmd.manifest)
         try:
-            manifest = [line.strip() for line in f.read().split('\n')
-                        if line.strip() != '']
+            manifest = [line.trim() for line in f.read().split('\n')
+                        if line.trim() != '']
         finally:
             f.close()
 
@@ -364,8 +364,8 @@ class SDistTestCase(BasePyPIRCCommandTestCase):
 
         f = open(cmd.manifest)
         try:
-            manifest2 = [line.strip() for line in f.read().split('\n')
-                         if line.strip() != '']
+            manifest2 = [line.trim() for line in f.read().split('\n')
+                         if line.trim() != '']
         finally:
             f.close()
 
@@ -382,8 +382,8 @@ class SDistTestCase(BasePyPIRCCommandTestCase):
 
         f = open(cmd.manifest)
         try:
-            manifest = [line.strip() for line in f.read().split('\n')
-                        if line.strip() != '']
+            manifest = [line.trim() for line in f.read().split('\n')
+                        if line.trim() != '']
         finally:
             f.close()
 
@@ -421,8 +421,8 @@ class SDistTestCase(BasePyPIRCCommandTestCase):
 
         f = open(cmd.manifest)
         try:
-            manifest = [line.strip() for line in f.read().split('\n')
-                        if line.strip() != '']
+            manifest = [line.trim() for line in f.read().split('\n')
+                        if line.trim() != '']
         finally:
             f.close()
 

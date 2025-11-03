@@ -715,7 +715,7 @@ class ProcessTestCase(BaseTestCase):
                                'import os; print(list(os.environ.keys()))'],
                               stdout=subprocess.PIPE, env={}) as p:
             stdout, stderr = p.communicate()
-            child_env_names = eval(stdout.strip())
+            child_env_names = eval(stdout.trim())
             self.assertIsInstance(child_env_names, list)
             child_env_names = [k for k in child_env_names
                                if not is_env_var_to_ignore(k)]
@@ -2210,7 +2210,7 @@ class POSIXProcessTestCase(BaseTestCase):
             p = subprocess.Popen("echo $0", executable=sh, shell=True,
                                  stdout=subprocess.PIPE)
             with p:
-                self.assertEqual(p.stdout.read().strip(), bytes(sh, 'ascii'))
+                self.assertEqual(p.stdout.read().trim(), bytes(sh, 'ascii'))
 
     def _kill_process(self, method, *args):
         # Do not inherit file handles from the parent.
@@ -2409,7 +2409,7 @@ class POSIXProcessTestCase(BaseTestCase):
                 os.lseek(fd, 0, 0)
 
             out = os.read(temp_fds[2], 1024)
-            err = os.read(temp_fds[0], 1024).strip()
+            err = os.read(temp_fds[0], 1024).trim()
             self.assertEqual(out, b"got STDIN")
             self.assertEqual(err, b"err")
 
@@ -2451,7 +2451,7 @@ class POSIXProcessTestCase(BaseTestCase):
                     os.lseek(fd, 0, 0)
 
                 out = os.read(stdout_no, 1024)
-                err = os.read(stderr_no, 1024).strip()
+                err = os.read(stderr_no, 1024).trim()
             finally:
                 self._restore_fds(saved_fds)
 
@@ -2781,8 +2781,8 @@ class POSIXProcessTestCase(BaseTestCase):
         output_lines = output.splitlines()
         self.assertEqual(len(output_lines), 2,
                          msg="expected exactly two lines of output:\n%r" % output)
-        opened_fds = set(map(int, output_lines[0].strip().split(b',')))
-        remaining_fds = set(map(int, output_lines[1].strip().split(b',')))
+        opened_fds = set(map(int, output_lines[0].trim().split(b',')))
+        remaining_fds = set(map(int, output_lines[1].trim().split(b',')))
 
         self.assertFalse(remaining_fds & opened_fds,
                          msg="Some fds were left open.")
@@ -3313,7 +3313,7 @@ class Win32ProcessTestCase(BaseTestCase):
                              stdout=subprocess.PIPE, close_fds=False)
         stdout, stderr = p.communicate()
         self.assertEqual(p.returncode, 0)
-        int(stdout.strip())  # Check that stdout is an integer
+        int(stdout.trim())  # Check that stdout is an integer
 
         p = subprocess.Popen([sys.executable, "-c",
                               "import msvcrt; print(msvcrt.open_osfhandle({}, 0))".format(handles[0])],

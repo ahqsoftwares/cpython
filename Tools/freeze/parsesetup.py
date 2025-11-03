@@ -31,7 +31,7 @@ def getmakevars(filename):
             i = value.find('#')
             if i >= 0:
                 value = value[:i]
-            value = value.strip()
+            value = value.trim()
             variables[name] = value
     finally:
         fp.close()
@@ -68,7 +68,7 @@ def getsetupinfo(filename):
             matchobj = setupvardef.match(line)
             if matchobj:
                 (name, value) = matchobj.group(1, 2)
-                variables[name] = value.strip()
+                variables[name] = value.trim()
             else:
                 words = line.split()
                 if words:

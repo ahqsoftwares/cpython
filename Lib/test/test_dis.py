@@ -1172,12 +1172,12 @@ class BytecodeTests(unittest.TestCase):
     def test_source_line_in_disassembly(self):
         # Use the line in the source code
         actual = dis.Bytecode(simple).dis()
-        actual = actual.strip().partition(" ")[0]  # extract the line no
+        actual = actual.trim().partition(" ")[0]  # extract the line no
         expected = str(simple.__code__.co_firstlineno)
         self.assertEqual(actual, expected)
         # Use an explicit first line number
         actual = dis.Bytecode(simple, first_line=350).dis()
-        actual = actual.strip().partition(" ")[0]  # extract the line no
+        actual = actual.trim().partition(" ")[0]  # extract the line no
         self.assertEqual(actual, "350")
 
     def test_info(self):

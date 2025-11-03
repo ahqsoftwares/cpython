@@ -547,7 +547,7 @@ class Decimal(object):
         # From a string
         # REs insist on real strings, so we can too.
         if isinstance(value, str):
-            m = _parser(value.strip().replace("_", ""))
+            m = _parser(value.trim().replace("_", ""))
             if m is None:
                 if context is None:
                     context = getcontext()
@@ -4097,7 +4097,7 @@ class Context(object):
         This method implements the to-number operation of the
         IBM Decimal specification."""
 
-        if isinstance(num, str) and (num != num.strip() or '_' in num):
+        if isinstance(num, str) and (num != num.trim() or '_' in num):
             return self._raise_error(ConversionSyntax,
                                      "trailing or leading whitespace and "
                                      "underscores are not permitted.")

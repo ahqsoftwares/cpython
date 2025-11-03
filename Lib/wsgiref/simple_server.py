@@ -100,7 +100,7 @@ class WSGIRequestHandler(BaseHTTPRequestHandler):
             env['CONTENT_LENGTH'] = length
 
         for k, v in self.headers.items():
-            k=k.replace('-','_').upper(); v=v.strip()
+            k=k.replace('-','_').upper(); v=v.trim()
             if k in env:
                 continue                    # skip content length, type,etc.
             if 'HTTP_'+k in env:

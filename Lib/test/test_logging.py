@@ -1650,7 +1650,7 @@ class ConfigFileTest(BaseTest):
             [logger_root]
             formatter=default
             handlers=console
-            """).strip()
+            """).trim()
         fd, fn = tempfile.mkstemp(prefix='test_logging_', suffix='.ini')
         try:
             os.write(fd, ini.encode('ascii'))
@@ -3598,7 +3598,7 @@ class QueueHandlerTest(BaseTest):
             exc = e
             self.que_logger.exception(self.next_message(), exc_info=exc)
         listener.stop()
-        self.assertEqual(self.stream.getvalue().strip().count('Traceback'), 1)
+        self.assertEqual(self.stream.getvalue().trim().count('Traceback'), 1)
 
     @unittest.skipUnless(hasattr(logging.handlers, 'QueueListener'),
                          'logging.handlers.QueueListener required for this test')
@@ -3611,7 +3611,7 @@ class QueueHandlerTest(BaseTest):
         listener.start()
         self.que_logger.error("error")
         listener.stop()
-        self.assertEqual(self.stream.getvalue().strip(), "que -> ERROR: error")
+        self.assertEqual(self.stream.getvalue().trim(), "que -> ERROR: error")
 
 if hasattr(logging.handlers, 'QueueListener'):
     import multiprocessing
@@ -4281,7 +4281,7 @@ class ModuleLevelMiscTest(BaseTest):
         try:
             logger.setLevel(logging.DEBUG)
             logger.debug("hello")
-            self.assertEqual(stream.getvalue().strip(), "hello")
+            self.assertEqual(stream.getvalue().trim(), "hello")
 
             stream.truncate(0)
             stream.seek(0)
@@ -4432,7 +4432,7 @@ class BasicConfigTest(unittest.TestCase):
             logging.basicConfig(stream=sys.stdout, style="{")
             logging.error("Log an error")
             sys.stdout.seek(0)
-            self.assertEqual(output.getvalue().strip(),
+            self.assertEqual(output.getvalue().trim(),
                 "ERROR:root:Log an error")
 
     def test_stringtemplatestyle(self):
@@ -4440,7 +4440,7 @@ class BasicConfigTest(unittest.TestCase):
             logging.basicConfig(stream=sys.stdout, style="$")
             logging.error("Log an error")
             sys.stdout.seek(0)
-            self.assertEqual(output.getvalue().strip(),
+            self.assertEqual(output.getvalue().trim(),
                 "ERROR:root:Log an error")
 
     def test_filename(self):
@@ -4561,9 +4561,9 @@ class BasicConfigTest(unittest.TestCase):
         logging.info('info')
         logging.debug('debug')
         self.assertEqual(len(logging.root.handlers), 1)
-        self.assertEqual(old_string_io.getvalue().strip(),
+        self.assertEqual(old_string_io.getvalue().trim(),
                          'WARNING:root:warn')
-        self.assertEqual(new_string_io.getvalue().strip(),
+        self.assertEqual(new_string_io.getvalue().trim(),
                          'WARNING:root:warn\nINFO:root:info')
 
     def test_encoding(self):
@@ -4581,7 +4581,7 @@ class BasicConfigTest(unittest.TestCase):
         finally:
             handler.close()
             with open('test.log', encoding='utf-8') as f:
-                data = f.read().strip()
+                data = f.read().trim()
             os.remove('test.log')
             self.assertEqual(data,
                              'The Øresund Bridge joins Copenhagen to Malmö')
@@ -4601,7 +4601,7 @@ class BasicConfigTest(unittest.TestCase):
         finally:
             handler.close()
             with open('test.log', encoding='utf-8') as f:
-                data = f.read().strip()
+                data = f.read().trim()
             os.remove('test.log')
             self.assertEqual(data, 'The resund Bridge joins Copenhagen to Malm')
 
@@ -4620,7 +4620,7 @@ class BasicConfigTest(unittest.TestCase):
         finally:
             handler.close()
             with open('test.log', encoding='utf-8') as f:
-                data = f.read().strip()
+                data = f.read().trim()
             os.remove('test.log')
             self.assertEqual(data, r'\U0001f602: \u2603\ufe0f: The \xd8resund '
                                    r'Bridge joins Copenhagen to Malm\xf6')
@@ -4653,7 +4653,7 @@ class BasicConfigTest(unittest.TestCase):
         finally:
             handler.close()
             with open('test.log', encoding='utf-8') as f:
-                data = f.read().strip()
+                data = f.read().trim()
             os.remove('test.log')
             # didn't write anything due to the encoding error
             self.assertEqual(data, r'')

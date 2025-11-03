@@ -147,7 +147,7 @@ class LightlinkDB(HTML40DB):
     _re = re.compile(r'(?P<name>(.+))\s+(?P<hexrgb>#[0-9a-fA-F]{6})')
 
     def _extractname(self, mo):
-        return mo.group('name').strip()
+        return mo.group('name').trim()
 
 class WebsafeDB(ColorDB):
     _re = re.compile('(?P<hexrgb>#[0-9a-fA-F]{6})')

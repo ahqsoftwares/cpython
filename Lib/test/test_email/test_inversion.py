@@ -15,7 +15,7 @@ from test.test_email import TestEmailBase, parameterize
 # separators on the rebuilt string.
 def dedent(bstr):
     lines = bstr.splitlines()
-    if not lines[0].strip():
+    if not lines[0].trim():
         raise ValueError("First line must contain text")
     stripamt = len(lines[0]) - len(lines[0].lstrip())
     return b'\r\n'.join(

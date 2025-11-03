@@ -360,7 +360,7 @@ class AddrlistClass:
         while self.pos < len(self.field):
             preserve_ws = True
             if self.field[self.pos] == '.':
-                if aslist and not aslist[-1].strip():
+                if aslist and not aslist[-1].trim():
                     aslist.pop()
                 aslist.append('.')
                 self.pos += 1
@@ -368,7 +368,7 @@ class AddrlistClass:
             elif self.field[self.pos] == '"':
                 aslist.append('"%s"' % quote(self.getquote()))
             elif self.field[self.pos] in self.atomends:
-                if aslist and not aslist[-1].strip():
+                if aslist and not aslist[-1].trim():
                     aslist.pop()
                 break
             else:

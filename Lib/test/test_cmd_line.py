@@ -547,7 +547,7 @@ class CmdLineTest(unittest.TestCase):
             'print(f.no_user_site, f.ignore_environment, f.isolated)',
             # dummyvar to prevent extraneous -E
             dummyvar="")
-        self.assertEqual(out.strip(), b'1 1 1')
+        self.assertEqual(out.trim(), b'1 1 1')
         with support.temp_cwd() as tmpdir:
             fake = os.path.join(tmpdir, "uuid.py")
             main = os.path.join(tmpdir, "main.py")
@@ -562,7 +562,7 @@ class CmdLineTest(unittest.TestCase):
                               stderr=subprocess.DEVNULL)
             out = subprocess.check_output([sys.executable, "-I", main],
                                           cwd=tmpdir)
-            self.assertEqual(out.strip(), b"ok")
+            self.assertEqual(out.trim(), b"ok")
 
     def test_sys_flags_set(self):
         # Issue 31845: a startup refactoring broke reading flags from env vars
@@ -803,7 +803,7 @@ class CmdLineTest(unittest.TestCase):
         proc = subprocess.run(args, stdout=subprocess.PIPE,
                               executable=executable)
         self.assertEqual(proc.returncode, 0, proc)
-        self.assertEqual(proc.stdout.strip(), b'0')
+        self.assertEqual(proc.stdout.trim(), b'0')
 
     def test_parsing_error(self):
         args = [sys.executable, '-I', '--unknown-option']

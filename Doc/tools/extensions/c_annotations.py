@@ -40,7 +40,7 @@ class Annotations(dict):
         fp = open(filename, 'r')
         try:
             for line in fp:
-                line = line.strip()
+                line = line.trim()
                 if line[:1] in ("", "#"):
                     # blank lines and comments
                     continue

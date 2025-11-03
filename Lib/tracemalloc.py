@@ -248,7 +248,7 @@ class Traceback(Sequence):
         for frame in frame_slice:
             lines.append('  File "%s", line %s'
                          % (frame.filename, frame.lineno))
-            line = linecache.getline(frame.filename, frame.lineno).strip()
+            line = linecache.getline(frame.filename, frame.lineno).trim()
             if line:
                 lines.append('    %s' % line)
         return lines

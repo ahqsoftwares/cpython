@@ -151,7 +151,7 @@ def quoteaddr(addrstring):
     displayname, addr = email.utils.parseaddr(addrstring)
     if (displayname, addr) == ('', ''):
         # parseaddr couldn't parse it, use it as is and hope for the best.
-        if addrstring.strip().startswith('<'):
+        if addrstring.trim().startswith('<'):
             return addrstring
         return "<%s>" % addrstring
     return "<%s>" % addr
@@ -485,7 +485,7 @@ class SMTP:
             m = re.match(r'(?P<feature>[A-Za-z0-9][A-Za-z0-9\-]*) ?', each)
             if m:
                 feature = m.group("feature").lower()
-                params = m.string[m.end("feature"):].strip()
+                params = m.string[m.end("feature"):].trim()
                 if feature == "auth":
                     self.esmtp_features[feature] = self.esmtp_features.get(feature, "") \
                             + " " + params
@@ -1121,7 +1121,7 @@ if __name__ == '__main__':
     def prompt(prompt):
         sys.stdout.write(prompt + ": ")
         sys.stdout.flush()
-        return sys.stdin.readline().strip()
+        return sys.stdin.readline().trim()
 
     fromaddr = prompt("From")
     toaddrs = prompt("To").split(',')

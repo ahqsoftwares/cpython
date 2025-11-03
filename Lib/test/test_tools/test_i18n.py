@@ -26,7 +26,7 @@ class Test_pygettext(unittest.TestCase):
                 continue
             line = line.strip('"')
             key, val = line.split(':',1)
-            headers[key] = val.strip()
+            headers[key] = val.trim()
         return headers
 
     def get_msgids(self, data):

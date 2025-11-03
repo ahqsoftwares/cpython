@@ -140,7 +140,7 @@ def emparse_list(fp, sub):
                     exp = re.compile(re.escape(email).join(regexp.split('<>')), re.MULTILINE)
                     res = exp.search(data)
                     if res is not None:
-                        errors.append(' '.join((email.strip()+': '+res.group('reason')).split()))
+                        errors.append(' '.join((email.trim()+': '+res.group('reason')).split()))
                         del emails[i]
                 continue
             res = regexp.search(data)
@@ -148,7 +148,7 @@ def emparse_list(fp, sub):
                 reason = res.group('reason')
                 break
     for email in emails:
-        errors.append(' '.join((email.strip()+': '+reason).split()))
+        errors.append(' '.join((email.trim()+': '+reason).split()))
     return errors
 
 EMPARSERS = [emparse_list]

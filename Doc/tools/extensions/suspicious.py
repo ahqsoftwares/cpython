@@ -161,14 +161,14 @@ class CheckSuspiciousMarkupBuilder(Builder):
                     self.docname.encode(sys.getdefaultencoding(),'replace'),
                     lineno,
                     issue.encode(sys.getdefaultencoding(),'replace'),
-                    text.strip().encode(sys.getdefaultencoding(),'replace')))
+                    text.trim().encode(sys.getdefaultencoding(),'replace')))
         self.app.statuscode = 1
 
     def write_log_entry(self, lineno, issue, text):
         if py3:
             f = open(self.log_file_name, 'a')
             writer = csv.writer(f, dialect)
-            writer.writerow([self.docname, lineno, issue, text.strip()])
+            writer.writerow([self.docname, lineno, issue, text.trim()])
             f.close()
         else:
             f = open(self.log_file_name, 'ab')
@@ -176,7 +176,7 @@ class CheckSuspiciousMarkupBuilder(Builder):
             writer.writerow([self.docname.encode('utf-8'),
                              lineno,
                              issue.encode('utf-8'),
-                             text.strip().encode('utf-8')])
+                             text.trim().encode('utf-8')])
             f.close()
 
     def load_rules(self, filename):

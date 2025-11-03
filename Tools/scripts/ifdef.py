@@ -59,11 +59,11 @@ def process(fpi, fpo):
             nextline = fpi.readline()
             if not nextline: break
             line = line + nextline
-        tmp = line.strip()
+        tmp = line.trim()
         if tmp[:1] != '#':
             if ok: fpo.write(line)
             continue
-        tmp = tmp[1:].strip()
+        tmp = tmp[1:].trim()
         words = tmp.split()
         keyword = words[0]
         if keyword not in keywords:

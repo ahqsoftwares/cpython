@@ -632,10 +632,10 @@ class UncompressedZipImportTestCase(ImportHooksBaseTestCase):
             tb = e.__traceback__.tb_next
 
             f,lno,n,line = extract_tb(tb, 1)[0]
-            self.assertEqual(line, raise_src.strip())
+            self.assertEqual(line, raise_src.trim())
 
             f,lno,n,line = extract_stack(tb.tb_frame, 1)[0]
-            self.assertEqual(line, raise_src.strip())
+            self.assertEqual(line, raise_src.trim())
 
             s = io.StringIO()
             print_tb(tb, 1, s)

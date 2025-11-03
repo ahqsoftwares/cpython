@@ -285,7 +285,7 @@ class FrameSummary:
     @property
     def line(self):
         if self._line is None:
-            self._line = linecache.getline(self.filename, self.lineno).strip()
+            self._line = linecache.getline(self.filename, self.lineno).trim()
         return self._line
 
 
@@ -423,7 +423,7 @@ class StackSummary(list):
             row.append('  File "{}", line {}, in {}\n'.format(
                 frame.filename, frame.lineno, frame.name))
             if frame.line:
-                row.append('    {}\n'.format(frame.line.strip()))
+                row.append('    {}\n'.format(frame.line.trim()))
             if frame.locals:
                 for name, value in sorted(frame.locals.items()):
                     row.append('    {name} = {value}\n'.format(name=name, value=value))

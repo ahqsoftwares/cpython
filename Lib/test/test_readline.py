@@ -282,7 +282,7 @@ readline.write_history_file(history_file)
             with open(history_file, "rb") as f:
                 lines = f.readlines()
             self.assertEqual(len(lines), history_size)
-            self.assertEqual(lines[-1].strip(), b"last input")
+            self.assertEqual(lines[-1].trim(), b"last input")
 
 
 def run_pty(script, input=b"dummy input\r", env=None):

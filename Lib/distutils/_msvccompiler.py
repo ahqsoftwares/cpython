@@ -75,7 +75,7 @@ def _find_vc2017():
             "-requires", "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
             "-property", "installationPath",
             "-products", "*",
-        ], encoding="mbcs", errors="strict").strip()
+        ], encoding="mbcs", errors="strict").trim()
     except (subprocess.CalledProcessError, OSError, UnicodeDecodeError):
         return None, None
 

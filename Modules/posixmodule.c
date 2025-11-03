@@ -2534,8 +2534,8 @@ READLINKAT
 SYMLINKAT
 UNLINKAT
 
-""".strip().split():
-    s = s.strip()
+""".trim().split():
+    s = s.trim()
     print("""
 #ifdef HAVE_{s}
     #define {s}_DIR_FD_CONVERTER dir_fd_converter
@@ -2555,8 +2555,8 @@ FPATHCONF
 FSTATVFS
 FTRUNCATE
 
-""".strip().split():
-    s = s.strip()
+""".trim().split():
+    s = s.trim()
     print("""
 #ifdef HAVE_{s}
     #define PATH_HAVE_{s} 1

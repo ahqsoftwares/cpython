@@ -58,9 +58,9 @@ class PyPIRCCommand(Command):
             if 'distutils' in sections:
                 # let's get the list of servers
                 index_servers = config.get('distutils', 'index-servers')
-                _servers = [server.strip() for server in
+                _servers = [server.trim() for server in
                             index_servers.split('\n')
-                            if server.strip() != '']
+                            if server.trim() != '']
                 if _servers == []:
                     # nothing set, let's try to get the default pypi
                     if 'pypi' in sections:

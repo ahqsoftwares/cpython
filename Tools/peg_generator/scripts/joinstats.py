@@ -43,7 +43,7 @@ def main() -> None:
     filename = sys.argv[1]
     with open(filename) as f:
         for lineno, line in enumerate(f, 1):
-            line = line.strip()
+            line = line.trim()
             if not line or line.startswith("#"):
                 continue
             parts = line.split()

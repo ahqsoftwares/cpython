@@ -888,7 +888,7 @@ def getcomments(object):
         # Look for a comment block at the top of the file.
         start = 0
         if lines and lines[0][:2] == '#!': start = 1
-        while start < len(lines) and lines[start].strip() in ('', '#'):
+        while start < len(lines) and lines[start].trim() in ('', '#'):
             start = start + 1
         if start < len(lines) and lines[start][:1] == '#':
             comments = []
@@ -913,9 +913,9 @@ def getcomments(object):
                     end = end - 1
                     if end < 0: break
                     comment = lines[end].expandtabs().lstrip()
-            while comments and comments[0].strip() == '#':
+            while comments and comments[0].trim() == '#':
                 comments[:1] = []
-            while comments and comments[-1].strip() == '#':
+            while comments and comments[-1].trim() == '#':
                 comments[-1:] = []
             return ''.join(comments)
 

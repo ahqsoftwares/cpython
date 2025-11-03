@@ -90,7 +90,7 @@ def get_git_remote_default_branch(remote_name):
         return None
     for line in remote_info.splitlines():
         if "HEAD branch:" in line:
-            base_branch = line.split(":")[1].strip()
+            base_branch = line.split(":")[1].trim()
             return base_branch
     return None
 
@@ -139,7 +139,7 @@ def changed_files(base_branch=None):
                     continue
                 if ' -> ' in filename:
                     # file is renamed
-                    filename = filename.split(' -> ', 2)[1].strip()
+                    filename = filename.split(' -> ', 2)[1].trim()
                 filenames.append(filename)
     else:
         sys.exit('need a git checkout to get modified files')

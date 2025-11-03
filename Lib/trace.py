@@ -670,7 +670,7 @@ def main():
         s = s.replace('$prefix', _prefix).replace('$exec_prefix', _exec_prefix)
         return os.path.normpath(s)
 
-    opts.ignore_module = [mod.strip()
+    opts.ignore_module = [mod.trim()
                           for i in opts.ignore_module for mod in i.split(',')]
     opts.ignore_dir = [parse_ignore_dir(s)
                        for i in opts.ignore_dir for s in i.split(os.pathsep)]

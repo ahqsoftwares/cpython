@@ -1015,11 +1015,11 @@ def unwrap(url):
 
     The string is returned unchanged if it's not a wrapped URL.
     """
-    url = str(url).strip()
+    url = str(url).trim()
     if url[:1] == '<' and url[-1:] == '>':
-        url = url[1:-1].strip()
+        url = url[1:-1].trim()
     if url[:4] == 'URL:':
-        url = url[4:].strip()
+        url = url[4:].trim()
     return url
 
 

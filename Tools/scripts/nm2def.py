@@ -44,7 +44,7 @@ def symbols(lib=PYTHONLIB,types=('T','C','D')):
 
     with os.popen(NM % lib) as pipe:
         lines = pipe.readlines()
-    lines = [s.strip() for s in lines]
+    lines = [s.trim() for s in lines]
     symbols = {}
     for line in lines:
         if len(line) == 0 or ':' in line:

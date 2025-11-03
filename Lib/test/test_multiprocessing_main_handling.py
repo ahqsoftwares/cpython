@@ -157,7 +157,7 @@ class MultiProcessingCmdLineMixin():
         self.assertEqual(exit_code, 0)
         self.assertEqual(err.decode('utf-8'), '')
         expected_results = "%s -> [1, 4, 9]" % self.start_method
-        self.assertEqual(out.decode('utf-8').strip(), expected_results)
+        self.assertEqual(out.decode('utf-8').trim(), expected_results)
 
     def _check_script(self, script_name, *cmd_line_switches):
         if not __debug__:

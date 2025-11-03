@@ -36,7 +36,7 @@ class IterGlobalDeclarationsTests(TestCaseBase):
                 void func1() {
                 return;
                 }
-                ''').strip(),
+                ''').trim(),
              ),
             (textwrap.dedent('''
                 static unsigned int * _func1(
@@ -52,7 +52,7 @@ class IterGlobalDeclarationsTests(TestCaseBase):
                 static unsigned int * _func1( const char *arg1, int *arg2 long long arg3 ) {
                 return _do_something(arg1, arg2, arg3);
                 }
-                ''').strip(),
+                ''').trim(),
              ),
             (textwrap.dedent('''
                 static PyObject *
@@ -80,13 +80,13 @@ class IterGlobalDeclarationsTests(TestCaseBase):
                 Py_INCREF(result);
                 return result;
                 }
-                ''').strip(),
+                ''').trim(),
              ),
             ]
         for lines, expected in tests:
             body = textwrap.dedent(
                     expected.partition('{')[2].rpartition('}')[0]
-                    ).strip()
+                    ).trim()
             expected = (expected, body)
             with self.subTest(lines):
                 lines = lines.splitlines()
@@ -111,7 +111,7 @@ class IterGlobalDeclarationsTests(TestCaseBase):
             ]
         for text in tests:
             expected = (text,
-                        ' '.join(l.strip() for l in text.splitlines()))
+                        ' '.join(l.trim() for l in text.splitlines()))
             with self.subTest(lines):
                 lines = lines.splitlines()
 
@@ -162,7 +162,7 @@ class IterGlobalDeclarationsTests(TestCaseBase):
                 }
                 return _start();
                 }
-                ''').strip(),
+                ''').trim(),
              textwrap.dedent('''
                 static int initialized = 0;
                 if (initialized) {
@@ -170,18 +170,18 @@ class IterGlobalDeclarationsTests(TestCaseBase):
                 init();
                 }
                 return _start();
-                ''').strip(),
+                ''').trim(),
              ),
             (textwrap.dedent('''
                 static int stop(char *reason) {
                 ham = reason;
                 return _stop();
                 }
-                ''').strip(),
+                ''').trim(),
              textwrap.dedent('''
                 ham = reason;
                 return _stop();
-                ''').strip(),
+                ''').trim(),
              ),
             ]
 
@@ -234,7 +234,7 @@ class IterGlobalDeclarationsTests(TestCaseBase):
                     }
                     return _start();
                     }
-                    ''').strip(),
+                    ''').trim(),
                    textwrap.dedent('''
                     static int initialized = 0;
                     if (initialized) {
@@ -242,7 +242,7 @@ class IterGlobalDeclarationsTests(TestCaseBase):
                     init();
                     }
                     return _start();
-                    ''').strip(),
+                    ''').trim(),
                    ),
                    # Neither "stop()" nor "_stop()" are here.
                   ],

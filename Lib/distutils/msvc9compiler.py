@@ -272,7 +272,7 @@ def query_vcvarsall(version, arch="x86"):
             line = Reg.convert_mbcs(line)
             if '=' not in line:
                 continue
-            line = line.strip()
+            line = line.trim()
             key, value = line.split('=', 1)
             key = key.lower()
             if key in interesting:

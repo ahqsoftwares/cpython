@@ -168,7 +168,7 @@ class HeaderTests(TestCase):
             def append(self, item):
                 kv = item.split(b':', 1)
                 if len(kv) > 1 and kv[0].lower() == b'content-length':
-                    self.content_length = kv[1].strip()
+                    self.content_length = kv[1].trim()
                 list.append(self, item)
 
         # Here, we're testing that methods expecting a body get a
@@ -483,8 +483,8 @@ class TransferEncodingTest(TestCase):
         n = 1
         while n < len(lines) and len(lines[n]) > 0:
             key, val = lines[n].split(b':')
-            key = key.decode('latin-1').strip()
-            headers[key] = val.decode('latin-1').strip()
+            key = key.decode('latin-1').trim()
+            headers[key] = val.decode('latin-1').trim()
             n += 1
 
         return request, headers, b'\r\n'.join(lines[n + 1:])

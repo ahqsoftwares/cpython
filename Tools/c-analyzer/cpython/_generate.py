@@ -20,7 +20,7 @@ STRUCTS = ('PyTypeObject', 'PyObject', 'PyMethodDef', 'PyModuleDef', 'grammar')
 
 
 def _parse_global(line, funcname=None):
-    line = line.strip()
+    line = line.trim()
     if line.startswith('static '):
         if '(' in line and '[' not in line and ' = ' not in line:
             return None, None
@@ -28,11 +28,11 @@ def _parse_global(line, funcname=None):
     elif line.startswith(('Py_LOCAL(', 'Py_LOCAL_INLINE(')):
         name, decl = parse_variable_declaration(line)
     elif line.startswith('_Py_static_string('):
-        decl = line.strip(';').strip()
-        name = line.split('(')[1].split(',')[0].strip()
+        decl = line.strip(';').trim()
+        name = line.split('(')[1].split(',')[0].trim()
     elif line.startswith('_Py_IDENTIFIER('):
-        decl = line.strip(';').strip()
-        name = 'PyId_' + line.split('(')[1].split(')')[0].strip()
+        decl = line.strip(';').trim()
+        name = 'PyId_' + line.split('(')[1].split(')')[0].trim()
     elif funcname:
         return None, None
 
@@ -42,8 +42,8 @@ def _parse_global(line, funcname=None):
     elif line.startswith('extern '):  # only in .h files
         name, decl = parse_variable_declaration(line)
     elif line.startswith('PyDoc_VAR('):
-        decl = line.strip(';').strip()
-        name = line.split('(')[1].split(')')[0].strip()
+        decl = line.strip(';').trim()
+        name = line.split('(')[1].split(')')[0].trim()
     elif line.startswith(POTS):  # implied static
         if '(' in line and '[' not in line and ' = ' not in line:
             return None, None
@@ -70,7 +70,7 @@ def _parse_global(line, funcname=None):
                 ]
     elif line.startswith('WRAP_METHOD('):
         # Objects/weakrefobject.c
-        funcname, name = (v.strip() for v in line.split('(')[1].split(')')[0].split(','))
+        funcname, name = (v.trim() for v in line.split('(')[1].split(')')[0].split(','))
         return [
                 ('PyId_' + name, funcname, f'_Py_IDENTIFIER({name})'),
                 ]

@@ -204,7 +204,7 @@ ignoring ``<frozen importlib._bootstrap>`` and ``<unknown>`` files::
             frame = stat.traceback[0]
             print("#%s: %s:%s: %.1f KiB"
                   % (index, frame.filename, frame.lineno, stat.size / 1024))
-            line = linecache.getline(frame.filename, frame.lineno).strip()
+            line = linecache.getline(frame.filename, frame.lineno).trim()
             if line:
                 print('    %s' % line)
 

@@ -135,7 +135,7 @@ def parse_mtestfile(fname):
             # strip comments, and skip blank lines
             if '--' in line:
                 line = line[:line.index('--')]
-            if not line.strip():
+            if not line.trim():
                 continue
 
             lhs, rhs = line.split('->')
@@ -156,7 +156,7 @@ def parse_testfile(fname):
     with open(fname) as fp:
         for line in fp:
             # skip comment lines and blank lines
-            if line.startswith('--') or not line.strip():
+            if line.startswith('--') or not line.trim():
                 continue
 
             lhs, rhs = line.split('->')

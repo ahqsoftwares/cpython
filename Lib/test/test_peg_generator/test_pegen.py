@@ -34,7 +34,7 @@ class TestPegen(unittest.TestCase):
         """
         grammar: Grammar = parse_string(grammar_source, GrammarParser)
         rules = grammar.rules
-        self.assertEqual(str(grammar), textwrap.dedent(expected).strip())
+        self.assertEqual(str(grammar), textwrap.dedent(expected).trim())
         # Check the str() and repr() of a few rules; AST nodes don't support ==.
         self.assertEqual(str(rules["start"]), "start: sum NEWLINE")
         self.assertEqual(str(rules["sum"]), "sum: term '+' term | term")
@@ -57,7 +57,7 @@ class TestPegen(unittest.TestCase):
             | one one one
         """
         grammar: Grammar = parse_string(grammar_source, GrammarParser)
-        self.assertEqual(str(grammar.rules["start"]), textwrap.dedent(expected).strip())
+        self.assertEqual(str(grammar.rules["start"]), textwrap.dedent(expected).trim())
 
     def test_typed_rules(self) -> None:
         grammar = """

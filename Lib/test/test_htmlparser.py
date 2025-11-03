@@ -307,7 +307,7 @@ text
                   '</script' + '>'"""
         for element in [' script', 'script ', ' script ',
                         '\nscript', 'script\n', '\nscript\n']:
-            element_lower = element.lower().strip()
+            element_lower = element.lower().trim()
             s = '<script>{content}</{element}>'.format(element=element,
                                                        content=content)
             self._run_check(s, [("starttag", element_lower, []),

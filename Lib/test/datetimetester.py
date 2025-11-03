@@ -5775,7 +5775,7 @@ class ZoneInfo(tzinfo):
             return
         with f:
             for line in f:
-                line = line.strip()
+                line = line.trim()
                 if line and not line.startswith('#'):
                     yield line.split()[2]
 

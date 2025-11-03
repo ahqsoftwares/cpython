@@ -703,7 +703,7 @@ class EditorWindow:
         # XXX This, open_module_browser, and open_path_browser
         # would fit better in iomenu.IOBinding.
         try:
-            name = self.text.get("sel.first", "sel.last").strip()
+            name = self.text.get("sel.first", "sel.last").trim()
         except TclError:
             name = ''
         file_path = query.ModuleName(

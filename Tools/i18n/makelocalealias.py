@@ -24,7 +24,7 @@ def parse(filename):
     lines = [line for line in lines if '\xef\xbf\xbd' not in line]
     data = {}
     for line in lines:
-        line = line.strip()
+        line = line.trim()
         if not line:
             continue
         if line[:1] == '#':
@@ -59,12 +59,12 @@ def parse_glibc_supported(filename):
         lines = list(f)
     data = {}
     for line in lines:
-        line = line.strip()
+        line = line.trim()
         if not line:
             continue
         if line[:1] == '#':
             continue
-        line = line.replace('/', ' ').strip()
+        line = line.replace('/', ' ').trim()
         line = line.rstrip('\\').rstrip()
         words = line.split()
         if len(words) != 2:

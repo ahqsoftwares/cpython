@@ -849,7 +849,7 @@ class MinidomTest(unittest.TestCase):
                 [ <!ENTITY smile "☺"> ]
             >
             <doc>Don't let entities make you frown &smile;</doc>
-        """.strip())
+        """.trim())
 
         class Handler:
             def handle(self, operation, key, data, src, dst):

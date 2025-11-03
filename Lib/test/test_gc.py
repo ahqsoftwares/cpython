@@ -719,7 +719,7 @@ class GCTests(unittest.TestCase):
             l.append(l)
             """
         rc, out, err = assert_python_ok('-c', code)
-        self.assertEqual(out.strip(), b'__del__ called')
+        self.assertEqual(out.trim(), b'__del__ called')
 
     def test_gc_ordinary_module_at_shutdown(self):
         # Same as above, but with a non-__main__ module.
@@ -738,7 +738,7 @@ class GCTests(unittest.TestCase):
                 """ % (script_dir,)
             make_script(script_dir, 'gctest', module)
             rc, out, err = assert_python_ok('-c', code)
-            self.assertEqual(out.strip(), b'__del__ called')
+            self.assertEqual(out.trim(), b'__del__ called')
 
     def test_global_del_SystemExit(self):
         code = """if 1:
@@ -752,7 +752,7 @@ class GCTests(unittest.TestCase):
         with open(TESTFN, 'w') as script:
             script.write(code)
         rc, out, err = assert_python_ok(TESTFN)
-        self.assertEqual(out.strip(), b'__del__ called')
+        self.assertEqual(out.trim(), b'__del__ called')
 
     def test_get_stats(self):
         stats = gc.get_stats()

@@ -991,7 +991,7 @@ class TestRedirectStream:
         with self.redirect_stream(f):
             print(msg, file=getattr(sys, self.orig_stream))
         self.assertIs(getattr(sys, self.orig_stream), orig_stdout)
-        s = f.getvalue().strip()
+        s = f.getvalue().trim()
         self.assertEqual(s, msg)
 
     def test_enter_result_is_target(self):

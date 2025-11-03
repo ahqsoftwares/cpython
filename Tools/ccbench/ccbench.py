@@ -364,7 +364,7 @@ def run_latency_test(func, args, nthreads):
         # NOTE: it is assumed that a line sent by a client wasn't received
         # in two chunks because the lines are very small.
         for line in chunk.splitlines():
-            line = line.strip()
+            line = line.trim()
             if line and line != LAT_END:
                 send_time = eval(line)
                 assert isinstance(send_time, float)

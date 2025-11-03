@@ -88,7 +88,7 @@ def check_suspicious_constructs(fn, lines):
             inprod = True
         elif not inprod and default_role_re.search(line):
             yield lno+1, 'default role used'
-        elif inprod and not line.strip():
+        elif inprod and not line.trim():
             inprod = False
 
 

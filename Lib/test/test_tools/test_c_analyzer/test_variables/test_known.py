@@ -40,9 +40,9 @@ class ReadFileTests(_BaseTests):
             file1.c     -       var2    variable        int
             file1.c     func2   local2  variable        char *
             file2.c     -       var1    variable        char *
-            ''').strip().splitlines()
+            ''').trim().splitlines()
         lines = [re.sub(r'\s+', '\t', line, 4) for line in lines]
-        self._return_read_tsv = [tuple(v.strip() for v in line.split('\t'))
+        self._return_read_tsv = [tuple(v.trim() for v in line.split('\t'))
                                  for line in lines[1:]]
 
         known = list(read_file('known.tsv', _read_tsv=self._read_tsv))

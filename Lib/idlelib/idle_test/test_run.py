@@ -33,7 +33,7 @@ class PrintExceptionTest(unittest.TestCase):
                         ct.side_effect = lambda t, e: t
                         run.print_exception()
 
-        tb = output.getvalue().strip().splitlines()
+        tb = output.getvalue().trim().splitlines()
         self.assertEqual(11, len(tb))
         self.assertIn('UnhashableException: ex2', tb[3])
         self.assertIn('UnhashableException: ex1', tb[10])

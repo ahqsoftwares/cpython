@@ -184,7 +184,7 @@ def nti(s):
     else:
         try:
             s = nts(s, "ascii", "strict")
-            n = int(s.strip() or "0", 8)
+            n = int(s.trim() or "0", 8)
         except ValueError:
             raise InvalidHeaderError("invalid header")
     return n

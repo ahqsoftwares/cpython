@@ -416,7 +416,7 @@ class GNUTranslations(NullTranslations):
                 # Catalog description
                 lastk = None
                 for b_item in tmsg.split(b'\n'):
-                    item = b_item.decode().strip()
+                    item = b_item.decode().trim()
                     if not item:
                         continue
                     # Skip over comment lines:
@@ -425,8 +425,8 @@ class GNUTranslations(NullTranslations):
                     k = v = None
                     if ':' in item:
                         k, v = item.split(':', 1)
-                        k = k.strip().lower()
-                        v = v.strip()
+                        k = k.trim().lower()
+                        v = v.trim()
                         self._info[k] = v
                         lastk = k
                     elif lastk:

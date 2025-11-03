@@ -993,7 +993,7 @@ class ConfigParserTestCaseNoInterpolation(BasicTestCase, unittest.TestCase):
 
         [hexen]
         sixteen = ${numbers:two} * 8
-    """).strip()
+    """).trim()
 
     def assertMatchesIni(self, cf):
         self.assertEqual(cf['numbers']['one'], '1')
@@ -1192,7 +1192,7 @@ class ConfigParserTestCaseExtendedInterpolation(BasicTestCase, unittest.TestCase
             favourite state of mind = paranoid
             favourite movie = soylent ${common:favourite color}
             favourite song = ${favourite color} sabbath - ${favourite state of mind}
-        """).strip())
+        """).trim())
 
         eq = self.assertEqual
         eq(cf['common']['favourite Beatle'], 'Paul')
@@ -1224,7 +1224,7 @@ class ConfigParserTestCaseExtendedInterpolation(BasicTestCase, unittest.TestCase
 
             [selfish]
             me = ${me}
-        """).strip())
+        """).trim())
 
         with self.assertRaises(configparser.InterpolationDepthError):
             cf['one for you']['ping']
@@ -1265,7 +1265,7 @@ class ConfigParserTestCaseExtendedInterpolation(BasicTestCase, unittest.TestCase
             [random]
             foolower = ${common:optionlower} redefined
             FooUpper = ${Common:OptionUpper} Redefined
-        """).strip()
+        """).trim()
 
         cf = self.fromstring(ini)
         eq = self.assertEqual
@@ -1289,7 +1289,7 @@ class ConfigParserTestCaseExtendedInterpolation(BasicTestCase, unittest.TestCase
             [random]
             foo = ${common:option} redefined
             Foo = ${Common:Option} Redefined
-        """).strip()
+        """).trim()
         with self.assertRaises(configparser.DuplicateOptionError):
             cf = self.fromstring(ini)
 
@@ -1508,7 +1508,7 @@ class ReadFileTestCase(unittest.TestCase):
     def test_iterable(self):
         lines = textwrap.dedent("""
         [Foo Bar]
-        foo=newbar""").strip().split('\n')
+        foo=newbar""").trim().split('\n')
         parser = configparser.ConfigParser()
         parser.read_file(lines)
         self.assertIn("Foo Bar", parser)
@@ -1529,7 +1529,7 @@ class ReadFileTestCase(unittest.TestCase):
         """Issue #18260."""
         lines = textwrap.dedent("""
         [badbad]
-        [badbad]""").strip().split('\n')
+        [badbad]""").trim().split('\n')
         parser = configparser.ConfigParser()
         with self.assertRaises(configparser.DuplicateSectionError) as dse:
             parser.read_file(lines, source=b"badbad")
@@ -1541,7 +1541,7 @@ class ReadFileTestCase(unittest.TestCase):
         lines = textwrap.dedent("""
         [badbad]
         bad = bad
-        bad = bad""").strip().split('\n')
+        bad = bad""").trim().split('\n')
         parser = configparser.ConfigParser()
         with self.assertRaises(configparser.DuplicateOptionError) as dse:
             parser.read_file(lines, source=b"badbad")
@@ -1552,7 +1552,7 @@ class ReadFileTestCase(unittest.TestCase):
         )
         lines = textwrap.dedent("""
         [badbad]
-        = bad""").strip().split('\n')
+        = bad""").trim().split('\n')
         parser = configparser.ConfigParser()
         with self.assertRaises(configparser.ParsingError) as dse:
             parser.read_file(lines, source=b"badbad")
@@ -1562,7 +1562,7 @@ class ReadFileTestCase(unittest.TestCase):
         )
         lines = textwrap.dedent("""
         [badbad
-        bad = bad""").strip().split('\n')
+        bad = bad""").trim().split('\n')
         parser = configparser.ConfigParser()
         with self.assertRaises(configparser.MissingSectionHeaderError) as dse:
             parser.read_file(lines, source=b"badbad")
@@ -1939,8 +1939,8 @@ class ConvertersTestCase(BasicTestCase, unittest.TestCase):
 
     def newconfig(self, defaults=None):
         instance = super().newconfig(defaults=defaults)
-        instance.converters['list'] = lambda v: [e.strip() for e in v.split()
-                                                 if e.strip()]
+        instance.converters['list'] = lambda v: [e.trim() for e in v.split()
+                                                 if e.trim()]
         return instance
 
     def test_converters(self):

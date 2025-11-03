@@ -306,9 +306,9 @@ class IBMTestCases(unittest.TestCase):
     def eval_line(self, s):
         if s.find(' -> ') >= 0 and s[:2] != '--' and not s.startswith('  --'):
             s = (s.split('->')[0] + '->' +
-                 s.split('->')[1].split('--')[0]).strip()
+                 s.split('->')[1].split('--')[0]).trim()
         else:
-            s = s.split('--')[0].strip()
+            s = s.split('--')[0].trim()
 
         for ignore in self.ignore_list:
             if s.find(ignore) >= 0:
@@ -322,7 +322,7 @@ class IBMTestCases(unittest.TestCase):
             return self.eval_equation(s)
 
     def eval_directive(self, s):
-        funct, value = (x.strip().lower() for x in s.split(':'))
+        funct, value = (x.trim().lower() for x in s.split(':'))
         if funct == 'rounding':
             value = self.RoundingDict[value]
         else:
@@ -343,13 +343,13 @@ class IBMTestCases(unittest.TestCase):
 
         try:
             Sides = s.split('->')
-            L = Sides[0].strip().split()
+            L = Sides[0].trim().split()
             id = L[0]
             if DEBUG:
                 print("Test ", id, end=" ")
             funct = L[1].lower()
             valstemp = L[2:]
-            L = Sides[1].strip().split()
+            L = Sides[1].trim().split()
             ans = L[0]
             exceptions = L[1:]
         except (TypeError, AttributeError, IndexError):

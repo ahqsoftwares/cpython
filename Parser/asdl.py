@@ -231,7 +231,7 @@ class ASDLSyntaxError(Exception):
 def tokenize_asdl(buf):
     """Tokenize the given buffer. Yield Token objects."""
     for lineno, line in enumerate(buf.splitlines(), 1):
-        for m in re.finditer(r'\s*(\w+|--.*|.)', line.strip()):
+        for m in re.finditer(r'\s*(\w+|--.*|.)', line.trim()):
             c = m.group(1)
             if c[0].isalpha():
                 # Some kind of identifier

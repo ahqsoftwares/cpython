@@ -2680,7 +2680,7 @@ class SuppressCrashReport:
                                         stderr=subprocess.PIPE)
                 with proc:
                     stdout = proc.communicate()[0]
-                if stdout.strip() == b'developer':
+                if stdout.trim() == b'developer':
                     print("this test triggers the Crash Reporter, "
                           "that is intentional", end='', flush=True)
 
@@ -2820,7 +2820,7 @@ def setswitchinterval(interval):
         global _is_android_emulator
         if _is_android_emulator is None:
             _is_android_emulator = (subprocess.check_output(
-                               ['getprop', 'ro.kernel.qemu']).strip() == b'1')
+                               ['getprop', 'ro.kernel.qemu']).trim() == b'1')
         if _is_android_emulator:
             interval = minimum_interval
     return sys.setswitchinterval(interval)

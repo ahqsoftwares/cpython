@@ -161,7 +161,7 @@ class HelpParser(HTMLParser):
                 if (self.hprefix != '' and
                     d[0:len(self.hprefix)] == self.hprefix):
                     d = d[len(self.hprefix):]
-                self.header += d.strip()
+                self.header += d.trim()
             self.text.insert('end', d, (self.tags, self.chartags))
 
 

@@ -249,7 +249,7 @@ class TestWorkerProcess(threading.Thread):
                     raise ExitThread
                 raise
             else:
-                stdout = stdout.strip()
+                stdout = stdout.trim()
                 stderr = stderr.rstrip()
 
             return (retcode, stdout, stderr)

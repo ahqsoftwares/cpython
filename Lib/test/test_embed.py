@@ -243,7 +243,7 @@ class EmbeddingTests(EmbeddingTestsMixin, unittest.TestCase):
                                 errors=expected_errors)
         # This is useful if we ever trip over odd platform behaviour
         self.maxDiff = None
-        self.assertEqual(out.strip(), expected_output)
+        self.assertEqual(out.trim(), expected_output)
 
     def test_pre_initialization_api(self):
         """

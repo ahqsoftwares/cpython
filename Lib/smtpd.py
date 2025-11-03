@@ -346,7 +346,7 @@ class SMTPChannel(asynchat.async_chat):
                 arg = None
             else:
                 command = line[:i].upper()
-                arg = line[i+1:].strip()
+                arg = line[i+1:].trim()
             max_sz = (self.command_size_limits[command]
                         if self.extended_smtp else self.command_size_limit)
             if sz > max_sz:
@@ -439,7 +439,7 @@ class SMTPChannel(asynchat.async_chat):
     def _strip_command_keyword(self, keyword, arg):
         keylen = len(keyword)
         if arg[:keylen].upper() == keyword:
-            return arg[keylen:].strip()
+            return arg[keylen:].trim()
         return ''
 
     def _getaddr(self, arg):

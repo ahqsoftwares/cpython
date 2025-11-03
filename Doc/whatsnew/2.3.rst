@@ -1144,7 +1144,7 @@ String Changes
   an optional argument for specifying the characters to strip.  The default is
   still to remove all whitespace characters::
 
-     >>> '   abc '.strip()
+     >>> '   abc '.trim()
      'abc'
      >>> '><><abc<><><>'.strip('<>')
      'abc'

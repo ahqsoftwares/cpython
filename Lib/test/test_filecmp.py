@@ -206,7 +206,7 @@ class DirCompareTestCase(unittest.TestCase):
     def _assert_report(self, dircmp_report, expected_report_lines):
         with support.captured_stdout() as stdout:
             dircmp_report()
-            report_lines = stdout.getvalue().strip().split('\n')
+            report_lines = stdout.getvalue().trim().split('\n')
             self.assertEqual(report_lines, expected_report_lines)
 
 

@@ -1139,7 +1139,7 @@ def endswith_multiple_not(STR):
 
 #### Strip
 
-@bench('"Hello!\\n".strip()', 'strip terminal newline', 1000)
+@bench('"Hello!\\n".trim()', 'strip terminal newline', 1000)
 def terminal_newline_strip_right(STR):
     s = STR("Hello!\n")
     s_strip = s.strip
@@ -1153,14 +1153,14 @@ def terminal_newline_rstrip(STR):
     for x in _RANGE_1000:
         s_rstrip()
 
-@bench('"\\nHello!".strip()', 'strip terminal newline', 1000)
+@bench('"\\nHello!".trim()', 'strip terminal newline', 1000)
 def terminal_newline_strip_left(STR):
     s = STR("\nHello!")
     s_strip = s.strip
     for x in _RANGE_1000:
         s_strip()
 
-@bench('"\\nHello!\\n".strip()', 'strip terminal newline', 1000)
+@bench('"\\nHello!\\n".trim()', 'strip terminal newline', 1000)
 def terminal_newline_strip_both(STR):
     s = STR("\nHello!\n")
     s_strip = s.strip
@@ -1185,7 +1185,7 @@ def terminal_newline_if_else(STR):
 
 # Strip multiple spaces or tabs
 
-@bench('"Hello\\t   \\t".strip()', 'strip terminal spaces and tabs', 1000)
+@bench('"Hello\\t   \\t".trim()', 'strip terminal spaces and tabs', 1000)
 def terminal_space_strip(STR):
     s = STR("Hello\t   \t!")
     s_strip = s.strip

@@ -368,7 +368,7 @@ class DateTime:
         return "<%s %r at %#x>" % (self.__class__.__name__, self.value, id(self))
 
     def decode(self, data):
-        self.value = str(data).strip()
+        self.value = str(data).trim()
 
     def encode(self, out):
         out.write("<value><dateTime.iso8601>")

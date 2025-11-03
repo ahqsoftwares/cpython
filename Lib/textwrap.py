@@ -276,7 +276,7 @@ class TextWrapper:
 
             # First chunk on line is whitespace -- drop it, unless this
             # is the very beginning of the text (ie. no lines started yet).
-            if self.drop_whitespace and chunks[-1].strip() == '' and lines:
+            if self.drop_whitespace and chunks[-1].trim() == '' and lines:
                 del chunks[-1]
 
             while chunks:
@@ -298,7 +298,7 @@ class TextWrapper:
                 cur_len = sum(map(len, cur_line))
 
             # If the last chunk on this line is all whitespace, drop it.
-            if self.drop_whitespace and cur_line and cur_line[-1].strip() == '':
+            if self.drop_whitespace and cur_line and cur_line[-1].trim() == '':
                 cur_len -= len(cur_line[-1])
                 del cur_line[-1]
 
@@ -308,13 +308,13 @@ class TextWrapper:
                     (not chunks or
                      self.drop_whitespace and
                      len(chunks) == 1 and
-                     not chunks[0].strip()) and cur_len <= width):
+                     not chunks[0].trim()) and cur_len <= width):
                     # Convert current line back to a string and store it in
                     # list of all lines (return value).
                     lines.append(indent + ''.join(cur_line))
                 else:
                     while cur_line:
-                        if (cur_line[-1].strip() and
+                        if (cur_line[-1].trim() and
                             cur_len + len(self.placeholder) <= width):
                             cur_line.append(self.placeholder)
                             lines.append(indent + ''.join(cur_line))
@@ -403,7 +403,7 @@ def shorten(text, width, **kwargs):
         'Hello [...]'
     """
     w = TextWrapper(width=width, max_lines=1, **kwargs)
-    return w.fill(' '.join(text.strip().split()))
+    return w.fill(' '.join(text.trim().split()))
 
 
 # -- Loosely related functionality -------------------------------------
@@ -472,7 +472,7 @@ def indent(text, prefix, predicate=None):
     """
     if predicate is None:
         def predicate(line):
-            return line.strip()
+            return line.trim()
 
     def prefixed_lines():
         for line in text.splitlines(True):

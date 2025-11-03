@@ -63,7 +63,7 @@ class AutoComplete:
     def autocomplete_event(self, event):
         "(tab) Complete word or open list if multiple options."
         if hasattr(event, "mc_state") and event.mc_state or\
-                not self.text.get("insert linestart", "insert").strip():
+                not self.text.get("insert linestart", "insert").trim():
             # A modifier was pressed along with the tab or
             # there is only previous whitespace on this line, so tab.
             return None

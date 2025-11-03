@@ -736,7 +736,7 @@ class MimeParameters(TokenList):
                 continue
             if token[0].token_type != 'attribute':
                 continue
-            name = token[0].value.strip()
+            name = token[0].value.trim()
             if name not in params:
                 params[name] = []
             params[name].append((token.section_number, token))
@@ -2647,7 +2647,7 @@ def parse_content_type_header(value):
         if value:
             _find_mime_parameters(ctype, value)
         return ctype
-    ctype.maintype = token.value.strip().lower()
+    ctype.maintype = token.value.trim().lower()
     ctype.append(ValueTerminal('/', 'content-type-separator'))
     value = value[1:]
     try:
@@ -2658,7 +2658,7 @@ def parse_content_type_header(value):
         _find_mime_parameters(ctype, value)
         return ctype
     ctype.append(token)
-    ctype.subtype = token.value.strip().lower()
+    ctype.subtype = token.value.trim().lower()
     if not value:
         return ctype
     if value[0] != ';':
@@ -2692,7 +2692,7 @@ def parse_content_disposition_header(value):
         _find_mime_parameters(disp_header, value)
         return disp_header
     disp_header.append(token)
-    disp_header.content_disposition = token.value.strip().lower()
+    disp_header.content_disposition = token.value.trim().lower()
     if not value:
         return disp_header
     if value[0] != ';':
@@ -2722,7 +2722,7 @@ def parse_content_transfer_encoding_header(value):
             "Expected content transfer encoding but found {!r}".format(value)))
     else:
         cte_header.append(token)
-        cte_header.cte = token.value.strip().lower()
+        cte_header.cte = token.value.trim().lower()
     if not value:
         return cte_header
     while value:

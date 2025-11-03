@@ -1917,7 +1917,7 @@ class PtyTests(unittest.TestCase):
         with open(r, "r") as rpipe:
             lines = []
             while True:
-                line = rpipe.readline().strip()
+                line = rpipe.readline().trim()
                 if line == "":
                     # The other end was closed => the child exited
                     break

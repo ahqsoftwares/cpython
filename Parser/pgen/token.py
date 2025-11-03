@@ -4,7 +4,7 @@ import itertools
 def generate_tokens(tokens):
     numbers = itertools.count(0)
     for line in tokens:
-        line = line.strip()
+        line = line.trim()
 
         if not line or line.startswith("#"):
             continue
@@ -18,7 +18,7 @@ def generate_tokens(tokens):
 
 def generate_opmap(tokens):
     for line in tokens:
-        line = line.strip()
+        line = line.trim()
 
         if not line or line.startswith("#"):
             continue

@@ -201,7 +201,7 @@ class BaseSockTestsMixin:
                     buf = await self.loop.sock_recv(server, 8192)
                     if not buf:
                         return rv
-                    rv += buf.strip()
+                    rv += buf.trim()
             task = asyncio.create_task(recv_all())
 
             # immediately make another sock_sendall call

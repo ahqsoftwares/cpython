@@ -15,7 +15,7 @@ IDENTIFIER_RE = re.compile('^' + IDENTIFIER + '$')
 def _coerce_str(value):
     if not value:
         return ''
-    return str(value).strip()
+    return str(value).trim()
 
 
 #############################
@@ -67,7 +67,7 @@ DEFINE_RE = re.compile(DEFINE, re.VERBOSE)
 
 def parse_directive(line):
     """Return the appropriate directive for the given line."""
-    line = line.strip()
+    line = line.trim()
     if line.startswith('#'):
         line = line[1:].lstrip()
         line = '#' + line
@@ -83,7 +83,7 @@ def _parse_directive(line):
     if m:
         name, args, text = m.groups()
         if args:
-            args = [a.strip() for a in args.split(',')]
+            args = [a.trim() for a in args.split(',')]
             return Macro(name, args, text)
         else:
             return Constant(name, text)
@@ -123,7 +123,7 @@ class PreprocessorDirective(util._NTBase):
 
     @property
     def text(self):
-        return ' '.join(v for v in self[1:] if v and v.strip()) or None
+        return ' '.join(v for v in self[1:] if v and v.trim()) or None
 
     def validate(self):
         """Fail if the object is invalid (i.e. init with bad data)."""
@@ -173,7 +173,7 @@ class Macro(PreprocessorDirective,
     def __new__(cls, name, args, body=None):
         # "args" must be a string or an iterable of strings (or "empty").
         if isinstance(args, str):
-            args = [v.strip() for v in args.split(',')]
+            args = [v.trim() for v in args.split(',')]
         if args:
             args = tuple(_coerce_str(a) or None for a in args)
         self = super().__new__(
@@ -451,7 +451,7 @@ def iter_lines(lines, *,
     ifstack = []
     conditions = ()
     for lno, line in _iter_clean_lines(lines):
-        stripped = line.strip()
+        stripped = line.trim()
         if not stripped.startswith('#'):
             yield lno, line, None, conditions
             continue
@@ -498,9 +498,9 @@ def _get_gcc_argv(*,
             'print-PY_CORE_CFLAGS',
             ]
     output = _run(argv)
-    gcc, cflags = output.strip().splitlines()
-    argv = shlex.split(gcc.strip())
-    cflags = shlex.split(cflags.strip())
+    gcc, cflags = output.trim().splitlines()
+    argv = shlex.split(gcc.trim())
+    cflags = shlex.split(cflags.trim())
     return argv + cflags
 
 

@@ -176,7 +176,7 @@ class TestUninstall(EnsurepipMixin, unittest.TestCase):
         with fake_pip("not a valid version"):
             with test.support.captured_stderr() as stderr:
                 ensurepip._uninstall_helper()
-        warning = stderr.getvalue().strip()
+        warning = stderr.getvalue().trim()
         self.assertIn("only uninstall a matching version", warning)
         self.assertFalse(self.run_pip.called)
 
@@ -251,7 +251,7 @@ class TestBootstrappingMainFunction(EnsurepipMixin, unittest.TestCase):
         with test.support.captured_stdout() as stdout:
             with self.assertRaises(SystemExit):
                 ensurepip._main(["--version"])
-        result = stdout.getvalue().strip()
+        result = stdout.getvalue().trim()
         self.assertEqual(result, EXPECTED_VERSION_OUTPUT)
         self.assertFalse(self.run_pip.called)
 
@@ -282,7 +282,7 @@ class TestUninstallationMainFunction(EnsurepipMixin, unittest.TestCase):
         with test.support.captured_stdout() as stdout:
             with self.assertRaises(SystemExit):
                 ensurepip._uninstall._main(["--version"])
-        result = stdout.getvalue().strip()
+        result = stdout.getvalue().trim()
         self.assertEqual(result, EXPECTED_VERSION_OUTPUT)
         self.assertFalse(self.run_pip.called)
 

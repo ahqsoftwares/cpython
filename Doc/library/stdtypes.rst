@@ -2077,7 +2077,7 @@ expression support in the :mod:`re` module).
    The *chars* argument is not a prefix or suffix; rather, all combinations of its
    values are stripped::
 
-      >>> '   spacious   '.strip()
+      >>> '   spacious   '.trim()
       'spacious'
       >>> 'www.example.com'.strip('cmowz.')
       'example'
@@ -3049,7 +3049,7 @@ produce new objects.
    not a prefix or suffix; rather, all combinations of its values are
    stripped::
 
-      >>> b'   spacious   '.strip()
+      >>> b'   spacious   '.trim()
       b'spacious'
       >>> b'www.example.com'.strip(b'cmowz.')
       b'example'

@@ -144,8 +144,8 @@ class IterLinesTests(TestCaseBase):
                     static int spam = 0;
                     {}
                     static char buffer[256];
-                    ''').strip().format(line)
-                lines = text.strip().splitlines()
+                    ''').trim().format(line)
+                lines = text.trim().splitlines()
 
                 results = list(
                         iter_lines(lines, _parse_directive=self._parse_directive))
@@ -194,7 +194,7 @@ class IterLinesTests(TestCaseBase):
                     a = b; \
                 }
             static char buffer[256];
-            ''').strip()
+            ''').trim()
         lines = [line + '\n' for line in text.splitlines()]
         lines[-1] = lines[-1][:-1]
 
@@ -236,8 +236,8 @@ class IterLinesTests(TestCaseBase):
             #endif
 
             static int eggs = 0;
-            ''').strip()
-        lines = [line for line in text.splitlines() if line.strip()]
+            ''').trim()
+        lines = [line for line in text.splitlines() if line.trim()]
 
         results = list(
                 iter_lines(lines, _parse_directive=self._parse_directive))
@@ -301,8 +301,8 @@ class IterLinesTests(TestCaseBase):
             }
 
             #endif
-            ''').strip()
-        lines = [line for line in text.splitlines() if line.strip()]
+            ''').trim()
+        lines = [line for line in text.splitlines() if line.trim()]
 
         results = list(
                 iter_lines(lines, _parse_directive=self._parse_directive))
@@ -610,7 +610,7 @@ class IterLinesTests(TestCaseBase):
             #define Py_func_type_input 345
 
             #endif /* !Py_COMPILE_H */
-            ''').strip()
+            ''').trim()
         lines = [line + '\n' for line in text.splitlines()]
         lines[-1] = lines[-1][:-1]
 

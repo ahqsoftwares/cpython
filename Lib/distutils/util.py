@@ -240,7 +240,7 @@ def split_quoted (s):
     # bit of a brain-bender to get it working right, though...
     if _wordchars_re is None: _init_regex()
 
-    s = s.strip()
+    s = s.trim()
     words = []
     pos = 0
 
@@ -526,7 +526,7 @@ def copydir_run_2to3(src, dest, template=None, fixer_names=None,
     filelist.files[:] = filelist.allfiles
     if template:
         for line in template.splitlines():
-            line = line.strip()
+            line = line.trim()
             if not line: continue
             filelist.process_template_line(line)
     copied = []

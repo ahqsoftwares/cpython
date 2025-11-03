@@ -261,7 +261,7 @@ it must be parenthesized. ::
    [4, 2, 0, 2, 4]
    >>> # call a method on each element
    >>> freshfruit = ['  banana', '  loganberry ', 'passion fruit  ']
-   >>> [weapon.strip() for weapon in freshfruit]
+   >>> [weapon.trim() for weapon in freshfruit]
    ['banana', 'loganberry', 'passion fruit']
    >>> # create a list of 2-tuples like (number, square)
    >>> [(x, x**2) for x in range(6)]

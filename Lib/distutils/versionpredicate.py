@@ -100,14 +100,14 @@ class VersionPredicate:
         #    name:  package name
         #    pred:  list of (comparison string, StrictVersion)
 
-        versionPredicateStr = versionPredicateStr.strip()
+        versionPredicateStr = versionPredicateStr.trim()
         if not versionPredicateStr:
             raise ValueError("empty package restriction")
         match = re_validPackage.match(versionPredicateStr)
         if not match:
             raise ValueError("bad package name in %r" % versionPredicateStr)
         self.name, paren = match.groups()
-        paren = paren.strip()
+        paren = paren.trim()
         if paren:
             match = re_paren.match(paren)
             if not match:
@@ -156,7 +156,7 @@ def split_provision(value):
         _provision_rx = re.compile(
             r"([a-zA-Z_]\w*(?:\.[a-zA-Z_]\w*)*)(?:\s*\(\s*([^)\s]+)\s*\))?$",
             re.ASCII)
-    value = value.strip()
+    value = value.trim()
     m = _provision_rx.match(value)
     if not m:
         raise ValueError("illegal provides specification: %r" % value)

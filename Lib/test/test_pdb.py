@@ -1536,7 +1536,7 @@ def bœr():
             quit
         """
         stdout, stderr = self.run_pdb_script(script, commands)
-        res = '\n'.join([x.strip() for x in stdout.splitlines()])
+        res = '\n'.join([x.trim() for x in stdout.splitlines()])
         self.assertRegex(res, "Restarting .* with arguments:\na b c")
         self.assertRegex(res, "Restarting .* with arguments:\nd e f")
 

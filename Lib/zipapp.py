@@ -150,7 +150,7 @@ def create_archive(source, target=None, interpreter=None, main=None,
 def get_interpreter(archive):
     with _maybe_open(archive, 'rb') as f:
         if f.read(2) == b'#!':
-            return f.readline().strip().decode(shebang_encoding)
+            return f.readline().trim().decode(shebang_encoding)
 
 
 def main(args=None):

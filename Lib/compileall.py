@@ -406,7 +406,7 @@ def main():
         try:
             with (sys.stdin if args.flist=='-' else open(args.flist)) as f:
                 for line in f:
-                    compile_dests.append(line.strip())
+                    compile_dests.append(line.trim())
         except OSError:
             if args.quiet < 2:
                 print("Error reading file list {}".format(args.flist))

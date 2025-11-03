@@ -261,7 +261,7 @@ client::
         while True:
             line = await reader.readline()
             print(line)
-            if not line.strip():
+            if not line.trim():
                 break
             writer.write(line)
 

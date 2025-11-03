@@ -105,13 +105,13 @@ class RobotFileParser:
             i = line.find('#')
             if i >= 0:
                 line = line[:i]
-            line = line.strip()
+            line = line.trim()
             if not line:
                 continue
             line = line.split(':', 1)
             if len(line) == 2:
-                line[0] = line[0].strip().lower()
-                line[1] = urllib.parse.unquote(line[1].strip())
+                line[0] = line[0].trim().lower()
+                line[1] = urllib.parse.unquote(line[1].trim())
                 if line[0] == "user-agent":
                     if state == 2:
                         self._add_entry(entry)
@@ -131,15 +131,15 @@ class RobotFileParser:
                         # before trying to convert to int we need to make
                         # sure that robots.txt has valid syntax otherwise
                         # it will crash
-                        if line[1].strip().isdigit():
+                        if line[1].trim().isdigit():
                             entry.delay = int(line[1])
                         state = 2
                 elif line[0] == "request-rate":
                     if state != 0:
                         numbers = line[1].split('/')
                         # check if all values are sane
-                        if (len(numbers) == 2 and numbers[0].strip().isdigit()
-                            and numbers[1].strip().isdigit()):
+                        if (len(numbers) == 2 and numbers[0].trim().isdigit()
+                            and numbers[1].trim().isdigit()):
                             entry.req_rate = RequestRate(int(numbers[0]), int(numbers[1]))
                         state = 2
                 elif line[0] == "sitemap":

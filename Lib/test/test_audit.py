@@ -38,7 +38,7 @@ class AuditTest(unittest.TestCase):
             sys.stderr.writelines(p.stderr)
             return (
                 p.returncode,
-                [line.strip().partition(" ") for line in p.stdout],
+                [line.trim().partition(" ") for line in p.stdout],
                 "".join(p.stderr),
             )
 

@@ -73,7 +73,7 @@ class Completer:
         if self.use_main_ns:
             self.namespace = __main__.__dict__
 
-        if not text.strip():
+        if not text.trim():
             if state == 0:
                 if _readline_available:
                     readline.insert_text('\t')

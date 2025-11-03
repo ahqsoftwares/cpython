@@ -730,7 +730,7 @@ class FormatTestCase(unittest.TestCase):
             for line in testfile:
                 if line.startswith('--'):
                     continue
-                line = line.strip()
+                line = line.trim()
                 if not line:
                     continue
 
@@ -768,7 +768,7 @@ class ReprTestCase(unittest.TestCase):
         with open(os.path.join(os.path.split(__file__)[0],
                   'floating_points.txt')) as floats_file:
             for line in floats_file:
-                line = line.strip()
+                line = line.trim()
                 if not line or line.startswith('#'):
                     continue
                 v = eval(line)

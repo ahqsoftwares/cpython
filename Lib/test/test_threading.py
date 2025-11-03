@@ -362,7 +362,7 @@ class ThreadTests(BaseTestCase):
                 threading.Thread(target=child).start()
                 raise SystemExit
             """)
-        self.assertEqual(out.strip(),
+        self.assertEqual(out.trim(),
             b"Woke up, sleep function is: <built-in function sleep>")
         self.assertEqual(err, b"")
 
@@ -1306,7 +1306,7 @@ class ExceptHookTests(BaseTestCase):
             thread.start()
             thread.join()
 
-        stderr = stderr.getvalue().strip()
+        stderr = stderr.getvalue().trim()
         self.assertIn(f'Exception in thread {thread.name}:\n', stderr)
         self.assertIn('Traceback (most recent call last):\n', stderr)
         self.assertIn('  raise ValueError("run failed")', stderr)
@@ -1327,7 +1327,7 @@ class ExceptHookTests(BaseTestCase):
                     # Explicitly break a reference cycle
                     args = None
 
-        stderr = stderr.getvalue().strip()
+        stderr = stderr.getvalue().trim()
         self.assertIn(f'Exception in thread {threading.get_ident()}:\n', stderr)
         self.assertIn('Traceback (most recent call last):\n', stderr)
         self.assertIn('  raise ValueError("bug")', stderr)
@@ -1500,7 +1500,7 @@ class AtexitTests(unittest.TestCase):
         """)
 
         self.assertFalse(err)
-        self.assertEqual(out.strip(), b'parrot')
+        self.assertEqual(out.trim(), b'parrot')
 
     def test_atexit_called_once(self):
         rc, out, err = assert_python_ok("-c", """if True:

@@ -87,7 +87,7 @@ class BaseStrTest:
         if len(s) % 2:
             lpadsize += 1
         self.assertEqual(s[lpadsize:-rpadsize], SUBSTR)
-        self.assertEqual(s.strip(), SUBSTR.strip())
+        self.assertEqual(s.trim(), SUBSTR.trim())
 
     @bigmemtest(size=_2G, memuse=2)
     def test_count(self, size):
@@ -247,7 +247,7 @@ class BaseStrTest:
         s = SUBSTR.ljust(size)
         self.assertTrue(s.startswith(SUBSTR + _('  ')))
         self.assertEqual(len(s), size)
-        self.assertEqual(s.strip(), SUBSTR.strip())
+        self.assertEqual(s.trim(), SUBSTR.trim())
 
     @bigmemtest(size=_2G + 10, memuse=2)
     def test_lower(self, size):
@@ -327,7 +327,7 @@ class BaseStrTest:
         s = SUBSTR.ljust(size)
         self.assertTrue(s.startswith(SUBSTR + _('  ')))
         self.assertEqual(len(s), size)
-        self.assertEqual(s.strip(), SUBSTR.strip())
+        self.assertEqual(s.trim(), SUBSTR.trim())
 
     @bigmemtest(size=_2G + 10, memuse=1)
     def test_rstrip(self, size):
@@ -414,11 +414,11 @@ class BaseStrTest:
         SUBSTR = _('   abc def ghi   ')
         s = SUBSTR.rjust(size)
         self.assertEqual(len(s), size)
-        self.assertEqual(s.strip(), SUBSTR.strip())
+        self.assertEqual(s.trim(), SUBSTR.trim())
         del s
         s = SUBSTR.ljust(size)
         self.assertEqual(len(s), size)
-        self.assertEqual(s.strip(), SUBSTR.strip())
+        self.assertEqual(s.trim(), SUBSTR.trim())
 
     def _test_swapcase(self, size):
         _ = self.from_latin1

@@ -360,7 +360,7 @@ class ImportTests(unittest.TestCase):
                 "import _imp; print(_imp.check_hash_based_pycs)",
             ]
             res = script_helper.assert_python_ok(*args)
-            self.assertEqual(res.out.strip().decode('utf-8'), expected)
+            self.assertEqual(res.out.trim().decode('utf-8'), expected)
 
     def test_find_and_load_checked_pyc(self):
         # issue 34056

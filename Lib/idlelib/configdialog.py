@@ -206,7 +206,7 @@ class ConfigDialog(Toplevel):
         Methods:
             view_text: Method from textview module.
         """
-        page = self.note.tab(self.note.select(), option='text').strip()
+        page = self.note.tab(self.note.select(), option='text').trim()
         view_text(self, title='Help for IDLE preferences',
                   contents=help_common+help_pages.get(page, ''))
 
@@ -2058,7 +2058,7 @@ class ExtPage(Frame):
         """
         name = opt['name']
         default = opt['default']
-        value = opt['var'].get().strip() or default
+        value = opt['var'].get().trim() or default
         opt['var'].set(value)
         # if self.defaultCfg.has_section(section):
         # Currently, always true; if not, indent to return.

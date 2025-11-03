@@ -193,7 +193,7 @@ def getdoc(object):
 
 def splitdoc(doc):
     """Split a doc string into a synopsis line (if any) and the rest."""
-    lines = doc.strip().split('\n')
+    lines = doc.trim().split('\n')
     if len(lines) == 1:
         return lines[0], ''
     elif len(lines) >= 2 and not lines[1].rstrip():
@@ -329,18 +329,18 @@ def ispackage(path):
 
 def source_synopsis(file):
     line = file.readline()
-    while line[:1] == '#' or not line.strip():
+    while line[:1] == '#' or not line.trim():
         line = file.readline()
         if not line: break
-    line = line.strip()
+    line = line.trim()
     if line[:4] == 'r"""': line = line[1:]
     if line[:3] == '"""':
         line = line[3:]
         if line[-1:] == '\\': line = line[:-1]
-        while not line.strip():
+        while not line.trim():
             line = file.readline()
             if not line: break
-        result = line.split('"""')[0].strip()
+        result = line.split('"""')[0].trim()
     else: result = None
     return result
 
@@ -761,7 +761,7 @@ class HTMLDoc(Doc):
         if hasattr(object, '__version__'):
             version = str(object.__version__)
             if version[:11] == '$' + 'Revision: ' and version[-1:] == '$':
-                version = version[11:-1].strip()
+                version = version[11:-1].trim()
             info.append('version %s' % self.escape(version))
         if hasattr(object, '__date__'):
             info.append(self.escape(str(object.__date__)))
@@ -1286,7 +1286,7 @@ location listed above.
         if hasattr(object, '__version__'):
             version = str(object.__version__)
             if version[:11] == '$' + 'Revision: ' and version[-1:] == '$':
-                version = version[11:-1].strip()
+                version = version[11:-1].trim()
             result = result + self.section('VERSION', version)
         if hasattr(object, '__date__'):
             result = result + self.section('DATE', str(object.__date__))
@@ -2022,7 +2022,7 @@ has the same effect as typing a particular string at the help> prompt.
                 if not request: break
             except (KeyboardInterrupt, EOFError):
                 break
-            request = request.strip()
+            request = request.trim()
 
             # Make sure significant trailing quoting marks of literals don't
             # get deleted while cleaning input
@@ -2046,7 +2046,7 @@ has the same effect as typing a particular string at the help> prompt.
 
     def help(self, request):
         if type(request) is type(''):
-            request = request.strip()
+            request = request.trim()
             if request == 'keywords': self.listkeywords()
             elif request == 'symbols': self.listsymbols()
             elif request == 'topics': self.listtopics()
@@ -2139,7 +2139,7 @@ module "pydoc_data.topics" could not be found.
         except KeyError:
             self.output.write('no documentation found for %s\n' % repr(topic))
             return
-        doc = doc.strip() + '\n'
+        doc = doc.trim() + '\n'
         if more_xrefs:
             xrefs = (xrefs or '') + ' ' + more_xrefs
         if xrefs:

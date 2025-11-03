@@ -301,7 +301,7 @@ class ExecutorShutdownTest:
         # Errors in atexit hooks don't change the process exit code, check
         # stderr manually.
         self.assertFalse(err)
-        self.assertEqual(out.strip(), b"apple")
+        self.assertEqual(out.trim(), b"apple")
 
     def test_submit_after_interpreter_shutdown(self):
         # Test the atexit hook for shutdown of worker threads and processes
@@ -329,7 +329,7 @@ class ExecutorShutdownTest:
         # Errors in atexit hooks don't change the process exit code, check
         # stderr manually.
         self.assertIn("RuntimeError: cannot schedule new futures", err.decode())
-        self.assertEqual(out.strip(), b"runtime-error")
+        self.assertEqual(out.trim(), b"runtime-error")
 
     def test_hang_issue12364(self):
         fs = [self.executor.submit(time.sleep, 0.1) for _ in range(50)]
@@ -380,7 +380,7 @@ class ExecutorShutdownTest:
             """.format(executor_type=self.executor_type.__name__,
                        context=getattr(self, 'ctx', None)))
         self.assertFalse(err)
-        self.assertEqual(out.strip(), b"apple")
+        self.assertEqual(out.trim(), b"apple")
 
 
 class ThreadPoolShutdownTest(ThreadPoolMixin, ExecutorShutdownTest, BaseTestCase):
@@ -474,7 +474,7 @@ class ThreadPoolShutdownTest(ThreadPoolMixin, ExecutorShutdownTest, BaseTestCase
         # Errors in atexit hooks don't change the process exit code, check
         # stderr manually.
         self.assertFalse(err)
-        self.assertEqual(out.strip(), b"apple")
+        self.assertEqual(out.trim(), b"apple")
 
 
 class ProcessPoolShutdownTest(ExecutorShutdownTest):

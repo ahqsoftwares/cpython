@@ -83,7 +83,7 @@ def process(filename, table):
             words = line[a1:b1].split(',')
             # print '#', line, words
             for word in words:
-                word = word.strip()
+                word = word.trim()
                 if word not in list:
                     list.append(word)
 

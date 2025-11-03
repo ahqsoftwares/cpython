@@ -48,7 +48,7 @@ def _formatwarnmsg_impl(msg):
     else:
         line = msg.line
     if line:
-        line = line.strip()
+        line = line.trim()
         s += "  %s\n" % line
 
     if msg.source is not None:
@@ -83,7 +83,7 @@ def _formatwarnmsg_impl(msg):
                 except Exception:
                     line = None
                 if line:
-                    line = line.strip()
+                    line = line.trim()
                     s += '    %s\n' % line
         elif not tracing:
             s += (f'{category}: Enable tracemalloc to get the object '
@@ -216,7 +216,7 @@ def _setoption(arg):
         raise _OptionError("too many fields (max 5): %r" % (arg,))
     while len(parts) < 5:
         parts.append('')
-    action, message, category, module, lineno = [s.strip()
+    action, message, category, module, lineno = [s.trim()
                                                  for s in parts]
     action = _getaction(action)
     category = _getcategory(category)

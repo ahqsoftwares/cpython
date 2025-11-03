@@ -267,7 +267,7 @@ def run_all_tests(options):
         name = re.split(r'[-.]', filename)[0]
         out.write(
             ("[%s] %s... "
-                % (name.center(7), func.__doc__.strip())
+                % (name.center(7), func.__doc__.trim())
             ).ljust(52))
         out.flush()
 

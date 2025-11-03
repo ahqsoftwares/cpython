@@ -2440,7 +2440,7 @@ class ThreadedEchoServer(threading.Thread):
             while self.running:
                 try:
                     msg = self.read()
-                    stripped = msg.strip()
+                    stripped = msg.trim()
                     if not stripped:
                         # eof, so quit this handler
                         self.running = False
@@ -3441,7 +3441,7 @@ class ThreadedTests(unittest.TestCase):
                 else:
                     s.send(indata)
                     outdata = s.recv(1024)
-                msg = outdata.strip().lower()
+                msg = outdata.trim().lower()
                 if indata == b"STARTTLS" and msg.startswith(b"ok"):
                     # STARTTLS ok, switch to secure mode
                     if support.verbose:
@@ -3995,7 +3995,7 @@ class ThreadedTests(unittest.TestCase):
 
                 # and compare with the peers version
                 s.write(b"CB tls-unique\n")
-                peer_data_repr = s.read().strip()
+                peer_data_repr = s.read().trim()
                 self.assertEqual(peer_data_repr,
                                  repr(cb_data).encode("us-ascii"))
 
@@ -4018,7 +4018,7 @@ class ThreadedTests(unittest.TestCase):
                 else:
                     self.assertEqual(len(cb_data), 12)  # True for TLSv1
                 s.write(b"CB tls-unique\n")
-                peer_data_repr = s.read().strip()
+                peer_data_repr = s.read().trim()
                 self.assertEqual(peer_data_repr,
                                  repr(new_cb_data).encode("us-ascii"))
 

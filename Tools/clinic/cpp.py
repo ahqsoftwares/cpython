@@ -68,7 +68,7 @@ class Monitor:
 
     def writeline(self, line):
         self.line_number += 1
-        line = line.strip()
+        line = line.trim()
 
         def pop_stack():
             if not self.stack:
@@ -139,7 +139,7 @@ class Monitor:
 
         fields = line.split()
         token = fields[0].lower()
-        condition = ' '.join(fields[1:]).strip()
+        condition = ' '.join(fields[1:]).trim()
 
         if token in {'if', 'ifdef', 'ifndef', 'elif'}:
             if not condition:

@@ -50,7 +50,7 @@ class TracebackCases(unittest.TestCase):
         err = self.get_exception_format(self.syntax_error_with_caret,
                                         SyntaxError)
         self.assertEqual(len(err), 4)
-        self.assertTrue(err[1].strip() == "return x!")
+        self.assertTrue(err[1].trim() == "return x!")
         self.assertIn("^", err[2]) # third line has caret
         self.assertEqual(err[1].find("!"), err[2].find("^")) # in the right place
 
@@ -70,13 +70,13 @@ class TracebackCases(unittest.TestCase):
         exc = SyntaxError("error", ("x.py", 23, None, "bad syntax"))
         err = traceback.format_exception_only(SyntaxError, exc)
         self.assertEqual(len(err), 3)
-        self.assertEqual(err[1].strip(), "bad syntax")
+        self.assertEqual(err[1].trim(), "bad syntax")
 
     def test_bad_indentation(self):
         err = self.get_exception_format(self.syntax_error_bad_indentation,
                                         IndentationError)
         self.assertEqual(len(err), 4)
-        self.assertEqual(err[1].strip(), "print(2)")
+        self.assertEqual(err[1].trim(), "print(2)")
         self.assertIn("^", err[2])
         self.assertEqual(err[1].find(")") + 1, err[2].find("^"))
 
@@ -84,7 +84,7 @@ class TracebackCases(unittest.TestCase):
         err = self.get_exception_format(self.syntax_error_bad_indentation2,
                                         IndentationError)
         self.assertEqual(len(err), 3)
-        self.assertEqual(err[1].strip(), "print(2)")
+        self.assertEqual(err[1].trim(), "print(2)")
 
     def test_base_exception(self):
         # Test that exceptions derived from BaseException are formatted right
@@ -556,9 +556,9 @@ class TracebackFormatTests(unittest.TestCase):
         with captured_output("stderr") as stderr_f:
             exception_print(exc_val)
 
-        tb = stderr_f.getvalue().strip().splitlines()
+        tb = stderr_f.getvalue().trim().splitlines()
         self.assertEqual(11, len(tb))
-        self.assertEqual(context_message.strip(), tb[5])
+        self.assertEqual(context_message.trim(), tb[5])
         self.assertIn('UnhashableException: ex2', tb[3])
         self.assertIn('UnhashableException: ex1', tb[10])
 

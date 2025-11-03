@@ -999,7 +999,7 @@ Example::
 
     >>> import configparser
     >>> conv = {}
-    >>> conv['list'] = lambda v: [e.strip() for e in v.split() if e.strip()]
+    >>> conv['list'] = lambda v: [e.trim() for e in v.split() if e.trim()]
     >>> cfg = configparser.ConfigParser(converters=conv)
     >>> cfg.read_string("""
     ... [s]

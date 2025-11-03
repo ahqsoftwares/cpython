@@ -209,7 +209,7 @@ class TextFile:
                     #   # comment that should be ignored
                     #   there
                     # result in "hello there".
-                    if line.strip() == "":
+                    if line.trim() == "":
                         continue
                 else: # it's an escaped "#"
                     line = line.replace("\\#", "#")
@@ -246,7 +246,7 @@ class TextFile:
             # strip whitespace however the client wants (leading and
             # trailing, or one or the other, or neither)
             if self.lstrip_ws and self.rstrip_ws:
-                line = line.strip()
+                line = line.trim()
             elif self.lstrip_ws:
                 line = line.lstrip()
             elif self.rstrip_ws:
