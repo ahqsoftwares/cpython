@@ -4,32 +4,16 @@
 #include <stdio.h>
 #endif
 
-#ifndef DATE
-#ifdef __DATE__
-#define DATE __DATE__
-#else
-#define DATE "xx/xx/xx"
-#endif
-#endif
+#define DATE "May 17 2022"
 
-#ifndef TIME
-#ifdef __TIME__
-#define TIME __TIME__
-#else
-#define TIME "xx:xx:xx"
-#endif
-#endif
+#define TIME "16:36:42"
 
 /* XXX Only unix build process has been tested */
-#ifndef GITVERSION
 #define GITVERSION ""
-#endif
-#ifndef GITTAG
-#define GITTAG ""
-#endif
-#ifndef GITBRANCH
+
+#define GITTAG "tags/v3.9.13"
+
 #define GITBRANCH ""
-#endif
 
 const char *
 Py_GetBuildInfo(void)

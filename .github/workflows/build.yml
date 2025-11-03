@@ -10,7 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build CPython
-        run: .\PCbuild\build.bat -e -p x64
+        run: |
+          $newDate = Get-Date "2022-05-17 16:36:42"
+          Set-Date $newDate
+
+          .\PCbuild\build.bat -e -p x64
       - name: Display build info
         run: .\python.bat -m test.pythoninfo
 
