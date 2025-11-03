@@ -1,0 +1,25 @@
+name: Build
+on:
+  push:
+
+jobs:
+  build_win_amd64:
+    name: "Windows (x64)"
+    runs-on: windows-latest
+    needs: check_source
+    if: needs.check_source.outputs.run_tests == 'true'
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build CPython
+        run: .\PCbuild\build.bat -e -p x64
+      - name: Display build info
+        run: .\python.bat -m test.pythoninfo
+      - name: Tests
+        run: .\PCbuild\rt.bat -p x64 -q -uall -u-cpu -rwW --slowest --timeout=1200 -j0
+
+      - name: Publish
+        uses: actions/upload-artifact@v4
+        with:
+          path: |
+            PCbuild\amd64\*.dll
+            PCbuild\x64\*.dll
