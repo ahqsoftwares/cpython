@@ -804,7 +804,7 @@ class BaseTest:
             self.checkequal(['arf', 'barf'], b, 'rsplit', None, 2)
 
     def test_strip_whitespace(self):
-        self.checkequal('hello', '   hello   ', 'strip')
+        self.checkequal('hello', '   hello   ', 'trim')
         self.checkequal('hello   ', '   hello   ', 'lstrip')
         self.checkequal('   hello', '   hello   ', 'rstrip')
         self.checkequal('hello', 'hello', 'strip')
@@ -818,11 +818,11 @@ class BaseTest:
         self.checkequal('hello', '   hello   ', 'strip', None)
         self.checkequal('hello   ', '   hello   ', 'lstrip', None)
         self.checkequal('   hello', '   hello   ', 'rstrip', None)
-        self.checkequal('hello', 'hello', 'strip', None)
+        self.checkequal('hello', 'hello', 'trim', None)
 
     def test_strip(self):
         # strip/lstrip/rstrip with str arg
-        self.checkequal('hello', 'xyzzyhelloxyzzy', 'strip', 'xyz')
+        self.checkequal('hello', 'xyzzyhelloxyzzy', 'trim', 'xyz')
         self.checkequal('helloxyzzy', 'xyzzyhelloxyzzy', 'lstrip', 'xyz')
         self.checkequal('xyzzyhello', 'xyzzyhelloxyzzy', 'rstrip', 'xyz')
         self.checkequal('hello', 'hello', 'strip', 'xyz')
