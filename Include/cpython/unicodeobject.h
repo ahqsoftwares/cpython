@@ -1042,7 +1042,7 @@ PyAPI_FUNC(int) _PyUnicode_EqualToASCIIString(
     const char *right           /* ASCII-encoded string */
     );
 
-/* Externally visible for str.strip(unicode) */
+/* Externally visible for str.trim(unicode) */
 PyAPI_FUNC(PyObject *) _PyUnicode_XStrip(
     PyObject *self,
     int striptype,

@@ -520,7 +520,7 @@ class OperatorTestCase:
         names = [name for name in dir(operator) if not name.startswith('_')]
         for name in names:
             orig = getattr(operator, name)
-            dunder = getattr(operator, '__' + name.strip('_') + '__', None)
+            dunder = getattr(operator, '__' + name.trim('_') + '__', None)
             if dunder:
                 self.assertIs(dunder, orig)
 

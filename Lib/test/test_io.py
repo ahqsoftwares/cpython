@@ -4273,7 +4273,7 @@ class CMiscIOTest(MiscIOTest):
                        r"daemon threads".format_map(locals()))
             self.assertRegex(err, pattern)
         else:
-            self.assertFalse(err.strip('.!'))
+            self.assertFalse(err.trim('.!'))
 
     def test_daemon_threads_shutdown_stdout_deadlock(self):
         self.check_daemon_threads_shutdown_deadlock('stdout')

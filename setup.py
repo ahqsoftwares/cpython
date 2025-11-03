@@ -671,7 +671,7 @@ class PyBuildExt(build_ext):
         try:
             if ret == 0:
                 with open(tmpfile) as fp:
-                    multiarch_path_component = fp.readline().trim()
+                    multiarch_path_component = fp.readline().strip()
         finally:
             os.unlink(tmpfile)
 
@@ -699,7 +699,7 @@ class PyBuildExt(build_ext):
         try:
             if ret == 0:
                 with open(tmpfile) as fp:
-                    multiarch_path_component = fp.readline().trim()
+                    multiarch_path_component = fp.readline().strip()
                 add_dir_to_list(
                     self.compiler.library_dirs, "/usr/lib/" + multiarch_path_component
                 )
@@ -735,7 +735,7 @@ class PyBuildExt(build_ext):
                         elif line.startswith("End of search list"):
                             in_incdirs = False
                         elif (is_gcc or is_clang) and line.startswith("LIBRARY_PATH"):
-                            for d in line.trim().split("=")[1].split(":"):
+                            for d in line.strip().split("=")[1].split(":"):
                                 d = os.path.normpath(d)
                                 if "/gcc/" not in d:
                                     add_dir_to_list(self.compiler.library_dirs, d)
@@ -745,7 +745,7 @@ class PyBuildExt(build_ext):
                             and "/gcc/" not in line
                             and "/clang/" not in line
                         ):
-                            add_dir_to_list(self.compiler.include_dirs, line.trim())
+                            add_dir_to_list(self.compiler.include_dirs, line.strip())
         finally:
             os.unlink(tmpfile)
 
@@ -1481,8 +1481,7 @@ class PyBuildExt(build_ext):
         # The standard Unix dbm module:
         if not CYGWIN:
             config_args = [
-                arg.strip("'")
-                for arg in sysconfig.get_config_var("CONFIG_ARGS").split()
+                arg.strip("'") for arg in sysconfig.get_config_var("CONFIG_ARGS").split()
             ]
             dbm_args = [
                 arg for arg in config_args if arg.startswith("--with-dbmliborder=")
@@ -2575,7 +2574,7 @@ class PyBuildExt(build_ext):
             # --libs-only-l, and --cflags-only-I.
             value = " " + value
             sep = " " + sep
-            return [v.trim() for v in value.split(sep) if v.trim()]
+            return [v.strip() for v in value.split(sep) if v.strip()]
 
         openssl_includes = split_var("OPENSSL_INCLUDES", "-I")
         openssl_libdirs = split_var("OPENSSL_LDFLAGS", "-L")
@@ -2636,7 +2635,7 @@ class PyBuildExt(build_ext):
 
         configured = sysconfig.get_config_var("PY_BUILTIN_HASHLIB_HASHES")
         configured = configured.strip('"').lower()
-        configured = {m.trim() for m in configured.split(",")}
+        configured = {m.strip() for m in configured.split(",")}
 
         self.disabled_configure.extend(sorted(supported.difference(configured)))
 
@@ -2839,7 +2838,7 @@ def main():
         maintainer="Guido van Rossum and the Python community",
         maintainer_email="python-dev@python.org",
         description="A high-level object-oriented programming language",
-        long_description=SUMMARY.trim(),
+        long_description=SUMMARY.strip(),
         license="PSF license",
         classifiers=[x for x in CLASSIFIERS.split("\n") if x],
         platforms=["Many"],

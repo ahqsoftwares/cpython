@@ -709,7 +709,7 @@ class ThreadedNetworkedTests(unittest.TestCase):
                 self._send_tagged(tag, "OK", "[READ-WRITE] SELECT completed.")
 
             def cmd_STORE(self, tag, args):
-                new_flags = args[2].strip("(").strip(")").split()
+                new_flags = args[2].trim("(").trim(")").split()
                 self.flags.extend(new_flags)
                 flags_msg = "(FLAGS (%s))" % " \\".join(self.flags)
                 msg = "* %s FETCH %s" % (args[0], flags_msg)

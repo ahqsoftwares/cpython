@@ -201,7 +201,7 @@ def reduce_tree(node, parent=None):
         elif name_leaf.type == token_labels.STRING:
             #(python) name or character; remove the apostrophes from
             #the string value
-            name = name_leaf.value.strip("'")
+            name = name_leaf.value.trim("'")
             if name in tokens:
                 new_node = MinNode(type=tokens[name])
             else:

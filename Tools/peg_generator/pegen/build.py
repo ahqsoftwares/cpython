@@ -62,7 +62,7 @@ def compile_c_extension(
     if keep_asserts:
         extra_compile_args.append("-UNDEBUG")
     if disable_optimization:
-        if sys.platform == 'win32':
+        if sys.platform == "win32":
             extra_compile_args.append("/Od")
             extra_link_args.append("/LTCG:OFF")
         else:
@@ -77,7 +77,9 @@ def compile_c_extension(
                 str(MOD_DIR.parent.parent.parent / "Python" / "asdl.c"),
                 str(MOD_DIR.parent.parent.parent / "Parser" / "tokenizer.c"),
                 str(MOD_DIR.parent.parent.parent / "Parser" / "pegen" / "pegen.c"),
-                str(MOD_DIR.parent.parent.parent / "Parser" / "pegen" / "parse_string.c"),
+                str(
+                    MOD_DIR.parent.parent.parent / "Parser" / "pegen" / "parse_string.c"
+                ),
                 str(MOD_DIR.parent / "peg_extension" / "peg_extension.c"),
                 generated_source_path,
             ],
@@ -114,7 +116,9 @@ def build_parser(
     grammar_file: str, verbose_tokenizer: bool = False, verbose_parser: bool = False
 ) -> Tuple[Grammar, Parser, Tokenizer]:
     with open(grammar_file) as file:
-        tokenizer = Tokenizer(tokenize.generate_tokens(file.readline), verbose=verbose_tokenizer)
+        tokenizer = Tokenizer(
+            tokenize.generate_tokens(file.readline), verbose=verbose_tokenizer
+        )
         parser = GrammarParser(tokenizer, verbose=verbose_parser)
         grammar = parser.start()
 
@@ -145,7 +149,7 @@ def generate_token_definitions(tokens: IO[str]) -> TokenDefinitions:
             all_tokens[index] = token
         elif len(pieces) == 2:
             token, op = pieces
-            exact_tokens[op.strip("'")] = index
+            exact_tokens[op.trim("'")] = index
             all_tokens[index] = token
         else:
             raise ValueError(f"Unexpected line found in Tokens file: {line}")
@@ -167,7 +171,12 @@ def build_c_generator(
         all_tokens, exact_tok, non_exact_tok = generate_token_definitions(tok_file)
     with open(output_file, "w") as file:
         gen: ParserGenerator = CParserGenerator(
-            grammar, all_tokens, exact_tok, non_exact_tok, file, skip_actions=skip_actions
+            grammar,
+            all_tokens,
+            exact_tok,
+            non_exact_tok,
+            file,
+            skip_actions=skip_actions,
         )
         gen.generate(grammar_file)
 
@@ -183,10 +192,15 @@ def build_c_generator(
 
 
 def build_python_generator(
-    grammar: Grammar, grammar_file: str, output_file: str, skip_actions: bool = False,
+    grammar: Grammar,
+    grammar_file: str,
+    output_file: str,
+    skip_actions: bool = False,
 ) -> ParserGenerator:
     with open(output_file, "w") as file:
-        gen: ParserGenerator = PythonParserGenerator(grammar, file)  # TODO: skip_actions
+        gen: ParserGenerator = PythonParserGenerator(
+            grammar, file
+        )  # TODO: skip_actions
         gen.generate(grammar_file)
     return gen
 
@@ -220,7 +234,9 @@ def build_c_parser_and_generator(
           when compiling the extension module. Defaults to True.
         skip_actions (bool, optional): Whether to pretend no rule has any actions.
     """
-    grammar, parser, tokenizer = build_parser(grammar_file, verbose_tokenizer, verbose_parser)
+    grammar, parser, tokenizer = build_parser(
+        grammar_file, verbose_tokenizer, verbose_parser
+    )
     gen = build_c_generator(
         grammar,
         grammar_file,
@@ -253,6 +269,13 @@ def build_python_parser_and_generator(
           when generating the parser. Defaults to False.
         skip_actions (bool, optional): Whether to pretend no rule has any actions.
     """
-    grammar, parser, tokenizer = build_parser(grammar_file, verbose_tokenizer, verbose_parser)
-    gen = build_python_generator(grammar, grammar_file, output_file, skip_actions=skip_actions,)
+    grammar, parser, tokenizer = build_parser(
+        grammar_file, verbose_tokenizer, verbose_parser
+    )
+    gen = build_python_generator(
+        grammar,
+        grammar_file,
+        output_file,
+        skip_actions=skip_actions,
+    )
     return grammar, parser, tokenizer, gen

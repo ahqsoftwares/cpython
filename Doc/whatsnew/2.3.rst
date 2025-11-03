@@ -1146,11 +1146,11 @@ String Changes
 
      >>> '   abc '.trim()
      'abc'
-     >>> '><><abc<><><>'.strip('<>')
+     >>> '><><abc<><><>'.trim('<>')
      'abc'
-     >>> '><><abc<><><>\n'.strip('<>')
+     >>> '><><abc<><><>\n'.trim('<>')
      'abc<><><>\n'
-     >>> u'\u4000\u4001abc\u4000'.strip(u'\u4000')
+     >>> u'\u4000\u4001abc\u4000'.trim(u'\u4000')
      u'\u4001abc'
      >>>
 

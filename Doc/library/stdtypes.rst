@@ -2069,7 +2069,7 @@ expression support in the :mod:`re` module).
    string at that position.
 
 
-.. method:: str.strip([chars])
+.. method:: str.trim([chars])
 
    Return a copy of the string with the leading and trailing characters removed.
    The *chars* argument is a string specifying the set of characters to be removed.
@@ -2079,7 +2079,7 @@ expression support in the :mod:`re` module).
 
       >>> '   spacious   '.trim()
       'spacious'
-      >>> 'www.example.com'.strip('cmowz.')
+      >>> 'www.example.com'.trim('cmowz.')
       'example'
 
    The outermost leading and trailing *chars* argument values are stripped
@@ -2089,7 +2089,7 @@ expression support in the :mod:`re` module).
    For example::
 
       >>> comment_string = '#....... Section 3.2.1 Issue #32 .......'
-      >>> comment_string.strip('.#! ')
+      >>> comment_string.trim('.#! ')
       'Section 3.2.1 Issue #32'
 
 
@@ -3038,8 +3038,8 @@ produce new objects.
       [b'1', b'2', b'3']
 
 
-.. method:: bytes.strip([chars])
-            bytearray.strip([chars])
+.. method:: bytes.trim([chars])
+            bytearray.trim([chars])
 
    Return a copy of the sequence with specified leading and trailing bytes
    removed. The *chars* argument is a binary sequence specifying the set of
@@ -3051,7 +3051,7 @@ produce new objects.
 
       >>> b'   spacious   '.trim()
       b'spacious'
-      >>> b'www.example.com'.strip(b'cmowz.')
+      >>> b'www.example.com'.trim(b'cmowz.')
       b'example'
 
    The binary sequence of byte values to remove may be any

@@ -669,7 +669,7 @@ class BZ2CompressorTest(BaseTest):
         data = bz2.decompress(compressed)
         try:
             self.assertEqual(len(data), size)
-            self.assertEqual(len(data.strip(b"x")), 0)
+            self.assertEqual(len(data.trim(b"x")), 0)
         finally:
             data = None
 

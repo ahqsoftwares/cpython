@@ -12662,7 +12662,7 @@ static const char *stripfuncnames[] = {"lstrip", "rstrip", "trim"};
 
 #define STRIPNAME(i) (stripfuncnames[i])
 
-/* externally visible for str.strip(unicode) */
+/* externally visible for str.trim(unicode) */
 PyObject *
 _PyUnicode_XStrip(PyObject *self, int striptype, PyObject *sepobj)
 {

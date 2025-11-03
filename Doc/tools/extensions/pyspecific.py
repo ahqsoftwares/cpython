@@ -185,7 +185,7 @@ class AuditEvent(Directive):
     def run(self):
         name = self.arguments[0]
         if len(self.arguments) >= 2 and self.arguments[1]:
-            args = (a.trim() for a in self.arguments[1].strip("'\"").split(","))
+            args = (a.trim() for a in self.arguments[1].trim("'\"").split(","))
             args = [a for a in args if a]
         else:
             args = []
@@ -212,7 +212,7 @@ class AuditEvent(Directive):
 
         ids = []
         try:
-            target = self.arguments[2].strip("\"'")
+            target = self.arguments[2].trim("\"'")
         except (IndexError, TypeError):
             target = None
         if not target:

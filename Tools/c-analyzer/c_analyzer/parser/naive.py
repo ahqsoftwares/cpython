@@ -8,11 +8,13 @@ from .preprocessor import _iter_clean_lines
 _NOT_SET = object()
 
 
-def get_srclines(filename, *,
-                 cache=None,
-                 _open=open,
-                 _iter_lines=_iter_clean_lines,
-                 ):
+def get_srclines(
+    filename,
+    *,
+    cache=None,
+    _open=open,
+    _iter_lines=_iter_clean_lines,
+):
     """Return the file's lines as a list.
 
     Each line will have trailing whitespace removed (including newline).
@@ -26,9 +28,9 @@ def get_srclines(filename, *,
             pass
 
     with _open(filename) as srcfile:
-        srclines = [line
-                    for _, line in _iter_lines(srcfile)
-                    if not line.startswith('#')]
+        srclines = [
+            line for _, line in _iter_lines(srcfile) if not line.startswith("#")
+        ]
     for i, line in enumerate(srclines):
         srclines[i] = line.rstrip()
 
@@ -40,13 +42,13 @@ def get_srclines(filename, *,
 def parse_variable_declaration(srcline):
     """Return (name, decl) for the given declaration line."""
     # XXX possible false negatives...
-    decl, sep, _ = srcline.partition('=')
+    decl, sep, _ = srcline.partition("=")
     if not sep:
-        if not srcline.endswith(';'):
+        if not srcline.endswith(";"):
             return None, None
-        decl = decl.strip(';')
+        decl = decl.trim(";")
     decl = decl.trim()
-    m = re.match(r'.*\b(\w+)\s*(?:\[[^\]]*\])?$', decl)
+    m = re.match(r".*\b(\w+)\s*(?:\[[^\]]*\])?$", decl)
     if not m:
         return None, None
     name = m.group(1)
@@ -58,8 +60,8 @@ def parse_variable(srcline, funcname=None):
     line = srcline.trim()
 
     # XXX Handle more than just static variables.
-    if line.startswith('static '):
-        if '(' in line and '[' not in line:
+    if line.startswith("static "):
+        if "(" in line and "[" not in line:
             # a function
             return None, None
         return parse_variable_declaration(line)
@@ -67,32 +69,34 @@ def parse_variable(srcline, funcname=None):
         return None, None
 
 
-def iter_variables(filename, *,
-                   srccache=None,
-                   parse_variable=None,
-                   _get_srclines=get_srclines,
-                   _default_parse_variable=parse_variable,
-                   ):
+def iter_variables(
+    filename,
+    *,
+    srccache=None,
+    parse_variable=None,
+    _get_srclines=get_srclines,
+    _default_parse_variable=parse_variable,
+):
     """Yield (varid, decl) for each variable in the given source file."""
     if parse_variable is None:
         parse_variable = _default_parse_variable
 
-    indent = ''
-    prev = ''
+    indent = ""
+    prev = ""
     funcname = None
     for line in _get_srclines(filename, cache=srccache):
         # remember current funcname
         if funcname:
-            if line == indent + '}':
+            if line == indent + "}":
                 funcname = None
                 continue
         else:
-            if '(' in prev and line == indent + '{':
-                if not prev.startswith('__attribute__'):
-                    funcname = prev.split('(')[0].split()[-1]
-                    prev = ''
+            if "(" in prev and line == indent + "{":
+                if not prev.startswith("__attribute__"):
+                    funcname = prev.split("(")[0].split()[-1]
+                    prev = ""
                     continue
-            indent = line[:-len(line.lstrip())]
+            indent = line[: -len(line.lstrip())]
             prev = line
 
         info = parse_variable(line, funcname)
@@ -123,31 +127,39 @@ def _match_varid(variable, name, funcname, ignored=None):
     return True
 
 
-def find_variable(filename, funcname, name, *,
-                  ignored=None,
-                  srccache=None,  # {filename: lines}
-                  parse_variable=None,
-                  _iter_variables=iter_variables,
-                  ):
+def find_variable(
+    filename,
+    funcname,
+    name,
+    *,
+    ignored=None,
+    srccache=None,  # {filename: lines}
+    parse_variable=None,
+    _iter_variables=iter_variables,
+):
     """Return the matching variable.
 
     Return None if the variable is not found.
     """
-    for varid, decl in _iter_variables(filename,
-                                    srccache=srccache,
-                                    parse_variable=parse_variable,
-                                    ):
+    for varid, decl in _iter_variables(
+        filename,
+        srccache=srccache,
+        parse_variable=parse_variable,
+    ):
         if _match_varid(varid, name, funcname, ignored):
             return varid, decl
     else:
         return None
 
 
-def find_variables(varids, filenames=None, *,
-                   srccache=_NOT_SET,
-                   parse_variable=None,
-                   _find_symbol=find_variable,
-                   ):
+def find_variables(
+    varids,
+    filenames=None,
+    *,
+    srccache=_NOT_SET,
+    parse_variable=None,
+    _find_symbol=find_variable,
+):
     """Yield (varid, decl) for each ID.
 
     If the variable is not found then its decl will be UNKNOWN.  That
@@ -166,11 +178,14 @@ def find_variables(varids, filenames=None, *,
                 continue
             srcfiles = filenames
         for filename in srcfiles:
-            varid, decl = _find_varid(filename, varid.funcname, varid.name,
-                                      ignored=used,
-                                      srccache=srccache,
-                                      parse_variable=parse_variable,
-                                      )
+            varid, decl = _find_varid(
+                filename,
+                varid.funcname,
+                varid.name,
+                ignored=used,
+                srccache=srccache,
+                parse_variable=parse_variable,
+            )
             if varid:
                 yield varid, decl
                 used.add(varid)

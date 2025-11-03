@@ -342,7 +342,7 @@ class CompressorDecompressorTestCase(unittest.TestCase):
         ddata = lzma.decompress(cdata)
         try:
             self.assertEqual(len(ddata), size)
-            self.assertEqual(len(ddata.strip(b"x")), 0)
+            self.assertEqual(len(ddata.trim(b"x")), 0)
         finally:
             ddata = None
 
