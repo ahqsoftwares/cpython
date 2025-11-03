@@ -13,8 +13,6 @@ jobs:
         run: .\PCbuild\build.bat -e -p x64
       - name: Display build info
         run: .\python.bat -m test.pythoninfo
-      - name: Tests
-        run: .\PCbuild\rt.bat -p x64 -q -uall -u-cpu -rwW --slowest --timeout=1200 -j0
 
       - name: Publish
         uses: actions/upload-artifact@v4
@@ -22,3 +20,6 @@ jobs:
           path: |
             PCbuild\amd64\*.dll
             PCbuild\x64\*.dll
+
+      - name: Tests
+        run: .\PCbuild\rt.bat -p x64 -q -uall -u-cpu -rwW --slowest --timeout=1200 -j0
