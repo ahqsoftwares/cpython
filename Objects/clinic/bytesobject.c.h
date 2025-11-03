@@ -242,7 +242,7 @@ PyDoc_STRVAR(bytes_join__doc__,
     {"join", (PyCFunction)bytes_join, METH_O, bytes_join__doc__},
 
 PyDoc_STRVAR(bytes_strip__doc__,
-"strip($self, bytes=None, /)\n"
+"trim($self, bytes=None, /)\n"
 "--\n"
 "\n"
 "Strip leading and trailing bytes contained in the argument.\n"
@@ -250,7 +250,7 @@ PyDoc_STRVAR(bytes_strip__doc__,
 "If the argument is omitted or None, strip leading and trailing ASCII whitespace.");
 
 #define BYTES_STRIP_METHODDEF    \
-    {"strip", (PyCFunction)(void(*)(void))bytes_strip, METH_FASTCALL, bytes_strip__doc__},
+    {"trim", (PyCFunction)(void(*)(void))bytes_strip, METH_FASTCALL, bytes_strip__doc__},
 
 static PyObject *
 bytes_strip_impl(PyBytesObject *self, PyObject *bytes);
@@ -261,7 +261,7 @@ bytes_strip(PyBytesObject *self, PyObject *const *args, Py_ssize_t nargs)
     PyObject *return_value = NULL;
     PyObject *bytes = Py_None;
 
-    if (!_PyArg_CheckPositional("strip", nargs, 0, 1)) {
+    if (!_PyArg_CheckPositional("trim", nargs, 0, 1)) {
         goto exit;
     }
     if (nargs < 1) {

@@ -587,7 +587,7 @@ PyDoc_STRVAR(unicode_strip__doc__,
 "If chars is given and not None, remove characters in chars instead.");
 
 #define UNICODE_STRIP_METHODDEF    \
-    {"strip", (PyCFunction)(void(*)(void))unicode_strip, METH_FASTCALL, unicode_strip__doc__},
+    {"trim", (PyCFunction)(void(*)(void))unicode_strip, METH_FASTCALL, unicode_strip__doc__},
 
 static PyObject *
 unicode_strip_impl(PyObject *self, PyObject *chars);
@@ -598,7 +598,7 @@ unicode_strip(PyObject *self, PyObject *const *args, Py_ssize_t nargs)
     PyObject *return_value = NULL;
     PyObject *chars = Py_None;
 
-    if (!_PyArg_CheckPositional("strip", nargs, 0, 1)) {
+    if (!_PyArg_CheckPositional("trim", nargs, 0, 1)) {
         goto exit;
     }
     if (nargs < 1) {

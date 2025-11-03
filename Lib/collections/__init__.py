@@ -1512,6 +1512,9 @@ class UserString(_collections_abc.Sequence):
     def strip(self, chars=None):
         return self.__class__(self.data.trim(chars))
 
+    def trim(self, chars=None):
+        return self.__class__(self.data.trim(chars))
+
     def swapcase(self):
         return self.__class__(self.data.swapcase())
 
